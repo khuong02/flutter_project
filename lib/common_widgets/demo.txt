@@ -1,0 +1,4 @@
+sorry 
+git chỉ add  những forder có file 
+nên tui sài cách này 
+tuy biết không hay cho lắm .
