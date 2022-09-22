@@ -1,0 +1,1 @@
+// Khai báo cái hằng số sử đụng chung
