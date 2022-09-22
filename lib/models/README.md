@@ -1,4 +1,1 @@
-nhận yêu cầu từ phía controller sau đó đi vào DB lấy dữ liệu tương ướng vs yêu cầu được nhận sử lý logic rồi trả về cho controller
-
-
-giống mô hình MVC
+tập hợp dữ liệu thường có nguồn gốc từ máy chủ, người dùng hoặc API bên ngoài, chúng được sử dụng kết hợp với các widget để hoàn thành giao diện người dùng của ứng dụng

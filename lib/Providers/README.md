@@ -1,0 +1,1 @@
+nhận data từ APIs và chuyển đổi thành dạng data có thể sử dụng

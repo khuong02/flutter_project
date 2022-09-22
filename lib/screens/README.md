@@ -1,3 +1,1 @@
 bao gồm những gì thể hiện trên màn hình như các control, form, widget,…
-
-giống mô hình MVC

@@ -1,0 +1,1 @@
+lưu trữ image chử sử dụng cho app
