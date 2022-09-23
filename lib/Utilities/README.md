@@ -1,0 +1,1 @@
+chứa có function sử lý logic của app
