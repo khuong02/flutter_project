@@ -1,4 +1,4 @@
-import 'package:formz/formz.dart';
+import 'package:form_validators/form_validators.dart';
 
 enum NameValidationError { empty, invalid }
 
