@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'Utilities/authentication/authentication_view.dart';
+import 'screens/authentication_view.dart';
 import 'utilities/authentication/controller/authentication_controller.dart';
 import 'screens/user_profile.dart';
 import 'package:firebase_core/firebase_core.dart';

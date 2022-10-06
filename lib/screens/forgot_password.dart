@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validators/form_validators.dart';
 
-import '../../../Widgets/animated_shape/animated_shape.dart';
-import '../../../Widgets/loading_error.dart';
-import 'controller/forgot_password_controller.dart';
+import '../Widgets/animated_shape/animated_shape.dart';
+import '../Widgets/loading_error.dart';
+import '../Utilities/authentication/forgot_password/controller/forgot_password_controller.dart';
 
-import '../../../Widgets/text_input_field.dart';
+import '../Widgets/text_input_field.dart';
 
 class ForgotPasswordView extends ConsumerWidget {
   const ForgotPasswordView({Key? key}) : super(key: key);
