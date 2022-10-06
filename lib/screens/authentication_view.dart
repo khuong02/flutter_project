@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../Widgets/animated_shape/animated_shape.dart';
-import '../../Widgets/auth_switch_button.dart';
-import '../../Widgets/slide_fade_switcher.dart';
-import 'signin/signin.dart';
-import 'signup/signup.dart';
+import '../Widgets/animated_shape/animated_shape.dart';
+import '../Widgets/auth_switch_button.dart';
+import '../Widgets/slide_fade_switcher.dart';
+import 'signin.dart';
+import 'signup.dart';
 
 class AuthenticationView extends StatefulWidget {
   const AuthenticationView({Key? key}) : super(key: key);

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validators/form_validators.dart';
 
-import '../../../Widgets/animated_button.dart';
-import '../../../Widgets/loading_error.dart';
-import '../../../Widgets/rounded_button_style.dart';
-import '../../../Widgets/text_input_field.dart';
+import '../Widgets/animated_button.dart';
+import '../Widgets/loading_error.dart';
+import '../Widgets/rounded_button_style.dart';
+import '../Widgets/text_input_field.dart';
 
-import 'controller/signup_controller.dart';
+import '../Utilities/authentication/signup/controller/signup_controller.dart';
 
 class SignUp extends ConsumerWidget {
   const SignUp({Key? key}) : super(key: key);

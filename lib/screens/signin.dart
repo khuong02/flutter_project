@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validators/form_validators.dart';
-import '../../../Widgets/animated_button.dart';
-import '../../../Widgets/loading_error.dart';
-import '../../../Widgets/rounded_button_style.dart';
-import '../../../Widgets/text_input_field.dart';
-import '../forgot_password/forgot_password.dart';
-import '../google_signin/google_signin_button.dart';
-import 'controller/signin_controller.dart';
+import '../Widgets/animated_button.dart';
+import '../Widgets/loading_error.dart';
+import '../Widgets/rounded_button_style.dart';
+import '../Widgets/text_input_field.dart';
+import 'forgot_password.dart';
+import '../Utilities/authentication/google_signin/google_signin_button.dart';
+import '../Utilities/authentication/signin/controller/signin_controller.dart';
 
 class SignIn extends ConsumerWidget {
   const SignIn({Key? key}) : super(key: key);
