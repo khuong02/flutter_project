@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'slide_fade_switcher.dart';
+import '../../Utilities/slide_fade_switcher.dart';
 
 const _kTextStyle = TextStyle(
   fontWeight: FontWeight.w500,

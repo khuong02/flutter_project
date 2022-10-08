@@ -4,7 +4,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../Providers/auth_repo_provider.dart';
+import '../../Providers/auth_repo_provider.dart';
 
 part 'authentication_state.dart';
 
@@ -21,7 +21,6 @@ class AuthController extends StateNotifier<AuthenticationState> {
     _streamSubscription =
         _authRepository.user.listen((user) => _onUserChanged(user));
   }
-
   void _onUserChanged(AuthUser user) {
     if (user.isEmpty) {
       state = const AuthenticationState.unauthenticated();

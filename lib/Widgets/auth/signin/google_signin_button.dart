@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../Widgets/animated_button.dart';
-import '../../../Widgets/loading_error.dart';
-import 'controller/google_signin_controller.dart';
+import '../../../Utilities/animated_button.dart';
+import '../../../Utilities/loading_error.dart';
+import '../../../features/authentication/google_signin/google_signin_controller.dart';
 
 class GoogleSignInButton extends ConsumerWidget {
   const GoogleSignInButton({Key? key}) : super(key: key);

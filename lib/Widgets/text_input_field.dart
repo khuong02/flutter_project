@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'size_fade_switcher.dart';
+import '../Utilities/size_fade_switcher.dart';
 
 class TextInputField extends StatelessWidget {
   final String hintText;

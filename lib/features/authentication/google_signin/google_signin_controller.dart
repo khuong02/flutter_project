@@ -1,6 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../Providers/auth_repo_provider.dart';
+import '../../../Providers/auth_repo_provider.dart';
 
 final googleSignInProvider =
     StateNotifierProvider<GoogleSignInController, GoogleSignInState>(

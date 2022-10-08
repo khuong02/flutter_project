@@ -1,4 +1,4 @@
-part of "signup_controller.dart";
+part of 'signup_controller.dart';
 
 class SignUpState extends Equatable {
   final Name name;

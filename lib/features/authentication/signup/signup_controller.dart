@@ -1,7 +1,7 @@
 import 'package:form_validators/form_validators.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:equatable/equatable.dart';
-import '../../../../../Providers/auth_repo_provider.dart';
+import '../../../../Providers/auth_repo_provider.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 
 part 'signup_state.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../Utilities/authentication/controller/authentication_controller.dart';
+import '../../features/authentication/authentication_controller.dart';
 
 class Profile extends ConsumerWidget {
   const Profile({Key? key}) : super(key: key);

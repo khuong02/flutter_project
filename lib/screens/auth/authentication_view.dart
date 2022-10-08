@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../Widgets/animated_shape/animated_shape.dart';
-import '../Widgets/auth_switch_button.dart';
-import '../Widgets/slide_fade_switcher.dart';
+import '../../Widgets/animated_shape/animated_shape.dart';
+import '../../Widgets/auth/auth_switch_button.dart';
+import '../../Utilities/slide_fade_switcher.dart';
 import 'signin.dart';
 import 'signup.dart';
 
