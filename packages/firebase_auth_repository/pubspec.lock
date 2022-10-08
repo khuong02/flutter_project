@@ -8,13 +8,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
-  authentication_repository:
-    dependency: "direct main"
-    description:
-      path: "packages/firebase_auth_repository"
-      relative: true
-    source: path
-    version: "0.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -43,13 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
   equatable:
     dependency: "direct main"
     description:
@@ -86,7 +72,7 @@ packages:
     source: hosted
     version: "4.6.0"
   firebase_core:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
@@ -107,7 +93,7 @@ packages:
     source: hosted
     version: "1.7.3"
   flutter:
-    dependency: "direct main"
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -118,15 +104,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  flutter_riverpod:
-    dependency: "direct main"
-    description:
-      name: flutter_riverpod
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.2"
   flutter_test:
-    dependency: "direct dev"
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -135,20 +114,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  form_validators:
-    dependency: "direct main"
-    description:
-      path: "packages/form_validators"
-      relative: true
-    source: path
-    version: "0.0.0"
-  formz:
-    dependency: transitive
-    description:
-      name: formz
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.1"
   google_sign_in:
     dependency: "direct main"
     description:
@@ -212,13 +177,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  loading_animation_widget:
-    dependency: "direct main"
-    description:
-      name: loading_animation_widget
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0+3"
   matcher:
     dependency: transitive
     description:
@@ -261,13 +219,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
-  riverpod:
-    dependency: transitive
-    description:
-      name: riverpod
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -287,13 +238,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
-  state_notifier:
-    dependency: transitive
-    description:
-      name: state_notifier
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.2+1"
   stream_channel:
     dependency: transitive
     description:
@@ -337,5 +281,5 @@ packages:
     source: hosted
     version: "2.1.2"
 sdks:
-  dart: ">=2.17.0 <3.0.0"
-  flutter: ">=3.0.0"
+  dart: ">=2.17.0-0 <3.0.0"
+  flutter: ">=2.10.0"
