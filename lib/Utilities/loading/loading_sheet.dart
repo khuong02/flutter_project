@@ -1,34 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-class ErrorDialog extends StatelessWidget {
-  const ErrorDialog._({Key? key, required this.error}) : super(key: key);
-
-  final String error;
-
-  static Future<void> show(BuildContext context, String errorMessage) {
-    return showCupertinoDialog(
-      context: context,
-      builder: (_) => ErrorDialog._(
-        error: errorMessage,
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoAlertDialog(
-      title: Text(error),
-      actions: [
-        CupertinoDialogAction(
-          child: const Text('OK'),
-          onPressed: () => Navigator.of(context).pop(),
-        )
-      ],
-    );
-  }
-}
 
 class LoadingSheet extends StatelessWidget {
   const LoadingSheet._({Key? key}) : super(key: key);

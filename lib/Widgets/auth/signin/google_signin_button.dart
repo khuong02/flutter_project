@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../Utilities/animated_button.dart';
-import '../../../Utilities/loading_error.dart';
+import '../../../Utilities/loading/loading_sheet.dart';
+import '../../../Utilities/my_error/error_dialog.dart';
 import '../../../features/authentication/google_signin/google_signin_controller.dart';
 
 class GoogleSignInButton extends ConsumerWidget {

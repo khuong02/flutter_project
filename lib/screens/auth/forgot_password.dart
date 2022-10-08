@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validators/form_validators.dart';
 
+import '../../Utilities/my_error/error_dialog.dart';
 import '../../Widgets/animated_shape/animated_shape.dart';
-import '../../Utilities/loading_error.dart';
 
 import '../../Widgets/text_input_field.dart';
 import '../../features/authentication/forgot_password/forgot_password_controller.dart';

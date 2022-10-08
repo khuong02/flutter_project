@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validators/form_validators.dart';
 
-import '../../Utilities/animated_button.dart';
-import '../../Utilities/loading_error.dart';
-import '../../Widgets/auth/rounded_button_style.dart';
+import '../../Utilities/loading/loading_sheet.dart';
+import '../../Utilities/my_error/error_dialog.dart';
 import '../../Widgets/auth/signin/email_field.dart';
 import '../../Widgets/auth/signin/password_field.dart';
 import '../../Widgets/auth/signup/name_field.dart';
 import '../../Widgets/auth/signup/sign_up_button.dart';
-import '../../Widgets/text_input_field.dart';
 import '../../features/authentication/signup/signup_controller.dart';
 
 class SignUp extends ConsumerWidget {
