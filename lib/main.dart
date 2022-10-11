@@ -9,20 +9,11 @@ import 'screens/user/user_profile.dart';
 import 'Consts/firebase_options.dart';
 
 void main() async {
-  bool isIos = false;
-  Platform.isIOS ? isIos = true : isIos = false;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // isIos
-  //     ? await Firebase.initializeApp(
-  //         name: "SecondaryApp",
-  //         options: DefaultFirebaseOptions.ios,
-  //       )
-  //     : await Firebase.initializeApp(
-  //         options: DefaultFirebaseOptions.android,
-  //       );
+
   runApp(
     const ProviderScope(
       child: MyApp(),
