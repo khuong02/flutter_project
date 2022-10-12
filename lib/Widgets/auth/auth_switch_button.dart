@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../Utilities/slide_fade_switcher.dart';
 
 const _kTextStyle = TextStyle(
-  fontWeight: FontWeight.w500,
-  color: Color(0xFF9A9A9A),
+  fontWeight: FontWeight.bold,
+  color: Colors.lightBlue,
 );
 
 class AuthSwitchButton extends StatelessWidget {
@@ -28,18 +28,25 @@ class AuthSwitchButton extends StatelessWidget {
           alignment: Alignment.center,
           padding: const EdgeInsets.all(16.0),
           child: SlideFadeSwitcher(
-            child: showSignIn
-                ? const Text(
-                    "Don't have account? Sign up",
-                    key: ValueKey("SignIn"),
-                    style: _kTextStyle,
-                  )
-                : const Text(
-                    "Already have an account? Sign in",
-                    key: ValueKey("SignUp"),
-                    style: _kTextStyle,
-                  ),
-          ),
+              child: showSignIn
+                  ? const Text.rich(
+                      TextSpan(
+                        text: "Don't have account?",
+                        children: [
+                          TextSpan(text: " Sign up", style: _kTextStyle)
+                        ],
+                      ),
+                      key: ValueKey("SignUp"),
+                    )
+                  : const Text.rich(
+                      TextSpan(
+                        text: "Already have account?",
+                        children: [
+                          TextSpan(text: " Sign in", style: _kTextStyle)
+                        ],
+                      ),
+                      key: ValueKey("SignIn"),
+                    )),
         ),
       ),
     );
