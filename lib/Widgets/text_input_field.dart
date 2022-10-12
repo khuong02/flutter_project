@@ -6,6 +6,7 @@ class TextInputField extends StatelessWidget {
   final void Function(String value) onChanged;
   final String? errorText;
   final bool obscureText;
+  final Widget? suffix;
 
   const TextInputField({
     Key? key,
@@ -13,6 +14,7 @@ class TextInputField extends StatelessWidget {
     required this.onChanged,
     this.errorText,
     this.obscureText = false,
+    this.suffix,
   }) : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class TextInputField extends StatelessWidget {
                 border: InputBorder.none,
                 // errorText: errorText,
                 hintText: hintText,
+                suffix: suffix,
                 hintStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
