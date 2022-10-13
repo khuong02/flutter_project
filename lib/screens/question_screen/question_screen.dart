@@ -114,6 +114,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
           ),
         ),
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -190,7 +191,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     Text(
                       'question ${(questionNumber + 1).toString()} of 10',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.6),
+                        color: Colors.white.withOpacity(0.5),
                         fontSize: 20,
                       ),
                     ),
@@ -200,7 +201,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       quizMaker.getQuestion(questionNumber),
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 30,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

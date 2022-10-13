@@ -12,7 +12,9 @@ import '../../Consts/cosntants.dart';
 class LoadingScreen extends StatefulWidget {
   final int index;
   final String selectedDif;
-  const LoadingScreen({required this.index, required this.selectedDif});
+  const LoadingScreen(
+      {Key? key, required this.index, required this.selectedDif})
+      : super(key: key);
 
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
@@ -23,7 +25,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     super.initState();
 
-    SchedulerBinding.instance?.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       Timer(const Duration(milliseconds: 500), () {
         getQuestions();
       });
@@ -89,7 +91,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         backgroundColor: Colors.transparent,
         body: Center(
           child: LoadingAnimationWidget.dotsTriangle(
-            color: Color(0xFFF5D973),
+            color: const Color(0xFFF5D973),
             size: 100,
           ),
         ),
