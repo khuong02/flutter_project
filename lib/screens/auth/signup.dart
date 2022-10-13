@@ -4,8 +4,8 @@ import 'package:form_validators/form_validators.dart';
 
 import '../../Utilities/loading/loading_sheet.dart';
 import '../../Utilities/my_error/error_dialog.dart';
-import '../../Widgets/auth/signin/email_field.dart';
-import '../../Widgets/auth/signin/password_field.dart';
+import '../../Widgets/auth/signup/email_field.dart';
+import '../../Widgets/auth/signup/password_field.dart';
 import '../../Widgets/auth/signup/name_field.dart';
 import '../../Widgets/auth/signup/sign_up_button.dart';
 import '../../features/authentication/signup/signup_controller.dart';
