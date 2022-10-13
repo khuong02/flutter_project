@@ -42,7 +42,7 @@ class DifficultyScreen extends StatelessWidget {
               tag: cardDetailList[selectedIndex].iconTag,
               child: Image.asset(
                 cardDetailList[selectedIndex].iconAssetName,
-                height: 300,
+                height: 150,
                 width: 300,
               ),
             ),

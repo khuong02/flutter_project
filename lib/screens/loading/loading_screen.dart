@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../question_screen/question_screen.dart';
+import '../question/question_screen.dart';
 import '../../Utilities/card/card_details.dart';
 import '../../models/networking.dart';
 import '../../Consts/cosntants.dart';
