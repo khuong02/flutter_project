@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../Utilities/nav_bar.dart';
 import '../../features/authentication/authentication_controller.dart';
+
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
 
 class Profile extends ConsumerWidget {
   const Profile({Key? key}) : super(key: key);
@@ -28,6 +32,8 @@ class Profile extends ConsumerWidget {
           ],
         ),
       ),
+
+      bottomNavigationBar: NavBar(),
     );
   }
 }

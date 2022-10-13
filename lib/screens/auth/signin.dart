@@ -28,6 +28,7 @@ class SignIn extends ConsumerWidget {
         }
       },
     );
+
     return Column(
       children: const [
         EmailField(),
