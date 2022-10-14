@@ -14,6 +14,10 @@ class _NavBar extends State<NavBar>{
 
   void handleTabChange(index){
     setState(() {
+      Navigator.pushNamed(
+        context,
+        '/login'
+      );
       _selectedIndex = index;
     });
   }
@@ -37,6 +41,10 @@ class _NavBar extends State<NavBar>{
       style: optionStyle,
     ),
   ];
+
+  void onButtonPress(){
+    print(1);
+  }
 
   @override
   Widget build(BuildContext context) {

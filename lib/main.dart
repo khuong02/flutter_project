@@ -1,3 +1,4 @@
+import 'package:do_an_di_dong/screens/auth/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,7 +43,11 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
-      home: getHome(),
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (context) => const Profile(),
+        '/login':(context) => const AuthenticationView(),
+      },
     );
   }
 }
