@@ -27,6 +27,7 @@ class Profile extends ConsumerWidget {
               child: const Text("SignOut"),
               onPressed: () {
                 authController.onSignOut();
+                Navigator.of(context).pushNamed("/auth");
               },
             ),
           ],

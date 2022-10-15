@@ -1,3 +1,4 @@
+import 'package:do_an_di_dong/routers/router.dart';
 import 'package:do_an_di_dong/screens/auth/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,27 +28,19 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authenticationState = ref.watch(authProvider);
+    // final authenticationState = ref.watch(authProvider);
+    //
+    // Widget getHome() {
+    //if (authenticationState.status == AuthenticationStatus.authenticated) {
+    //     return const Profile();
+    //   } else if (authenticationState.status ==
+    //       AuthenticationStatus.unauthenticated) {
+    //     return const AuthenticationView();
+    //   } else {
+    //     return const AuthenticationView();
+    //   }
+    // }
 
-    Widget getHome() {
-      if (authenticationState.status == AuthenticationStatus.authenticated) {
-        return const Profile();
-      } else if (authenticationState.status ==
-          AuthenticationStatus.unauthenticated) {
-        return const AuthenticationView();
-      } else {
-        return const AuthenticationView();
-      }
-    }
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
-      initialRoute: '/',
-      routes: <String, WidgetBuilder>{
-        '/': (context) => const Profile(),
-        '/login':(context) => const AuthenticationView(),
-      },
-    );
+    return RouteApp();
   }
 }
