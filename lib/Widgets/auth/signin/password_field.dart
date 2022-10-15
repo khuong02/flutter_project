@@ -24,7 +24,7 @@ class PasswordFieldState extends ConsumerState<PasswordField> {
     final signInController = ref.read(signInProvider.notifier);
     return TextInputField(
       hintText: "Password",
-      obscureText: true,
+      obscureText: obscure,
       suffix: GestureDetector(
         child: icon
             ? const Icon(
