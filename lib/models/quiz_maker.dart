@@ -1,4 +1,4 @@
-import '../Utilities/questions.dart';
+import 'questions.dart';
 
 class QuizMaker {
   List<Question> _questionList = [];
