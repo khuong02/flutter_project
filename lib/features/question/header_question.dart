@@ -1,10 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import '../../features/question/question.dart';
-
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:flutter/rendering.dart';
 
 import '../../Widgets/close_button.dart';
 import '../../Utilities/card/card_details.dart';

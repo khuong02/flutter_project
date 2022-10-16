@@ -25,7 +25,7 @@ class OptionWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
         alignment: Alignment.center,
-        height: size.height * 0.05,
+        height: option.length > 50 ? size.height * 0.075 : size.height * 0.05,
         width: size.width,
         decoration: BoxDecoration(
           color: optionColor,
