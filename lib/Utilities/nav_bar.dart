@@ -81,27 +81,23 @@ class _NavBar extends State<NavBar>{
               hoverColor: Colors.grey[100]!,
               gap: 8,
               activeColor: Colors.black,
-              iconSize: 24,
+              iconSize: 30,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: Colors.grey[100]!,
+              tabBackgroundColor: Colors.grey[300]!,
               color: Colors.black,
               tabs: const [
                 GButton(
                   icon: LineIcons.home,
-                  text: 'Home',
                 ),
                 GButton(
                   icon: LineIcons.barChart,
-                  text: 'Leaderboard',
                 ),
                 GButton(
                   icon: LineIcons.user,
-                  text: 'Profile',
                 ),
                 GButton(
                   icon: Icons.settings,
-                  text: 'Settings',
                 ),
               ],
               selectedIndex: _selectedIndex,
