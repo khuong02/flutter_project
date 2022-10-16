@@ -1,6 +1,12 @@
+import 'package:do_an_di_dong/screens/home/home_screen.dart';
+import 'package:do_an_di_dong/screens/leaderboard/leaderboard_screen.dart';
+import 'package:do_an_di_dong/screens/user/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+
+import '../screens/errors/not_found_screen.dart';
+import '../screens/settings/setting_screen.dart';
 
 class NavBar extends StatefulWidget {
   @override
@@ -12,12 +18,12 @@ class _NavBar extends State<NavBar>{
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
 
-  void handleTabChange(index){
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
+  final List<Widget>_children = [
+    const HomeScreen(),
+    const LeaderboardScreen(),
+    const Profile(),
+    const SettingScreen(),
+  ];
 
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
@@ -25,22 +31,39 @@ class _NavBar extends State<NavBar>{
       style: optionStyle,
     ),
     Text(
-      'Likes',
-      style: optionStyle,
-    ),
-    Text(
-      'Search',
+      'Leaderboard',
       style: optionStyle,
     ),
     Text(
       'Profile',
       style: optionStyle,
     ),
+    Text(
+      'Settings',
+      style: optionStyle,
+    ),
   ];
+
+  void handleTabChange(index){
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  Widget handleChangeScreen(int index){
+    if(index >= _children.length || index < 0) {
+      return const NotFoundScreen();
+    }
+
+    return _children[index];
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
+      body: handleChangeScreen(_selectedIndex),
+
+      bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -69,16 +92,16 @@ class _NavBar extends State<NavBar>{
                   text: 'Home',
                 ),
                 GButton(
-                  icon: LineIcons.heart,
-                  text: 'Likes',
-                ),
-                GButton(
-                  icon: LineIcons.search,
-                  text: 'Search',
+                  icon: LineIcons.barChart,
+                  text: 'Leaderboard',
                 ),
                 GButton(
                   icon: LineIcons.user,
                   text: 'Profile',
+                ),
+                GButton(
+                  icon: Icons.settings,
+                  text: 'Settings',
                 ),
               ],
               selectedIndex: _selectedIndex,
@@ -86,6 +109,7 @@ class _NavBar extends State<NavBar>{
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }
