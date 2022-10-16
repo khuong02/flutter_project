@@ -32,8 +32,6 @@ class Profile extends ConsumerWidget {
           ],
         ),
       ),
-
-      bottomNavigationBar: NavBar(),
     );
   }
 }
