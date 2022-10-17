@@ -21,21 +21,13 @@ class _LeaderboardScreen extends State<LeaderboardScreen>{
       ),
       child: Scaffold(
         backgroundColor: MyColor.leaderboardBackGroundColor,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          leading: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          actions: const [Icon(
-            Icons.grid_view,
-            color: Colors.white,
-          )],
-        ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(
+              top: 50.0,
+              left: 8.0,
+              right: 8.0,
+            ),
             child: Column(
               children: [
                 Container(
@@ -48,7 +40,7 @@ class _LeaderboardScreen extends State<LeaderboardScreen>{
                     ]),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(2.5),
                     child: Container(
                       height: 60.0,
                       decoration: BoxDecoration(
@@ -72,9 +64,24 @@ class _LeaderboardScreen extends State<LeaderboardScreen>{
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: const [
-                    WinnerContainer(height: 110.0,),
-                    WinnerContainer(height: 150.0,),
-                    WinnerContainer(height: 90.0,),
+                    WinnerContainer(
+                      height: 120.0,
+                      winnerPosition: 2,
+                      winnerName: 'winner2',
+                      color: Colors.yellow,
+                    ),
+                    WinnerContainer(
+                      height: 150.0,
+                      winnerPosition: 1,
+                      winnerName: 'winner1',
+                      color: Colors.red,
+                    ),
+                    WinnerContainer(
+                      height: 100.0,
+                      winnerPosition: 3,
+                      winnerName: 'winner3',
+                      color: Colors.blue,
+                    ),
                   ],
                 ),
                 Board(),
@@ -86,24 +93,3 @@ class _LeaderboardScreen extends State<LeaderboardScreen>{
     );
   }
 }
-
-// Padding(
-// padding: const EdgeInsets.symmetric(horizontal: 16.0),
-// child: Row(
-// mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// children: const [
-// Text(
-// 'Region',
-// style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),
-// ),
-// Text(
-// 'National',
-// style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),
-// ),
-// Text(
-// 'Global',
-// style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),
-// )
-// ],
-// ),
-// ),
