@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '../../Widgets/close_button.dart';
 import '../../Utilities/card/card_details.dart';
@@ -214,12 +215,17 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                             height: 5,
                           ),
                           // ignore: prefer_const_constructors
-                          Text(
-                            quizMaker.getQuestion(questionNumber),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                          SizedBox(
+                            height: size.height * 0.17,
+                            width: size.width,
+                            child: AutoSizeText(
+                              quizMaker.getQuestion(questionNumber),
+                              minFontSize: 18,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 35,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ],
@@ -230,7 +236,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
               ),
               ...buildOptions(questionNumber),
               const SizedBox(
-                height: 35,
+                height: 15,
               ),
               SizedBox(
                 child: Row(
