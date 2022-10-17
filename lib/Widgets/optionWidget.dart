@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '../Utilities/card/card_details.dart';
 import '../features/question/header_question.dart';
@@ -38,12 +39,15 @@ class OptionWidget extends StatelessWidget {
             ),
           ],
         ),
-        child: Text(
-          option,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: cardDetailList[widget.categoryIndex].textColor,
+        child: SizedBox(
+          child: AutoSizeText(
+            option,
+            minFontSize: 16,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: cardDetailList[widget.categoryIndex].textColor,
+            ),
           ),
         ),
       ),
