@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import '../Utilities/size_fade_switcher.dart';
 
 class TextInputField extends StatelessWidget {
-  final String hintText;
+  final String? hintText;
   final void Function(String value) onChanged;
   final String? errorText;
   final bool obscureText;
   final Widget? suffix;
+  final TextEditingController? controller;
 
   const TextInputField({
     Key? key,
-    required this.hintText,
+    this.hintText,
     required this.onChanged,
     this.errorText,
+    this.controller,
     this.obscureText = false,
     this.suffix,
   }) : super(key: key);
@@ -32,6 +34,7 @@ class TextInputField extends StatelessWidget {
           child: TextField(
             onChanged: onChanged,
             obscureText: obscureText,
+            controller: controller,
             decoration: InputDecoration(
                 border: InputBorder.none,
                 // errorText: errorText,
