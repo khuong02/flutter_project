@@ -6,7 +6,6 @@ import 'package:do_an_di_dong/Widgets/user/text_edit_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../features/authentication/authentication_controller.dart';
 
