@@ -4,12 +4,14 @@ class AuthUser extends Equatable {
   final String id;
   final String? email;
   final String? name;
+  final String? photo;
   final bool emailVerified;
 
   const AuthUser({
     required this.id,
     this.email,
     this.name,
+    this.photo,
     this.emailVerified = false,
   });
 
@@ -22,6 +24,7 @@ class AuthUser extends Equatable {
         email,
         id,
         name,
+        photo,
         emailVerified,
       ];
 }
