@@ -73,7 +73,6 @@ class UserProfileState extends ConsumerState<Profile> {
           ),
         ],
       ),
-      bottomNavigationBar: NavBar(),
     );
   }
 
