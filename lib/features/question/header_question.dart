@@ -128,9 +128,9 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: SizedBox(
-          height: size.height * 0.9,
+          height: size.height,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -187,51 +187,53 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: size.height * 0.15,
+                width: size.width * 0.65,
+                child: Image.asset(
+                  cardDetailList[widget.categoryIndex].iconAssetName,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
               Container(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: size.height * 0.2,
-                      width: size.width * 0.75,
-                      child: Image.asset(
-                        cardDetailList[widget.categoryIndex].iconAssetName,
-                        fit: BoxFit.fitHeight,
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: size.height * 0.2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'question ${(questionNumber + 1).toString()} of 10',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          // ignore: prefer_const_constructors
-                          SizedBox(
-                            height: size.height * 0.17,
-                            width: size.width,
-                            child: AutoSizeText(
-                              quizMaker.getQuestion(questionNumber),
-                              minFontSize: 18,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 35,
-                                fontWeight: FontWeight.w600,
+                child: SizedBox(
+                  height: size.height * 0.25,
+                  child: GridView.count(
+                    crossAxisCount: 1,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        // height: size.height * 0.35,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'question ${(questionNumber + 1).toString()} of 10',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.5),
+                                fontSize: 16,
                               ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            SizedBox(
+                              width: size.width,
+                              child: AutoSizeText(
+                                quizMaker.getQuestion(questionNumber),
+                                minFontSize: 18,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               ...buildOptions(questionNumber),
