@@ -1,12 +1,14 @@
+import 'package:do_an_di_dong/Utilities/nav_bar.dart';
+import 'package:do_an_di_dong/screens/auth/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'dart:io' show Platform;
 
 import 'features/authentication/authentication_controller.dart';
 import 'screens/auth/authentication_view.dart';
 import 'screens/user/user_profile.dart';
 import 'Consts/firebase_options.dart';
+import 'screens/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +32,7 @@ class MyApp extends ConsumerWidget {
 
     Widget getHome() {
       if (authenticationState.status == AuthenticationStatus.authenticated) {
-        return const Profile();
+        return NavBar();
       } else if (authenticationState.status ==
           AuthenticationStatus.unauthenticated) {
         return const AuthenticationView();
