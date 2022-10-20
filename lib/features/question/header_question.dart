@@ -149,7 +149,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      padding: const EdgeInsets.only(top: 40, right: 15, left: 15, bottom: 20),
+      padding: const EdgeInsets.only(top: 10, right: 15, left: 15, bottom: 20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.bottomCenter,
@@ -158,6 +158,43 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         ),
       ),
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white.withOpacity(0),
+          shadowColor: Colors.white.withOpacity(0),
+          leading: const CustomCloseButton(),
+          title: CircularCountDownTimer(
+            width: 50,
+            height: 50,
+            duration: duration,
+            fillColor: Colors.grey.withOpacity(0.8),
+            ringColor: Colors.white,
+            textStyle: const TextStyle(
+              fontSize: 25,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+            autoStart: true,
+            isReverse: true,
+            controller: _controller,
+            onComplete: () {
+              if (questionNumber < 9) {
+                setState(() {
+                  fiftyfifty = false;
+                  userHeart--;
+                  questionNumber++;
+                });
+                if (userHeart == 0) {
+                  totalScore();
+                }
+                _controller.restart();
+              } else {
+                totalScore();
+              }
+            },
+          ),
+          actions: buildHeart(userHeart),
+          centerTitle: true,
+        ),
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: SizedBox(
@@ -165,48 +202,6 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const CustomCloseButton(),
-                  SizedBox(
-                    width: 105,
-                    child: Row(
-                      children: buildHeart(userHeart),
-                    ),
-                  ),
-                ],
-              ),
-              CircularCountDownTimer(
-                width: 50,
-                height: 50,
-                duration: duration,
-                fillColor: Colors.grey.withOpacity(0.8),
-                ringColor: Colors.white,
-                textStyle: const TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-                autoStart: true,
-                isReverse: true,
-                controller: _controller,
-                onComplete: () {
-                  if (questionNumber < 9) {
-                    setState(() {
-                      fiftyfifty = false;
-                      userHeart--;
-                      questionNumber++;
-                    });
-                    if (userHeart == 0) {
-                      totalScore();
-                    }
-                    _controller.restart();
-                  } else {
-                    totalScore();
-                  }
-                },
-              ),
               SizedBox(
                 height: size.height * 0.15,
                 width: size.width * 0.65,
@@ -221,7 +216,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                   crossAxisCount: 1,
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      // width: MediaQuery.of(context).size.width,
                       // height: size.height * 0.35,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -255,10 +250,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 200,
-                child: Column(children: buildOptions(questionNumber)),
-              ),
+              ...buildOptions(questionNumber),
               const SizedBox(
                 height: 15,
               ),

@@ -26,7 +26,7 @@ class OptionWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
         alignment: Alignment.center,
-        height: size.height * 0.05,
+        height: size.height * 0.065,
         width: size.width,
         decoration: BoxDecoration(
           color: optionColor,
@@ -42,7 +42,7 @@ class OptionWidget extends StatelessWidget {
         child: SizedBox(
           child: AutoSizeText(
             option,
-            minFontSize: 16,
+            minFontSize: 14,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
