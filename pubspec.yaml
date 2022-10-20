@@ -44,6 +44,7 @@ dependencies:
   internet_connection_checker: 0.0.1
   fl_score_bar: ^0.2.4
   auto_size_text: ^3.0.0
+  babstrap_settings_screen: ^0.1.3
 
   authentication_repository:
     path: packages/firebase_auth_repository
