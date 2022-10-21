@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'contestant_list.dart';
 
 class Board extends StatelessWidget{
+  const Board({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class Board extends StatelessWidget{
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Container(
-          height: 350.0,
+          height: MediaQuery.of(context).size.height - 420.0,
           decoration: const BoxDecoration(
             borderRadius:  BorderRadius.only(
               topLeft: Radius.circular(20.0),
@@ -30,16 +31,17 @@ class Board extends StatelessWidget{
             ),
             color: MyColor.leaderboardBackGroundColor,
           ),
-          child: GridView.count(
-            crossAxisCount: 1,
-            childAspectRatio: 4.0,
-            children: const [
-              ContestantList(),
-              ContestantList(),
-              ContestantList(),
-              ContestantList(),
-              ContestantList(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ContestantList(),
+                ContestantList(),
+                ContestantList(),
+                ContestantList(),
+                ContestantList(),
+                ContestantList(),
+              ],
+            ),
           ),
         ),
       ),
