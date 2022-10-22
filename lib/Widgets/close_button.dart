@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomCloseButton extends StatelessWidget {
@@ -7,17 +8,13 @@ class CustomCloseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: Colors.white),
-      ),
+    return SizedBox(
       child: GestureDetector(
         onTap: () {
           Navigator.pop(context);
         },
         child: const Icon(
-          Icons.close_rounded,
+          CupertinoIcons.arrowshape_turn_up_left_fill,
           color: Colors.white,
           size: 30,
         ),
