@@ -17,10 +17,10 @@ class _Leaderboard extends State<Leaderboard>{
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: MyColor.leaderboardBackGroundColor,
+        color: Colors.white,
       ),
       child: Scaffold(
-        backgroundColor: MyColor.leaderboardBackGroundColor,
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
@@ -39,7 +39,7 @@ class _Leaderboard extends State<Leaderboard>{
                       height: 120.0,
                       winnerPosition: 2,
                       winnerName: 'winner2',
-                      color: Colors.yellow,
+                      color: Colors.green,
                     ),
                     WinnerContainer(
                       height: 150.0,

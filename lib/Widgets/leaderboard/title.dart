@@ -23,13 +23,13 @@ class TitleWidget extends StatelessWidget{
           height: 60.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
-            color: MyColor.leaderboardColor,
+            color: Colors.white,
           ),
           child: const Center(
             child: Text(
               'LeaderBoard',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.w600,
                   fontSize: 20.0,
                   letterSpacing: 1.0),

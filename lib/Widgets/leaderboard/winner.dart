@@ -47,7 +47,7 @@ class WinnerContainer extends StatelessWidget{
                          height: height,
                          width: 90.0,
                          decoration: const BoxDecoration(
-                           color: MyColor.leaderboardColor,
+                           color:Colors.white,
                            borderRadius: BorderRadius.only(
                              topLeft: Radius.circular(40.0),
                              topRight: Radius.circular(40.0),
@@ -77,7 +77,7 @@ class WinnerContainer extends StatelessWidget{
                            children: [
                              Text(
                                winnerName ?? 'Dao Vinh Khuong',
-                               style: const TextStyle(color: Colors.white,fontSize: 11.0,
+                               style: const TextStyle(color: Colors.black,fontSize: 11.0,
                                    fontWeight: FontWeight.w600),
                              ),
                              Text(
