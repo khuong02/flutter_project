@@ -21,27 +21,26 @@ class Board extends StatelessWidget{
         ]),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(2.0),
+        padding: const EdgeInsets.all(3.0),
         child: Container(
-          height: MediaQuery.of(context).size.height - 420.0,
+          height: MediaQuery.of(context).size.height - 450.0,
           decoration: const BoxDecoration(
             borderRadius:  BorderRadius.only(
               topLeft: Radius.circular(20.0),
               topRight: Radius.circular(20.0),
             ),
-            color: MyColor.leaderboardBackGroundColor,
+            color: Colors.white,
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ContestantList(),
-                ContestantList(),
-                ContestantList(),
-                ContestantList(),
-                ContestantList(),
-                ContestantList(),
-              ],
-            ),
+          child: GridView.count(
+            crossAxisCount: 1,
+            childAspectRatio: 4.0,
+            children: const [
+              ContestantList(),
+              ContestantList(),
+              ContestantList(),
+              ContestantList(),
+              ContestantList(),
+            ],
           ),
         ),
       ),
