@@ -1,3 +1,4 @@
+import 'package:do_an_di_dong/Widgets/auth/signup/repassword_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validators/form_validators.dart';
@@ -30,20 +31,24 @@ class SignUp extends ConsumerWidget {
     );
 
     return Column(
-      children: const [
-        NameField(),
-        SizedBox(
+      children: [
+        const NameField(),
+        const SizedBox(
           height: 16,
         ),
-        EmailField(),
-        SizedBox(
+        const EmailField(),
+        const SizedBox(
           height: 16,
         ),
         PasswordField(),
-        SizedBox(
+        const SizedBox(
           height: 24,
         ),
-        SignUpButton(),
+        RepasswordField(),
+        const SizedBox(
+          height: 24,
+        ),
+        const SignUpButton(),
       ],
     );
   }

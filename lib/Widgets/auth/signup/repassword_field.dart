@@ -5,15 +5,14 @@ import 'package:form_validators/form_validators.dart';
 import '../../../features/authentication/signup/signup_controller.dart';
 import '../../text_input_field.dart';
 
-class PasswordField extends ConsumerStatefulWidget {
-  PasswordField({
-    Key? key,
-  }) : super(key: key);
+class RepasswordField extends ConsumerStatefulWidget {
+  RepasswordField({Key? key}) : super(key: key);
+
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => PasswordFieldState();
+  ConsumerState<ConsumerStatefulWidget> createState() => RepasswordFieldState();
 }
 
-class PasswordFieldState extends ConsumerState<PasswordField> {
+class RepasswordFieldState extends ConsumerState<RepasswordField> {
   bool obscure = true;
   bool icon = true;
   @override
@@ -22,7 +21,7 @@ class PasswordFieldState extends ConsumerState<PasswordField> {
     final showError = signUpState.password.invalid;
     final signUpController = ref.read(signUpProvider.notifier);
     return TextInputField(
-      hintText: "Password",
+      hintText: "Confirm password",
       obscureText: obscure,
       suffix: GestureDetector(
         child: icon
@@ -44,9 +43,10 @@ class PasswordFieldState extends ConsumerState<PasswordField> {
         },
       ),
       errorText: showError
-          ? Password.showPasswordErrorMessage(signUpState.password.error)
+          ? Repassword.showRepasswordErrorMessage(signUpState.repassword.error)
           : null,
-      onChanged: (password) => signUpController.onPasswordChange(password),
+      onChanged: (repassword) =>
+          signUpController.onRepasswordChange(repassword),
     );
   }
 }
