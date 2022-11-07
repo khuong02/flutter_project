@@ -40,12 +40,19 @@ class AuthenticationRepository {
   }
 
   Future<void> signUpWithEmailAndPassword(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String repassword}) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      if (password == repassword) {
+        await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+      } else {
+        throw const SignUpWithEmailAndPasswordFailure(
+            "Password and repassword do not match");
+      }
     } on FirebaseAuthException catch (e) {
       throw SignUpWithEmailAndPasswordFailure(e.code);
     }

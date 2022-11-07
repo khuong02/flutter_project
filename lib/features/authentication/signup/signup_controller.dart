@@ -23,6 +23,7 @@ class SignUpController extends StateNotifier<SignUpState> {
         name,
         state.email,
         state.password,
+        state.repassword,
       ]),
     );
   }
@@ -37,6 +38,7 @@ class SignUpController extends StateNotifier<SignUpState> {
           state.name,
           email,
           state.password,
+          state.repassword,
         ],
       ),
     );
@@ -51,6 +53,22 @@ class SignUpController extends StateNotifier<SignUpState> {
           state.name,
           state.email,
           password,
+          state.repassword,
+        ],
+      ),
+    );
+  }
+
+  void onRepasswordChange(String value) {
+    final repassword = Repassword.dirty(value);
+    state = state.copyWith(
+      repassword: repassword,
+      status: Formz.validate(
+        [
+          state.name,
+          state.email,
+          state.password,
+          repassword,
         ],
       ),
     );
@@ -63,6 +81,7 @@ class SignUpController extends StateNotifier<SignUpState> {
       await _authenticationRepository.signUpWithEmailAndPassword(
         email: state.email.value,
         password: state.password.value,
+        repassword: state.repassword.value,
       );
 
       state = state.copyWith(status: FormzStatus.submissionSuccess);
