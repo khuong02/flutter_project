@@ -11,8 +11,7 @@ class ForgotPasswordButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(CupertinoPageRoute(
-            builder: (_) => const ForgotPasswordView(),
-            fullscreenDialog: true));
+            builder: (_) => ForgotPasswordView(), fullscreenDialog: true));
       },
       child: const Padding(
         padding: EdgeInsets.symmetric(vertical: 8.0),
