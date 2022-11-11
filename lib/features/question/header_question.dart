@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:do_an_di_dong/features/question/help_audience.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -30,17 +31,17 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   }
 
   final CountDownController _controller = CountDownController();
-  bool isOnTap = false;
 
   QuizMaker quizMaker = QuizMaker();
-  int questionNumber = 0;
 
+  int questionNumber = 0;
   int userHeart = 3;
 
+  bool isOnTap = false;
   bool fiftyfifty = false;
   bool isTapFifty = false;
-
   bool isAbsorbing = false;
+  bool isHelpAudience = false;
 
   // time choi moi cau hoi
   final int duration = Constants.duration;
@@ -278,7 +279,14 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: isHelpAudience
+                          ? null
+                          : () {
+                              setState(() {
+                                isHelpAudience = true;
+                              });
+                              showHelpAudience();
+                            },
                       child: const SizedBox(
                         height: 35,
                         width: 35,
@@ -350,6 +358,15 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
           score: quizMaker.getScore(),
           index: widget.categoryIndex,
         ),
+      ),
+    );
+  }
+
+  showHelpAudience() {
+    showDialog<dynamic>(
+      context: context,
+      builder: (BuildContext context) => Center(
+        child: const HelpAudience(),
       ),
     );
   }
