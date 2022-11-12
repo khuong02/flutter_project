@@ -51,7 +51,7 @@ class HomeScreen extends ConsumerWidget {
                   TextButton(
                     child: const Text("SignOut"),
                     onPressed: () {
-                      authController.onSignOut();
+                      authController.onSignOut(context);
                     },
                   ),
                 ],

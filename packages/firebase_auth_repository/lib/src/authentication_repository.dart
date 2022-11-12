@@ -2,6 +2,8 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'auth_user.dart';
+
 class SignUpWithEmailAndPasswordFailure implements Exception {
   final String code;
   const SignUpWithEmailAndPasswordFailure(this.code);
@@ -34,7 +36,6 @@ class AuthenticationRepository {
               email: firebaseUser.email,
               name: firebaseUser.displayName,
               photo: firebaseUser.photoURL,
-              emailVerified: firebaseUser.emailVerified,
             );
     });
   }
@@ -100,17 +101,6 @@ class AuthenticationRepository {
       return userCredential.additionalUserInfo?.isNewUser;
     } on FirebaseAuthException catch (_) {
       throw SignInWithGoogleFailure();
-    }
-  }
-
-  Future<void> signOut() async {
-    try {
-      await Future.wait([
-        _firebaseAuth.signOut(),
-        _googleSignIn.signOut(),
-      ]);
-    } catch (_) {
-      throw SignOutFailure();
     }
   }
 }

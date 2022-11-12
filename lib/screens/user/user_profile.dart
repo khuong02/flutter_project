@@ -18,11 +18,25 @@ class Profile extends ConsumerStatefulWidget {
 }
 
 class UserProfileState extends ConsumerState<Profile> {
+  Future<User>? _futureUser;
+  FutureBuilder<User> buildFutureBuilder() {
+    return FutureBuilder<User>(
+      future: _futureUser,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!.name);
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final authController = ref.read(authProvider.notifier);
-    // final authUser = ref.watch(authProvider).user;
-    final user = UserProvider.myuser;
     return Scaffold(
       body: ListView(
         physics: const BouncingScrollPhysics(),
@@ -30,7 +44,7 @@ class UserProfileState extends ConsumerState<Profile> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.20,
             child: ProfileWidget(
-              imageUrl: user.photo,
+              imageUrl: "http://pngimg.com/uploads/google/google_PNG19635.png",
               onClicked: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -42,14 +56,14 @@ class UserProfileState extends ConsumerState<Profile> {
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.10,
-            child: buildName(user),
+            child: buildName(),
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.10,
             child: NumberWidget(
-              rank: user.ranking,
-              totalPlayed: user.totalPlay,
-              datetime: user.dateCreated,
+              rank: 1,
+              totalPlayed: 20,
+              datetime: DateTime(2020, 2, 3),
             ),
           ),
           SizedBox(
@@ -62,7 +76,7 @@ class UserProfileState extends ConsumerState<Profile> {
             padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.06),
             child: TextButton(
               onPressed: () {
-                authController.onSignOut();
+                authController.onSignOut(context);
               },
               child: const Text(
                 "Log out",
@@ -76,21 +90,21 @@ class UserProfileState extends ConsumerState<Profile> {
     );
   }
 
-  Widget buildName(User user) {
+  Widget buildName() {
     return Column(
-      children: [
+      children: const [
         Text(
-          user.name,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+          "Trần Phi Long",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
         ),
-        const SizedBox(
+        SizedBox(
           height: 4,
         ),
         Text(
-          user.email,
-          style: const TextStyle(color: Colors.grey, fontSize: 15),
+          "caybut65@gmail.com",
+          style: TextStyle(color: Colors.grey, fontSize: 15),
         ),
-        const SizedBox(
+        SizedBox(
           height: 10,
         ),
       ],
