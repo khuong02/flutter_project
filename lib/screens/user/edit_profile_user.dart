@@ -22,7 +22,6 @@ class _EditProfileState extends ConsumerState<EditProfileUser> {
   @override
   Widget build(BuildContext context) {
     // final authUser = ref.watch(authProvider).user;
-    final user = UserProvider.myuser;
     return Scaffold(
       appBar: CupertinoNavigationBar(
         border: Border.all(style: BorderStyle.none),
@@ -46,14 +45,14 @@ class _EditProfileState extends ConsumerState<EditProfileUser> {
           ),
           ProfileWidget(
             isEdit: true,
-            imageUrl: user.photo,
+            imageUrl: "http://pngimg.com/uploads/google/google_PNG19635.png",
             onClicked: () async {},
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextEditUser(
               title: "Full name",
-              text: user.name,
+              text: "Long",
               onChanged: (name) {},
             ),
           ),
@@ -61,7 +60,7 @@ class _EditProfileState extends ConsumerState<EditProfileUser> {
             padding: const EdgeInsets.all(8.0),
             child: TextEditUser(
               title: "Full name",
-              text: user.name,
+              text: "Long",
               onChanged: (name) {},
             ),
           ),
@@ -69,7 +68,7 @@ class _EditProfileState extends ConsumerState<EditProfileUser> {
             padding: const EdgeInsets.all(8.0),
             child: TextEditUser(
               title: "Full name",
-              text: user.name,
+              text: "Long",
               onChanged: (name) {},
             ),
           ),
@@ -77,7 +76,7 @@ class _EditProfileState extends ConsumerState<EditProfileUser> {
             padding: const EdgeInsets.all(8.0),
             child: TextEditUser(
               title: "Full name",
-              text: user.name,
+              text: "Long",
               onChanged: (name) {},
             ),
           ),

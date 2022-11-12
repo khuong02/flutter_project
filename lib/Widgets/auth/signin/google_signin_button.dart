@@ -26,7 +26,7 @@ class GoogleSignInButton extends ConsumerWidget {
 
     return AnimatedButton(
       onTap: () {
-        ref.read(googleSignInProvider.notifier).signInWithGoogle();
+        ref.read(googleSignInProvider.notifier).signInWithGoogle(context);
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 18),
@@ -58,18 +58,5 @@ class GoogleSignInButton extends ConsumerWidget {
         ),
       ),
     );
-    // TextButton(
-    //   child: const Text(
-    //     "Sign In With Google",
-    //     style: TextStyle(
-    //       color: Color(0xFF9A9A9A),
-    //       fontWeight: FontWeight.bold,
-    //       fontSize: 18,
-    //     ),
-    //   ),
-    //   onPressed: () {
-    //     ref.read(googleSignInProvider.notifier).signInWithGoogle();
-    //   },
-    // );
   }
 }

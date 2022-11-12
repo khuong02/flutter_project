@@ -5,14 +5,14 @@ class AuthUser extends Equatable {
   final String? email;
   final String? name;
   final String? photo;
-  final bool emailVerified;
+  final int? cost;
 
   const AuthUser({
     required this.id,
     this.email,
     this.name,
     this.photo,
-    this.emailVerified = false,
+    this.cost,
   });
 
   static const empty = AuthUser(id: '');
@@ -21,10 +21,10 @@ class AuthUser extends Equatable {
 
   @override
   List<Object?> get props => [
-        email,
         id,
+        email,
         name,
         photo,
-        emailVerified,
+        cost,
       ];
 }
