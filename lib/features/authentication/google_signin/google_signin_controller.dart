@@ -46,14 +46,17 @@ class GoogleSignInController extends StateNotifier<GoogleSignInState> {
       var res = await CallApi().verifyToken(token);
 
       var body = jsonDecode(res.body);
+      if (body["status"] == 200) {
+        final pref = await SharedPreferences.getInstance();
+        await pref.setString('token', body["token"]);
 
-      final pref = await SharedPreferences.getInstance();
-      await pref.setString('token', body["token"]);
-
-      state = GoogleSignInState.success;
-      Navigator.pop(context);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => NavBar()));
+        state = GoogleSignInState.success;
+        Navigator.pop(context);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => NavBar()));
+      } else {
+        state = GoogleSignInState.error;
+      }
     } on SignInWithGoogleFailure catch (_) {
       state = GoogleSignInState.error;
     }

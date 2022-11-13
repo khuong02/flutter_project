@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Utilities/card/card_details.dart';
 import '../../Widgets/home/list_card.dart';
-import '../../Consts/cosntants.dart';
-import '../../features/authentication/authentication_controller.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final authController = ref.read(authProvider.notifier);
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: Container(
@@ -47,12 +47,6 @@ class HomeScreen extends ConsumerWidget {
                       color: Colors.lightBlueAccent,
                       size: 30,
                     ),
-                  ),
-                  TextButton(
-                    child: const Text("SignOut"),
-                    onPressed: () {
-                      authController.onSignOut(context);
-                    },
                   ),
                 ],
               ),

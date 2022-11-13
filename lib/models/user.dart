@@ -1,24 +1,21 @@
 class User {
   final int id;
   final String name;
-  final String? email;
+  final String email;
   final String? photo;
-  final int? cost;
+  final int cost;
 
   const User(
       {required this.id,
       required this.name,
-      this.email,
+      required this.email,
       this.photo,
-      this.cost});
+      required this.cost});
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      id: json['id'],
-      name: json['username'],
-      email: json["email"],
-      photo: json["avatar"],
-      cost: json["cost"],
-    );
-  }
+  User.fromJson(Map<String, dynamic> json)
+      : id = json["data"]["id"],
+        name = json["data"]["username"],
+        email = json["data"]["email"],
+        photo = json["data"]["avatar"],
+        cost = int.parse(json["data"]["cost"]);
 }
