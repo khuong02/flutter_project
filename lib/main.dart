@@ -13,7 +13,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -29,30 +28,22 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  String? _token;
   @override
   void initState() {
-    getToken();
     getHome();
+    getToken();
     super.initState();
   }
 
   Future<TokenObj> getToken() async {
     final prefs = await SharedPreferences.getInstance();
     return TokenObj(
-      token: prefs.getString('token')!,
+      token: prefs.getString('token') ?? '',
       loading: false,
     );
-    // return prefs.getString('token');
   }
 
   Widget getHome() {
-    // if (_token != null) {
-    //   return NavBar();
-    // } else {
-    //   return const AuthenticationView();
-    // }
-
     return FutureBuilder<TokenObj>(
       future: getToken(),
       initialData: TokenObj(token: '', loading: true),
@@ -61,14 +52,16 @@ class MyAppState extends State<MyApp> {
           TokenObj data = snapshot.data!;
           if (data.loading) {
             return Scaffold(
-              body: Text("Loading..."),
+              body: Center(child: Text("Loading...")),
             );
           }
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             body: data.token != '' ? NavBar() : const AuthenticationView(),
           );
         }
         return const Scaffold(
+          resizeToAvoidBottomInset: false,
           body: AuthenticationView(),
         );
       }),
@@ -79,7 +72,7 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: ThemeData.light(),
       home: getHome(),
     );
   }

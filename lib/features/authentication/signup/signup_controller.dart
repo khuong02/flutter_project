@@ -94,15 +94,20 @@ class SignUpController extends StateNotifier<SignUpState> {
       var res = await CallApi().register(data);
 
       var body = jsonDecode(res.body);
+      if (body["status"] == 200) {
+        final pref = await SharedPreferences.getInstance();
+        await pref.setString('token', body["authorisation"]["token"]);
 
-      final pref = await SharedPreferences.getInstance();
-      await pref.setString('token', body["authorisation"]["token"]);
+        state = state.copyWith(status: FormzStatus.submissionSuccess);
 
-      state = state.copyWith(status: FormzStatus.submissionSuccess);
-
-      Navigator.pop(context);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => NavBar()));
+        Navigator.pop(context);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => NavBar()));
+      } else {
+        state = state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errorMessage: "Fail to register");
+      }
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       state = state.copyWith(
           status: FormzStatus.submissionFailure, errorMessage: e.toString());
