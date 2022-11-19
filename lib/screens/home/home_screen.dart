@@ -1,18 +1,25 @@
+import 'package:do_an_di_dong/Providers/user_provider.dart';
+import 'package:do_an_di_dong/features/authentication/authentication_controller.dart';
+import 'package:do_an_di_dong/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Utilities/card/card_details.dart';
 import '../../Widgets/home/list_card.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  User myUser = UserProvider().user;
+
   @override
   Widget build(BuildContext context) {
+    final authController = ref.read(authProvider.notifier);
     return Scaffold(
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
@@ -25,29 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(7),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey)),
-                    child: const Icon(
-                      Icons.favorite_sharp,
-                      color: Colors.lightBlueAccent,
-                      size: 30,
-                    ),
+                  SizedBox(
+                    child: Text(myUser.cost.toString()),
                   ),
-                  const SizedBox(width: 15),
-                  Container(
-                    padding: const EdgeInsets.all(7),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey)),
-                    child: const Icon(
-                      Icons.person,
-                      color: Colors.lightBlueAccent,
-                      size: 30,
-                    ),
-                  ),
+                  TextButton(
+                      onPressed: () {
+                        authController.onSignOut(context);
+                      },
+                      child: Text("Sign out"))
                 ],
               ),
               const SizedBox(height: 10),

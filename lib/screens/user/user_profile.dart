@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'package:do_an_di_dong/Providers/user_provider.dart';
 import 'package:do_an_di_dong/Widgets/user/number_widget.dart';
 import 'package:do_an_di_dong/api/api.dart';
 import 'package:do_an_di_dong/models/user.dart';
@@ -17,17 +18,18 @@ class Profile extends ConsumerStatefulWidget {
 }
 
 class UserProfileState extends ConsumerState<Profile> {
-  Future<User> getUser() async {
-    var prefs = await SharedPreferences.getInstance();
-    String? token = await prefs.getString("token");
-    return await CallApi().getUser(token!);
+  late Future<User> myUser;
+
+  @override
+  void initState() {
+    myUser = CallApi().getUser();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final authController = ref.read(authProvider.notifier);
     return FutureBuilder<User>(
-      future: getUser(),
+      future: myUser,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
@@ -42,7 +44,7 @@ class UserProfileState extends ConsumerState<Profile> {
                     onClicked: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => EditProfileUser(),
+                          builder: (context) => EditProfileUser(snapshot.data!),
                         ),
                       );
                     },
@@ -66,29 +68,11 @@ class UserProfileState extends ConsumerState<Profile> {
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       child: buildInfo(snapshot.data!),
                     )),
-                Padding(
-                  padding:
-                      EdgeInsets.all(MediaQuery.of(context).size.height * 0.06),
-                  child: TextButton(
-                    onPressed: () {
-                      authController.onSignOut(context);
-                    },
-                    child: const Text(
-                      "Log out",
-                      style: TextStyle(
-                          color: Colors.redAccent, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ),
               ],
             ),
           );
         }
-        return Scaffold(
-          body: Center(
-            child: Text("Loading..."),
-          ),
-        );
+        return const Center(child: CircularProgressIndicator());
       },
     );
   }
