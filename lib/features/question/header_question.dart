@@ -122,18 +122,20 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         Padding(
           padding: const EdgeInsets.only(bottom: 13),
           child: OptionWidget(
-              widget: widget,
-              option: "",
-              optionColor: Colors.white,
-              onTap: () {}),
+            widget: widget,
+            option: "",
+            optionColor: Colors.white,
+            onTap: () {},
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 13),
           child: OptionWidget(
-              widget: widget,
-              option: "",
-              optionColor: Colors.white,
-              onTap: () {}),
+            widget: widget,
+            option: "",
+            optionColor: Colors.white,
+            onTap: () {},
+          ),
         ),
       ];
       if (index == 3 || index == 2) {
@@ -285,7 +287,8 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                               setState(() {
                                 isHelpAudience = true;
                               });
-                              showHelpAudience();
+                              showHelpAudience(isTapFifty,
+                                  quizMaker.getCorrectIndex(questionNumber));
                             },
                       child: const SizedBox(
                         height: 35,
@@ -362,11 +365,14 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
     );
   }
 
-  showHelpAudience() {
+  showHelpAudience(bool isTapFifty, int indexCorrect) {
     showDialog<dynamic>(
       context: context,
       builder: (BuildContext context) => Center(
-        child: const HelpAudience(),
+        child: HelpAudience(
+          indexCorrect: indexCorrect,
+          isTapFifty: isTapFifty,
+        ),
       ),
     );
   }
