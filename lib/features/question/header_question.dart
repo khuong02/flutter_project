@@ -290,12 +290,12 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                               showHelpAudience(isTapFifty,
                                   quizMaker.getCorrectIndex(questionNumber));
                             },
-                      child: const SizedBox(
+                      child: SizedBox(
                         height: 35,
                         width: 35,
                         child: Icon(
                           Icons.safety_divider,
-                          color: Colors.white,
+                          color: isTapFifty ? Colors.grey : Colors.white,
                           size: 35,
                         ),
                       ),
