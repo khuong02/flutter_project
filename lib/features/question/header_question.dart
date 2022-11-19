@@ -295,7 +295,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                         width: 35,
                         child: Icon(
                           Icons.safety_divider,
-                          color: isTapFifty ? Colors.grey : Colors.white,
+                          color: isHelpAudience ? Colors.grey : Colors.white,
                           size: 35,
                         ),
                       ),
