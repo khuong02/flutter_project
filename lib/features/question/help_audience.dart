@@ -212,43 +212,4 @@ class HelpAudienceState extends State<HelpAudience> {
       },
     );
   }
-
-  List<PieChartSectionData> showingSections2() {
-    return List.generate(
-      2,
-      (i) {
-        final isTouched = i == touchedIndex;
-        final fontSize = isTouched ? 25.0 : 16.0;
-        final radius = isTouched ? 60.0 : 50.0;
-        switch (i) {
-          case 0:
-            return PieChartSectionData(
-              color: const Color(0xff845bef),
-              value: percentC.toDouble(),
-              title: '$percentA%',
-              radius: radius,
-              titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff),
-              ),
-            );
-          case 1:
-            return PieChartSectionData(
-              color: const Color(0xff13d38e),
-              value: percentD.toDouble(),
-              title: '$percentB%',
-              radius: radius,
-              titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff),
-              ),
-            );
-          default:
-            throw Error();
-        }
-      },
-    );
-  }
 }
