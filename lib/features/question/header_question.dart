@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:do_an_di_dong/features/question/help_audience.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -30,17 +31,17 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   }
 
   final CountDownController _controller = CountDownController();
-  bool isOnTap = false;
 
   QuizMaker quizMaker = QuizMaker();
-  int questionNumber = 0;
 
+  int questionNumber = 0;
   int userHeart = 3;
 
+  bool isOnTap = false;
   bool fiftyfifty = false;
   bool isTapFifty = false;
-
   bool isAbsorbing = false;
+  bool isHelpAudience = false;
 
   // time choi moi cau hoi
   final int duration = Constants.duration;
@@ -121,18 +122,20 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         Padding(
           padding: const EdgeInsets.only(bottom: 13),
           child: OptionWidget(
-              widget: widget,
-              option: "",
-              optionColor: Colors.white,
-              onTap: () {}),
+            widget: widget,
+            option: "",
+            optionColor: Colors.white,
+            onTap: () {},
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 13),
           child: OptionWidget(
-              widget: widget,
-              option: "",
-              optionColor: Colors.white,
-              onTap: () {}),
+            widget: widget,
+            option: "",
+            optionColor: Colors.white,
+            onTap: () {},
+          ),
         ),
       ];
       if (index == 3 || index == 2) {
@@ -278,13 +281,21 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
-                      child: const SizedBox(
+                      onTap: isHelpAudience
+                          ? null
+                          : () {
+                              setState(() {
+                                isHelpAudience = true;
+                              });
+                              showHelpAudience(isTapFifty,
+                                  quizMaker.getCorrectIndex(questionNumber));
+                            },
+                      child: SizedBox(
                         height: 35,
                         width: 35,
                         child: Icon(
                           Icons.safety_divider,
-                          color: Colors.white,
+                          color: isHelpAudience ? Colors.grey : Colors.white,
                           size: 35,
                         ),
                       ),
@@ -349,6 +360,18 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         builder: (context) => ScoreScreen(
           score: quizMaker.getScore(),
           index: widget.categoryIndex,
+        ),
+      ),
+    );
+  }
+
+  showHelpAudience(bool isTapFifty, int indexCorrect) {
+    showDialog<dynamic>(
+      context: context,
+      builder: (BuildContext context) => Center(
+        child: HelpAudience(
+          indexCorrect: indexCorrect,
+          isTapFifty: isTapFifty,
         ),
       ),
     );
