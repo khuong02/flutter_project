@@ -51,9 +51,7 @@ class MyAppState extends State<MyApp> {
         if (snapshot.hasData) {
           TokenObj data = snapshot.data!;
           if (data.loading) {
-            return Scaffold(
-              body: Center(child: Text("Loading...")),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
           return Scaffold(
             resizeToAvoidBottomInset: false,

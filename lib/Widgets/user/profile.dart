@@ -55,7 +55,7 @@ class ProfileWidget extends StatelessWidget {
   }
 
   Widget buildEdit(Color color) => buildCircle(
-        color: Colors.white,
+        color: color,
         all: 3,
         child: buildCircle(
           all: 8,

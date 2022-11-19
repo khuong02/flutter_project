@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:do_an_di_dong/Providers/user_provider.dart';
 import 'package:do_an_di_dong/Widgets/user/profile.dart';
 import 'package:do_an_di_dong/Widgets/user/text_edit_user.dart';
+import 'package:do_an_di_dong/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +11,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../features/authentication/authentication_controller.dart';
 
 class EditProfileUser extends ConsumerStatefulWidget {
-  EditProfileUser({Key? key, this.isChange}) : super(key: key);
+  final User myUser;
+  EditProfileUser(this.myUser, {Key? key, this.isChange}) : super(key: key);
 
   bool? isChange = false;
 
@@ -21,7 +23,6 @@ class EditProfileUser extends ConsumerStatefulWidget {
 class _EditProfileState extends ConsumerState<EditProfileUser> {
   @override
   Widget build(BuildContext context) {
-    // final authUser = ref.watch(authProvider).user;
     return Scaffold(
       appBar: CupertinoNavigationBar(
         border: Border.all(style: BorderStyle.none),
@@ -31,9 +32,7 @@ class _EditProfileState extends ConsumerState<EditProfileUser> {
             style:
                 TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.w700),
           ),
-          onTap: () {
-            Navigator.of(context).pop();
-          },
+          onTap: () async {},
         ),
       ),
       body: ListView(
@@ -45,38 +44,30 @@ class _EditProfileState extends ConsumerState<EditProfileUser> {
           ),
           ProfileWidget(
             isEdit: true,
-            imageUrl: "http://pngimg.com/uploads/google/google_PNG19635.png",
-            onClicked: () async {},
+            imageUrl: widget.myUser.photo,
+            onClicked: () {},
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextEditUser(
               title: "Full name",
-              text: "Long",
+              text: widget.myUser.name,
               onChanged: (name) {},
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextEditUser(
-              title: "Full name",
-              text: "Long",
+              title: "Email",
+              text: widget.myUser.email,
               onChanged: (name) {},
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextEditUser(
-              title: "Full name",
-              text: "Long",
-              onChanged: (name) {},
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextEditUser(
-              title: "Full name",
-              text: "Long",
+              title: "Cost",
+              text: widget.myUser.cost.toString(),
               onChanged: (name) {},
             ),
           ),

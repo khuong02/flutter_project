@@ -14,7 +14,6 @@ class DifficultyTile extends StatelessWidget {
   final int difficulty;
 
   final List<String> level = ['Easy', 'Medium', 'Hard'];
-  final List<String> levelLowercase = ['easy', 'medium', 'hard'];
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +23,8 @@ class DifficultyTile extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => LoadingScreen(
-                      index: selectedIndex,
-                      selectedDif: levelLowercase[difficulty],
+                      index: selectedIndex + 1,
+                      selectedDif: difficulty + 1,
                     )));
       },
       child: Container(

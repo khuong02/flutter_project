@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:do_an_di_dong/api/api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:http/http.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -11,7 +14,7 @@ import '../../Consts/cosntants.dart';
 
 class LoadingScreen extends StatefulWidget {
   final int index;
-  final String selectedDif;
+  final int selectedDif;
   const LoadingScreen(
       {Key? key, required this.index, required this.selectedDif})
       : super(key: key);
@@ -40,23 +43,23 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void getQuestions() async {
     bool result = await checkConnectivity();
     if (result) {
-      NetworkHelper networkHelper = NetworkHelper(
-          '${Constants.urlApi}/api/questions?categories=' +
-              cardDetailList[widget.index].category +
-              '&limit=10&difficulty=' +
-              widget.selectedDif);
-      var questionData = await networkHelper.getData();
+      Response data =
+          await CallApi().callQuestions(widget.index, widget.selectedDif);
 
-      Navigator.pop(context);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: ((context) => QuestionScreen(
-                questionData: questionData,
-                categoryIndex: widget.index,
-              )),
-        ),
-      );
+      if (data.statusCode == 200) {
+        var body = jsonDecode(data.body);
+
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: ((context) => QuestionScreen(
+                  questionData: body['data'],
+                  categoryIndex: widget.index,
+                )),
+          ),
+        );
+      }
     } else {
       showDialog(
         context: context,
