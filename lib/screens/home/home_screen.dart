@@ -15,8 +15,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  User myUser = UserProvider().user;
-
   @override
   Widget build(BuildContext context) {
     final authController = ref.read(authProvider.notifier);
@@ -33,7 +31,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SizedBox(
-                    child: Text(myUser.cost.toString()),
+                    child: Text("5000"),
                   ),
                   TextButton(
                       onPressed: () {

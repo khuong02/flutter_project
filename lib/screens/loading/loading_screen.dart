@@ -44,7 +44,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     bool result = await checkConnectivity();
     if (result) {
       Response data =
-          await CallApi().callQuestions(widget.index, widget.selectedDif);
+          await QuestionApi().callQuestions(widget.index, widget.selectedDif);
 
       if (data.statusCode == 200) {
         var body = jsonDecode(data.body);

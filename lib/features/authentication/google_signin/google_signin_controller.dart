@@ -43,7 +43,7 @@ class GoogleSignInController extends StateNotifier<GoogleSignInState> {
       var firebaseIdToken = FirebaseAuth.instance.currentUser!.getIdToken();
       String token = await firebaseIdToken;
 
-      var res = await CallApi().verifyToken(token);
+      var res = await AuthenticationApi().verifyToken(token);
 
       var body = jsonDecode(res.body);
       if (body["status"] == 200) {

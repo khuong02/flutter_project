@@ -46,7 +46,7 @@ class SignInController extends StateNotifier<SignInState> {
     };
 
     try {
-      var res = await CallApi().login(data);
+      var res = await AuthenticationApi().login(data);
 
       var body = jsonDecode(res.body);
       if (body["status"] == 200) {

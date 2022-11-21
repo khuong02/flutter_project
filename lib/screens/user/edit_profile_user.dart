@@ -44,7 +44,7 @@ class _EditProfileState extends ConsumerState<EditProfileUser> {
           ),
           ProfileWidget(
             isEdit: true,
-            imageUrl: widget.myUser.photo,
+            imageUrl: widget.myUser.photo!,
             onClicked: () {},
           ),
           Padding(
