@@ -9,7 +9,6 @@ import 'package:equatable/equatable.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../Providers/auth_repo_provider.dart';
-import '../../../models/user.dart';
 
 part 'signup_state.dart';
 
@@ -91,7 +90,7 @@ class SignUpController extends StateNotifier<SignUpState> {
     };
 
     try {
-      var res = await CallApi().register(data);
+      var res = await AuthenticationApi().register(data);
 
       var body = jsonDecode(res.body);
       if (body["status"] == 200) {

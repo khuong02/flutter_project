@@ -22,7 +22,7 @@ class UserProfileState extends ConsumerState<Profile> {
 
   @override
   void initState() {
-    myUser = CallApi().getUser();
+    myUser = UserApi().getUser();
     super.initState();
   }
 
