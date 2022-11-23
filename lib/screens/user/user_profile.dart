@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'package:do_an_di_dong/Providers/user_provider.dart';
+import 'package:do_an_di_dong/Widgets/refresh.dart';
 import 'package:do_an_di_dong/Widgets/user/number_widget.dart';
 import 'package:do_an_di_dong/api/api.dart';
 import 'package:do_an_di_dong/models/user.dart';
@@ -22,58 +23,68 @@ class UserProfileState extends ConsumerState<Profile> {
 
   @override
   void initState() {
-    myUser = UserApi().getUser();
+    loadUser();
     super.initState();
+  }
+
+  Future loadUser() async {
+    setState(() {
+      myUser = UserApi().getUser();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<User>(
-      future: myUser,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Scaffold(
-            body: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.20,
-                  child: ProfileWidget(
-                    imageUrl: snapshot.data?.photo ??
-                        "http://pngimg.com/uploads/google/google_PNG19635.png",
-                    onClicked: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => EditProfileUser(snapshot.data!),
-                        ),
-                      );
-                    },
+    return Refresh(
+      onRefresh: loadUser,
+      child: FutureBuilder<User>(
+        future: myUser,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Scaffold(
+              body: ListView(
+                // physics: const BouncingScrollPhysics(),
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.20,
+                    child: ProfileWidget(
+                      imageUrl: snapshot.data?.photo ??
+                          "http://pngimg.com/uploads/google/google_PNG19635.png",
+                      onClicked: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                EditProfileUser(snapshot.data!),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.10,
-                  child: buildName(snapshot.data!),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.10,
-                  child: NumberWidget(
-                    rank: 1,
-                    totalPlayed: 20,
-                    datetime: DateTime(2020, 2, 3),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.10,
+                    child: buildName(snapshot.data!),
                   ),
-                ),
-                SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.30,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: buildInfo(snapshot.data!),
-                    )),
-              ],
-            ),
-          );
-        }
-        return const Center(child: CircularProgressIndicator());
-      },
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.10,
+                    child: NumberWidget(
+                      rank: 1,
+                      totalPlayed: 20,
+                      datetime: DateTime(2020, 2, 3),
+                    ),
+                  ),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.30,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: buildInfo(snapshot.data!),
+                      )),
+                ],
+              ),
+            );
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
+      ),
     );
   }
 
