@@ -45,7 +45,7 @@ dependencies:
   fl_score_bar: ^0.2.4
   auto_size_text: ^3.0.0
   babstrap_settings_screen: ^0.1.3
-
+  jwt_decode: ^0.3.1
   authentication_repository:
     path: packages/firebase_auth_repository
   form_validators:
@@ -54,8 +54,12 @@ dependencies:
   google_nav_bar: ^5.0.6
   line_icons: ^2.0.1
   fl_chart: ^0.55.2
+  shared_preferences: ^2.0.15
+  image_picker: ^0.8.6
+  cloudinary: ^1.0.3
 
 dev_dependencies:
+  flutter_native_splash: ^2.2.14
   flutter_test:
     sdk: flutter
 
@@ -65,6 +69,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+flutter_native_splash:
+  image: assets/images/science.png
+  color: "#f9f9f9"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

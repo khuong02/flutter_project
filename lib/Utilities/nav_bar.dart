@@ -9,16 +9,18 @@ import '../screens/errors/not_found_screen.dart';
 import '../screens/settings/setting_screen.dart';
 
 class NavBar extends StatefulWidget {
+  const NavBar({Key? key}) : super(key: key);
+
   @override
   _NavBar createState() => _NavBar();
 }
 
-class _NavBar extends State<NavBar>{
+class _NavBar extends State<NavBar> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
 
-  final List<Widget>_children = [
+  final List<Widget> _children = [
     const HomeScreen(),
     const LeaderboardScreen(),
     const Profile(),
@@ -44,14 +46,14 @@ class _NavBar extends State<NavBar>{
     ),
   ];
 
-  void handleTabChange(index){
+  void handleTabChange(index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  Widget handleChangeScreen(int index){
-    if(index >= _children.length || index < 0) {
+  Widget handleChangeScreen(int index) {
+    if (index >= _children.length || index < 0) {
       return const NotFoundScreen();
     }
 
@@ -62,7 +64,6 @@ class _NavBar extends State<NavBar>{
   Widget build(BuildContext context) {
     return Scaffold(
       body: handleChangeScreen(_selectedIndex),
-
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white,

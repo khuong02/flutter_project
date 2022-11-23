@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:do_an_di_dong/screens/auth/authentication_view.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:equatable/equatable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Providers/auth_repo_provider.dart';
 
@@ -29,8 +32,12 @@ class AuthController extends StateNotifier<AuthenticationState> {
     }
   }
 
-  void onSignOut() {
-    _authRepository.signOut();
+  void onSignOut(context) async {
+    final pref = await SharedPreferences.getInstance();
+    await pref.remove('token');
+    Navigator.pop(context);
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const AuthenticationView()));
   }
 
   @override

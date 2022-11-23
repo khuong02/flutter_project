@@ -1,19 +1,18 @@
 class User {
-  final String id;
   final String name;
   final String email;
-  final String photo;
-  final int ranking;
-  final int totalPlay;
-  final DateTime dateCreated;
+  final String? photo;
+  final int cost;
 
-  const User({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.photo,
-    required this.ranking,
-    required this.totalPlay,
-    required this.dateCreated,
-  });
+  User(
+      {required this.name,
+      required this.email,
+      this.photo,
+      required this.cost});
+
+  User.fromJson(Map<String, dynamic> json)
+      : name = json["username"],
+        email = json["email"],
+        photo = json["avatar"],
+        cost = int.parse(json["cost"]);
 }

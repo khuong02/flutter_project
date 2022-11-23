@@ -28,6 +28,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   void initState() {
     super.initState();
     quizMaker.getList(widget.questionData);
+    getQuestionAndAnswer();
   }
 
   final CountDownController _controller = CountDownController();
@@ -44,6 +45,14 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   bool isHelpAudience = false;
   bool isBuyAnwser = false;
 
+  List<String> options = [];
+
+  getQuestionAndAnswer() {
+    setState(() {
+      options = quizMaker.getOptions(questionNumber);
+    });
+  }
+
   // time choi moi cau hoi
   final int duration = Constants.duration;
 
@@ -54,11 +63,10 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
     Colors.white
   ];
 
-  List<Widget> buildOptions(int i) {
-    List<String> options = quizMaker.getOptions(i);
+  List<Widget> buildOptions() {
     List<Widget> Options = [];
 
-    for (int j = 0; j < 4; j++) {
+    for (int j = 0; j < options.length; j++) {
       Options.add(
         Padding(
           padding: const EdgeInsets.only(bottom: 13),
@@ -72,7 +80,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
               }
               isOnTap = true;
               _controller.pause();
-              if (quizMaker.isCorrect(i, j)) {
+              if (quizMaker.isCorrect(questionNumber, j)) {
                 setState(
                   () {
                     optionColor[j] = Colors.green;
@@ -84,7 +92,8 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                 setState(
                   () {
                     optionColor[j] = Colors.red;
-                    optionColor[quizMaker.getCorrectIndex(i)] = Colors.green;
+                    optionColor[quizMaker.getCorrectIndex(questionNumber)] =
+                        Colors.green;
                     isAbsorbing = true;
                     userHeart--;
                   },
@@ -98,8 +107,10 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                 setState(
                   () {
                     optionColor[j] = Colors.white;
-                    optionColor[quizMaker.getCorrectIndex(i)] = Colors.white;
+                    optionColor[quizMaker.getCorrectIndex(questionNumber)] =
+                        Colors.white;
                     questionNumber++;
+                    getQuestionAndAnswer();
                     isAbsorbing = false;
                     fiftyfifty = false;
                   },
@@ -118,35 +129,37 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
       );
     }
     if (fiftyfifty) {
-      int index = quizMaker.getCorrectIndex(i);
-      List<Widget> replaceIndex = [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 13),
-          child: OptionWidget(
-            widget: widget,
-            option: "",
-            optionColor: Colors.white,
-            onTap: () {},
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 13),
-          child: OptionWidget(
-            widget: widget,
-            option: "",
-            optionColor: Colors.white,
-            onTap: () {},
-          ),
-        ),
-      ];
-      if (index == 3 || index == 2) {
-        Options.replaceRange(0, 2, replaceIndex);
-      }
-      if (index == 0 || index == 1) {
-        Options.replaceRange(2, 4, replaceIndex);
-      }
+      buildOptionsFifty(Options);
     }
     return Options;
+  }
+
+  void buildOptionsFifty(List<Widget> Options) {
+    int index = quizMaker.getCorrectIndex(questionNumber);
+    List<Widget> replace_index = [
+      Padding(
+        padding: const EdgeInsets.only(bottom: 13),
+        child: OptionWidget(
+            widget: widget,
+            option: "",
+            optionColor: Colors.white,
+            onTap: () {}),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(bottom: 13),
+        child: OptionWidget(
+            widget: widget,
+            option: "",
+            optionColor: Colors.white,
+            onTap: () {}),
+      ),
+    ];
+    if (index == 3 || index == 2) {
+      Options.replaceRange(0, 2, replace_index);
+    }
+    if (index == 0 || index == 1) {
+      Options.replaceRange(2, 4, replace_index);
+    }
   }
 
   @override
@@ -254,7 +267,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                   ],
                 ),
               ),
-              ...buildOptions(questionNumber),
+              ...buildOptions(),
               const SizedBox(
                 height: 15,
               ),

@@ -1,11 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {
-  final String? imageUrl;
+  final String imageUrl;
   final bool isEdit;
+  final File? image;
   final VoidCallback? onClicked;
   const ProfileWidget(
-      {Key? key, this.onClicked, required this.imageUrl, this.isEdit = false})
+      {Key? key,
+      this.onClicked,
+      required this.imageUrl,
+      this.isEdit = false,
+      this.image})
       : super(key: key);
 
   @override
@@ -25,7 +32,23 @@ class ProfileWidget extends StatelessWidget {
   }
 
   Widget buildImage() {
-    final image = NetworkImage(imageUrl!);
+    final image = NetworkImage(imageUrl);
+    if (this.image != null) {
+      final imageFile = FileImage(this.image!);
+      return ClipOval(
+        child: Material(
+          child: Ink.image(
+            image: imageFile,
+            fit: BoxFit.cover,
+            width: 120,
+            height: 120,
+            child: InkWell(
+              onTap: onClicked,
+            ),
+          ),
+        ),
+      );
+    }
     return imageUrl != null
         ? ClipOval(
             child: Material(
@@ -55,7 +78,7 @@ class ProfileWidget extends StatelessWidget {
   }
 
   Widget buildEdit(Color color) => buildCircle(
-        color: Colors.white,
+        color: color,
         all: 3,
         child: buildCircle(
           all: 8,
