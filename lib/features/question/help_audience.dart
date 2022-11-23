@@ -19,21 +19,21 @@ class HelpAudience extends StatefulWidget {
 class HelpAudienceState extends State<HelpAudience> {
   int touchedIndex = -1;
 
-  int percentA = 0;
-  int percentB = 0;
-  int percentC = 0;
-  int percentD = 0;
+  int percent1 = 0;
+  int percent2 = 0;
+  int percent3 = 0;
+  int percent4 = 0;
 
   @override
   Widget build(BuildContext context) {
     if (widget.isTapFifty) {
-      percentA = Random().nextInt(65) + 1;
-      percentB = 100 - percentA;
+      percent1 = Random().nextInt(65) + 1;
+      percent2 = 100 - percent1;
     } else {
-      percentA = Random().nextInt(80) + 1;
-      percentB = Random().nextInt(100 - percentA) + 1;
-      percentC = Random().nextInt(100 - percentA - percentB) + 1;
-      percentD = 100 - percentA - percentB - percentC;
+      percent1 = Random().nextInt(80) + 1;
+      percent2 = Random().nextInt(100 - percent1) + 1;
+      percent3 = Random().nextInt(100 - percent1 - percent2) + 1;
+      percent4 = 100 - percent1 - percent2 - percent3;
     }
 
     return AspectRatio(
@@ -161,8 +161,8 @@ class HelpAudienceState extends State<HelpAudience> {
           case 0:
             return PieChartSectionData(
               color: const Color(0xff0293ee),
-              value: percentA.toDouble(),
-              title: '$percentA%',
+              value: percent1.toDouble(),
+              title: '$percent1%',
               radius: radius,
               titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -173,8 +173,8 @@ class HelpAudienceState extends State<HelpAudience> {
           case 1:
             return PieChartSectionData(
               color: const Color(0xfff8b250),
-              value: percentB.toDouble(),
-              title: '$percentB%',
+              value: percent2.toDouble(),
+              title: '$percent2%',
               radius: radius,
               titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -185,8 +185,8 @@ class HelpAudienceState extends State<HelpAudience> {
           case 2:
             return PieChartSectionData(
               color: const Color(0xff845bef),
-              value: percentC.toDouble(),
-              title: '$percentC%',
+              value: percent3.toDouble(),
+              title: '$percent3%',
               radius: radius,
               titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -197,8 +197,8 @@ class HelpAudienceState extends State<HelpAudience> {
           case 3:
             return PieChartSectionData(
               color: const Color(0xff13d38e),
-              value: percentD.toDouble(),
-              title: '$percentD%',
+              value: percent4.toDouble(),
+              title: '$percent4%',
               radius: radius,
               titleStyle: TextStyle(
                 fontSize: fontSize,
