@@ -387,40 +387,8 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   }
 
   showBuyAnwser(int indexCorrect) {
-    showDialog<String>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Đáp án đúng'),
-        content: Text(
-          getCorrectAnwser(indexCorrect),
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 25,
-            color: Colors.yellowAccent[500],
-          ),
-        ),
-      ),
-    );
-  }
-
-  getCorrectAnwser(int index) {
-    String percent = '';
-
-    switch (index) {
-      case 0:
-        percent = 'A';
-        break;
-      case 1:
-        percent = 'B';
-        break;
-      case 2:
-        percent = 'C';
-        break;
-      case 3:
-        percent = 'D';
-        break;
-      default:
-    }
-    return percent;
+    setState(() {
+      optionColor[indexCorrect] = Colors.yellow;
+    });
   }
 }
