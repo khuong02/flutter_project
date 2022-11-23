@@ -42,6 +42,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   bool isTapFifty = false;
   bool isAbsorbing = false;
   bool isHelpAudience = false;
+  bool isBuyAnwser = false;
 
   // time choi moi cau hoi
   final int duration = Constants.duration;
@@ -118,7 +119,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
     }
     if (fiftyfifty) {
       int index = quizMaker.getCorrectIndex(i);
-      List<Widget> replace_index = [
+      List<Widget> replaceIndex = [
         Padding(
           padding: const EdgeInsets.only(bottom: 13),
           child: OptionWidget(
@@ -139,10 +140,10 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         ),
       ];
       if (index == 3 || index == 2) {
-        Options.replaceRange(0, 2, replace_index);
+        Options.replaceRange(0, 2, replaceIndex);
       }
       if (index == 0 || index == 1) {
-        Options.replaceRange(2, 4, replace_index);
+        Options.replaceRange(2, 4, replaceIndex);
       }
     }
     return Options;
@@ -313,13 +314,21 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
-                      child: const SizedBox(
+                      onTap: isBuyAnwser
+                          ? null
+                          : () {
+                              setState(() {
+                                isBuyAnwser = true;
+                              });
+                              showBuyAnwser(
+                                  quizMaker.getCorrectIndex(questionNumber));
+                            },
+                      child: SizedBox(
                         height: 35,
                         width: 35,
                         child: Icon(
-                          Icons.people,
-                          color: Colors.white,
+                          Icons.monetization_on_outlined,
+                          color: isBuyAnwser ? Colors.grey : Colors.white,
                           size: 35,
                         ),
                       ),
@@ -375,5 +384,43 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         ),
       ),
     );
+  }
+
+  showBuyAnwser(int indexCorrect) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Đáp án đúng'),
+        content: Text(
+          getCorrectAnwser(indexCorrect),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.yellowAccent[500],
+          ),
+        ),
+      ),
+    );
+  }
+
+  getCorrectAnwser(int index) {
+    String percent = '';
+
+    switch (index) {
+      case 0:
+        percent = 'A';
+        break;
+      case 1:
+        percent = 'B';
+        break;
+      case 2:
+        percent = 'C';
+        break;
+      case 3:
+        percent = 'D';
+        break;
+      default:
+    }
+    return percent;
   }
 }
