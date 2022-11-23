@@ -6,7 +6,7 @@ class QuestionApi {
   //GET
   callQuestions(quizid, diffid) async {
     SharedPreferences perfs = await SharedPreferences.getInstance();
-    String token = await perfs.getString('token')!;
+    String token = perfs.getString('token')!;
 
     String uri = Constants.urlApi +
         "questions?quizz_id=" +
