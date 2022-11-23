@@ -287,7 +287,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                               setState(() {
                                 isHelpAudience = true;
                               });
-                              showHelpAudience(isTapFifty,
+                              showHelpAudience(fiftyfifty,
                                   quizMaker.getCorrectIndex(questionNumber));
                             },
                       child: SizedBox(
@@ -365,13 +365,13 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
     );
   }
 
-  showHelpAudience(bool isTapFifty, int indexCorrect) {
+  showHelpAudience(bool fiftyfifty, int indexCorrect) {
     showDialog<dynamic>(
       context: context,
       builder: (BuildContext context) => Center(
         child: HelpAudience(
           indexCorrect: indexCorrect,
-          isTapFifty: isTapFifty,
+          isTapFifty: fiftyfifty,
         ),
       ),
     );
