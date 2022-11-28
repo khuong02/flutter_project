@@ -57,6 +57,7 @@ dependencies:
   shared_preferences: ^2.0.15
   image_picker: ^0.8.6
   cloudinary: ^1.0.3
+  auto_reload: ^1.1.0
 
 dev_dependencies:
   flutter_native_splash: ^2.2.14

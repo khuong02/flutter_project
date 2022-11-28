@@ -1,13 +1,13 @@
 class User {
   final String name;
   final String email;
-  final String? photo;
+  final String photo;
   final int cost;
 
   User(
       {required this.name,
       required this.email,
-      this.photo,
+      required this.photo,
       required this.cost});
 
   User.fromJson(Map<String, dynamic> json)

@@ -11,11 +11,11 @@ import '../../models/user.dart';
 class UserApi {
   final _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  Random _rnd = Random();
+  final Random _rnd = Random();
   //GET
   Future<User> getUser() async {
     SharedPreferences perfs = await SharedPreferences.getInstance();
-    String token = await perfs.getString('token')!;
+    String token = perfs.getString('token')!;
 
     final response = await http.get(
       Uri.parse(Constants.urlApi + "users"),
