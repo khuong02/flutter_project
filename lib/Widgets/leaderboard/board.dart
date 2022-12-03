@@ -1,10 +1,22 @@
 import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/leaderboard_obj.dart';
 import 'contestant_list.dart';
 
 class Board extends StatelessWidget{
-  const Board({Key? key}) : super(key: key);
+  final List<LeaderBoardObj> list;
+  const Board({Key? key, required this.list}) : super(key: key);
+
+  List<Widget> listUser(List<LeaderBoardObj> list){
+    List<Widget> contestants = [];
+
+    for(LeaderBoardObj item in list){
+      contestants.add(ContestantList(user: item));
+    }
+
+    return contestants;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +46,7 @@ class Board extends StatelessWidget{
           child: GridView.count(
             crossAxisCount: 1,
             childAspectRatio: 4.0,
-            children: const [
-              ContestantList(),
-              ContestantList(),
-              ContestantList(),
-              ContestantList(),
-              ContestantList(),
-            ],
+            children: listUser(list),
           ),
         ),
       ),

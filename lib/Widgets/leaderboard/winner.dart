@@ -1,16 +1,37 @@
+import 'dart:convert';
+
 import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
+import 'package:do_an_di_dong/models/leaderboard_obj.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:http/http.dart' as http;
 
-class WinnerContainer extends StatelessWidget{
+import '../../Consts/cosntants.dart';
+
+class WinnerContainer extends StatefulWidget{
   final bool? isFirst;
   final Color? color;
   final int? winnerPosition;
-  final String? winnerName;
-  final int? rank;
+  final LeaderBoardObj user;
   final double height;
+  final double positionName;
 
-  const WinnerContainer({Key? key, required this.height, this.isFirst, this.color, this.winnerPosition, this.winnerName, this.rank}) : super(key: key);
+  WinnerContainer({
+    Key? key,
+    required this.height,
+    this.isFirst,
+    this.color,
+    this.winnerPosition,
+    required this.user,
+    required this.positionName
+  }) : super(key: key);
+
+  @override
+  State<WinnerContainer> createState() => _WinnerContainerState();
+}
+
+class _WinnerContainerState extends State<WinnerContainer> {
+  late String img = widget.user.avatar!;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +48,7 @@ class WinnerContainer extends StatelessWidget{
                  ),
                  child: Center(
                    child: Container(
-                     height: height,
+                     height: widget.height,
                      width: 90.0,
                      decoration: BoxDecoration(
                        gradient: LinearGradient(colors:[
@@ -44,7 +65,7 @@ class WinnerContainer extends StatelessWidget{
                      child: Padding(
                        padding: const EdgeInsets.all(1.0),
                        child: Container(
-                         height: height,
+                         height: widget.height,
                          width: 90.0,
                          decoration: const BoxDecoration(
                            color:Colors.white,
@@ -53,45 +74,35 @@ class WinnerContainer extends StatelessWidget{
                              topRight: Radius.circular(40.0),
                            ),
                          ),
+                         child: Padding(
+                           padding: const EdgeInsets.all(0),
+                           child: Center(
+                             child: Column(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 Padding(
+                                   padding: EdgeInsets.only(
+                                      top: widget.positionName,
+                                   ),
+                                   child: Center(
+                                     child: Text(
+                                       widget.user.username!,
+                                       textAlign: TextAlign.center,
+                                       style: const TextStyle(color: Colors.black,fontSize: 11.0,
+                                           fontWeight: FontWeight.w600),
+                                     ),
+                                   ),
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
                        ),
                      ),
                    ),
                  ),
                ),
                //box name
-               Padding(
-                 padding: const EdgeInsets.only(
-                   top: 100.0,
-                   left: 17.0,
-                 ),
-                 child: Center(
-                   child: Column(
-                     mainAxisAlignment: MainAxisAlignment.center,
-                     children: [
-                       Padding(
-                         padding: const EdgeInsets.only(
-                           left: 8.0,
-                           right: 8.0,
-                         ),
-                         child: Column(
-                           children: [
-                             Text(
-                               winnerName ?? 'Dao Vinh Khuong',
-                               style: const TextStyle(color: Colors.black,fontSize: 11.0,
-                                   fontWeight: FontWeight.w600),
-                             ),
-                             Text(
-                               winnerPosition != null ? winnerPosition.toString() : '1',
-                               style: TextStyle(color: color ?? Colors.white,fontSize: 14.0,
-                                   fontWeight: FontWeight.w600),
-                             ),
-                           ],
-                         ),
-                       ),
-                     ],
-                   ),
-                 ),
-               ),
              ],
            ),
            Center(
@@ -111,8 +122,13 @@ class WinnerContainer extends StatelessWidget{
                            Colors.red,
                          ]),
                          border: Border.all(color: Colors.amber),
-                         image: const DecorationImage(
-                           image: NetworkImage('https://images.unsplash.com/photo-1546587348-d12660c30c50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bmF0dXJhbHxlbnwwfHwwfHw%3D&w=1000&q=80'),
+                         image:  DecorationImage(
+                           image: NetworkImage(img),
+                           onError: (error, stackTrace) {
+                             setState((){
+                               img = Constants.imageUri;
+                             });
+                           },
                            fit: BoxFit.cover,
                          )
                      ),
@@ -139,10 +155,10 @@ class WinnerContainer extends StatelessWidget{
                      width: 20.0,
                      decoration: BoxDecoration(
                        shape: BoxShape.circle,
-                       color: color ?? Colors.red,
+                       color: widget.color ?? Colors.red,
                      ),
                      child:  Center(
-                       child: Text(winnerPosition != null ? winnerPosition.toString() : '1' ,style: TextStyle(color: Colors.white),),
+                       child: Text(widget.winnerPosition != null ? widget.winnerPosition.toString() : '1' ,style: TextStyle(color: Colors.white),),
                      ),
                    ),
                  ),
