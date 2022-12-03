@@ -26,10 +26,10 @@ class _ContestantList extends State<ContestantList>{
     }
 
     if (min < 60){
-      return min.toString().split(".")[0] + "m" + second.toString() + "s";
+      return min.toString().split(".")[0] + "m" + second.toString().split(".")[0] + "s";
     }
 
-    return min.toString().split(".")[0] + "h" +  min.toString().split(".")[0] + "m" + second.toString() + "s";
+    return min.toString().split(".")[0] + "h" +  min.toString().split(".")[0] + "m" + second.toString().split(".")[0] + "s";
   }
 
   @override
