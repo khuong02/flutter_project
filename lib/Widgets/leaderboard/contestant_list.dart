@@ -1,15 +1,37 @@
 import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
+import 'package:do_an_di_dong/models/leaderboard_obj.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../Consts/cosntants.dart';
+
 class ContestantList extends StatefulWidget{
-  const ContestantList({Key? key}) : super(key: key);
+  final LeaderBoardObj user;
+  const ContestantList({Key? key, required this.user}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ContestantList();
 }
 
 class _ContestantList extends State<ContestantList>{
+
+  String formatTime(int time){
+    double min = time / 60;
+    double second = time % 60;
+
+    double hour = int.parse(min.toString().split(".")[0]) / 60;
+
+    if(min < 1){
+      return second.toString() + "s";
+    }
+
+    if (min < 60){
+      return min.toString().split(".")[0] + "m" + second.toString() + "s";
+    }
+
+    return min.toString().split(".")[0] + "h" +  min.toString().split(".")[0] + "m" + second.toString() + "s";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,26 +60,69 @@ class _ContestantList extends State<ContestantList>{
                   ClipOval(
                     clipBehavior: Clip.antiAlias,
                     child: Image.network(
-                      'https://images.unsplash.com/photo-1546587348-d12660c30c50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bmF0dXJhbHxlbnwwfHwwfHw%3D&w=1000&q=80',
+                      widget.user.avatar!,
                       width: 50.0,
                       height: 50.0,
                       fit: BoxFit.fill,
+                      errorBuilder: (BuildContext context, Object exception,
+                          StackTrace? stackTrace) {
+                        return Image.network(
+                          Constants.imageUri,
+                          width: 50.0,
+                          height: 50.0,
+                          fit: BoxFit.fill,
+                        );
+                      },
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text('Name',style: TextStyle(color: Colors.black),),
-                      Text('@Name',style: TextStyle(color: Colors.black54),),
-                    ],
+                  SizedBox(
+                    width: 125,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.user.username!,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        // Text(widget.user.email!,style: TextStyle(color: Colors.black54),),
+                      ],
+                    ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text('1302',style: TextStyle(color: Colors.black),),
-                    ],
+                  SizedBox(
+                    width: 50,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.user.score!.toString(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 50,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          formatTime(widget.user.time!),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
