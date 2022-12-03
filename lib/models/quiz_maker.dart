@@ -47,7 +47,7 @@ class QuizMaker {
   }
 
   void increaseScore() {
-    _score++;
+    _score += 100;
   }
 
   int getScore() {

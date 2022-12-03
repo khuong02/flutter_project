@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:do_an_di_dong/Utilities/my_error/error_dialog.dart';
 import 'package:do_an_di_dong/features/question/help_audience.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,12 +25,20 @@ class HeaderQuestion extends StatefulWidget {
 }
 
 class _HeaderQuestionState extends State<HeaderQuestion> {
+  DateTime timeStart = DateTime.now();
+
   @override
   void initState() {
     super.initState();
     quizMaker.getList(widget.questionData);
     getQuestionAndAnswer();
   }
+
+  int numberAnswer = 0;
+  int bestStreak = 0;
+
+  int money = 5000;
+  int moneyBuy = 1000;
 
   final CountDownController _controller = CountDownController();
 
@@ -38,12 +47,18 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   int questionNumber = 0;
   int userHeart = 3;
 
-  bool isOnTap = false;
-  bool fiftyfifty = false;
-  bool isTapFifty = false;
-  bool isAbsorbing = false;
-  bool isHelpAudience = false;
-  bool isBuyAnwser = false;
+  Map<String, bool> feature = {
+    'isOnTap': false,
+    'fiftyfifty': false,
+    'isTapFifty': false,
+    'isAbsorbing': false,
+    'isHelpAudience': false,
+    'isBuyAnswer': false,
+    'checkTrue': false,
+  };
+
+  bool checkTrue = false;
+  int correctNum = 0;
 
   List<String> options = [];
 
@@ -75,27 +90,39 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
             option: options[j],
             optionColor: optionColor[j],
             onTap: () async {
-              if (isOnTap) {
+              if (feature['isOnTap'] == true) {
                 return;
               }
-              isOnTap = true;
+              feature['isOnTap'] = true;
               _controller.pause();
               if (quizMaker.isCorrect(questionNumber, j)) {
                 setState(
                   () {
+                    numberAnswer++;
                     optionColor[j] = Colors.green;
-                    isAbsorbing = true;
+                    feature['isAbsorbing'] = true;
+                    correctNum++;
+                    checkTrue = true;
+                    if (correctNum > bestStreak) {
+                      bestStreak = correctNum;
+                    }
                   },
                 );
+
                 quizMaker.increaseScore();
+                if (correctNum > 4 && checkTrue) {
+                  quizMaker.increaseScore();
+                }
               } else {
                 setState(
                   () {
                     optionColor[j] = Colors.red;
                     optionColor[quizMaker.getCorrectIndex(questionNumber)] =
                         Colors.green;
-                    isAbsorbing = true;
+                    feature['isAbsorbing'] = true;
                     userHeart--;
+                    feature['checkTrue'] = false;
+                    correctNum = 0;
                   },
                 );
               }
@@ -111,12 +138,12 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                         Colors.white;
                     questionNumber++;
                     getQuestionAndAnswer();
-                    isAbsorbing = false;
-                    fiftyfifty = false;
+                    feature['isAbsorbing'] = false;
+                    feature['fiftyfifty'] = false;
                   },
                 );
                 _controller.restart();
-                isOnTap = false;
+                feature['isOnTap'] = false;
                 if (userHeart == 0) {
                   totalScore();
                 }
@@ -128,7 +155,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         ),
       );
     }
-    if (fiftyfifty) {
+    if (feature['fiftyfifty'] == true) {
       buildOptionsFifty(Options);
     }
     return Options;
@@ -196,7 +223,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
             onComplete: () {
               if (questionNumber < 9) {
                 setState(() {
-                  fiftyfifty = false;
+                  feature['fiftyfifty'] = false;
                   userHeart--;
                   questionNumber++;
                 });
@@ -239,7 +266,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'question ${(questionNumber + 1).toString()} of 10',
+                            'question ${(questionNumber + 1).toString()}',
                             style: TextStyle(
                               color: Colors.white.withOpacity(0.5),
                               fontSize: 16,
@@ -276,12 +303,12 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     GestureDetector(
-                      onTap: isTapFifty
+                      onTap: feature['isTapFifty'] == true
                           ? null
                           : () {
                               setState(() {
-                                fiftyfifty = true;
-                                isTapFifty = true;
+                                feature['fiftyfifty'] = true;
+                                feature['isTapFifty'] = true;
                               });
                             },
                       child: SizedBox(
@@ -289,19 +316,21 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                         width: 35,
                         child: Icon(
                           CupertinoIcons.divide_square,
-                          color: isTapFifty ? Colors.grey : Colors.white,
+                          color: feature['isTapFifty'] == true
+                              ? Colors.grey
+                              : Colors.white,
                           size: 35,
                         ),
                       ),
                     ),
                     GestureDetector(
-                      onTap: isHelpAudience
+                      onTap: feature['isHelpAudience'] == true
                           ? null
                           : () {
                               setState(() {
-                                isHelpAudience = true;
+                                feature['isHelpAudience'] = true;
                               });
-                              showHelpAudience(fiftyfifty,
+                              showHelpAudience(feature['fiftyfifty']!,
                                   quizMaker.getCorrectIndex(questionNumber));
                             },
                       child: SizedBox(
@@ -309,7 +338,9 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                         width: 35,
                         child: Icon(
                           Icons.safety_divider,
-                          color: isHelpAudience ? Colors.grey : Colors.white,
+                          color: feature['isHelpAudience'] == true
+                              ? Colors.grey
+                              : Colors.white,
                           size: 35,
                         ),
                       ),
@@ -326,26 +357,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: isBuyAnwser
-                          ? null
-                          : () {
-                              setState(() {
-                                isBuyAnwser = true;
-                              });
-                              showBuyAnwser(
-                                  quizMaker.getCorrectIndex(questionNumber));
-                            },
-                      child: SizedBox(
-                        height: 35,
-                        width: 35,
-                        child: Icon(
-                          Icons.monetization_on_outlined,
-                          color: isBuyAnwser ? Colors.grey : Colors.white,
-                          size: 35,
-                        ),
-                      ),
-                    ),
+                    buyAnswers(),
                   ],
                 ),
               ),
@@ -382,6 +394,9 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         builder: (context) => ScoreScreen(
           score: quizMaker.getScore(),
           index: widget.categoryIndex,
+          timeStart: timeStart,
+          numberOfCorrectAnswer: numberAnswer,
+          bestStreak: bestStreak,
         ),
       ),
     );
@@ -394,6 +409,60 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         child: HelpAudience(
           indexCorrect: indexCorrect,
           isTapFifty: fiftyfifty,
+        ),
+      ),
+    );
+  }
+
+  Widget buyAnswers() {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+            context: context,
+            builder: (context) => CupertinoAlertDialog(
+                  title: const Text('Bạn có muốn mua câu trả lời không?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        'No',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        if (money > moneyBuy) {
+                          money -= moneyBuy;
+                          moneyBuy += moneyBuy;
+
+                          showBuyAnwser(
+                              quizMaker.getCorrectIndex(questionNumber));
+                        } else {
+                          ErrorDialog.show(context, "Bạn không đủ tiền");
+                        }
+                      },
+                      child: const Text(
+                        'Yes',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ],
+                ));
+      },
+      child: const SizedBox(
+        height: 35,
+        width: 35,
+        child: Icon(
+          Icons.monetization_on_outlined,
+          color: Colors.white,
+          size: 35,
         ),
       ),
     );

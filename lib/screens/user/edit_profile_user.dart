@@ -55,7 +55,7 @@ class _EditProfileState extends State<EditProfileUser> {
     Map<String, String> data = {
       "username": _txtName.text,
       "cost": widget.myUser.cost.toString(),
-      "avatar": widget.myUser.photo!,
+      "avatar": widget.myUser.photo,
     };
 
     if (image != null) {

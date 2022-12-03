@@ -9,8 +9,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../question/question_screen.dart';
 import '../../Utilities/card/card_details.dart';
-import '../../models/networking.dart';
-import '../../Consts/cosntants.dart';
 
 class LoadingScreen extends StatefulWidget {
   final int index;
