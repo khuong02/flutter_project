@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../features/question/header_question.dart';
 
 class QuestionScreen extends StatefulWidget {
-  QuestionScreen({required this.questionData, required this.categoryIndex});
-
+  QuestionScreen({
+    required this.questionData,
+    required this.categoryIndex,
+  });
   final questionData;
   final int categoryIndex;
   @override
@@ -23,8 +25,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
     return AbsorbPointer(
       absorbing: isAbsorbing,
       child: HeaderQuestion(
-          questionData: widget.questionData,
-          categoryIndex: widget.categoryIndex),
+        questionData: widget.questionData,
+        categoryIndex: widget.categoryIndex,
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:do_an_di_dong/Consts/cosntants.dart';
 import 'package:do_an_di_dong/api/leaderboard_api/leaderboard_api.dart';
 import 'package:flutter/material.dart';
 import '../../Utilities/card/card_details.dart';
@@ -36,7 +37,9 @@ class _ScoreScreenState extends State<ScoreScreen> {
 
   @override
   void initState() {
-    updateLeaderBoard();
+    if (Constants.isRank) {
+      updateLeaderBoard();
+    }
     super.initState();
   }
 
@@ -105,6 +108,9 @@ class _ScoreScreenState extends State<ScoreScreen> {
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
+                  if (Constants.isRank == false) {
+                    Navigator.pop(context);
+                  }
                 },
                 child: Container(
                   width: 0.3 * MediaQuery.of(context).size.width,

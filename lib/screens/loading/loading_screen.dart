@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:do_an_di_dong/Consts/cosntants.dart';
 import 'package:do_an_di_dong/api/api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -11,11 +12,13 @@ import '../question/question_screen.dart';
 import '../../Utilities/card/card_details.dart';
 
 class LoadingScreen extends StatefulWidget {
-  final int index;
-  final int selectedDif;
-  const LoadingScreen(
-      {Key? key, required this.index, required this.selectedDif})
-      : super(key: key);
+  final int? index;
+  final int? selectedDif;
+  const LoadingScreen({
+    Key? key,
+    this.index,
+    this.selectedDif,
+  }) : super(key: key);
 
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
@@ -41,9 +44,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void getQuestions() async {
     bool result = await checkConnectivity();
     if (result) {
-      Response data =
-          await QuestionApi().callQuestions(widget.index, widget.selectedDif);
-
+      Response data = Constants.isRank
+          ? await QuestionApi().callQuestionsRankMode()
+          : await QuestionApi().callQuestions(widget.index, widget.selectedDif);
       if (data.statusCode == 200) {
         var body = jsonDecode(data.body);
 
@@ -53,7 +56,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           MaterialPageRoute(
             builder: ((context) => QuestionScreen(
                   questionData: body['data'],
-                  categoryIndex: widget.index,
+                  categoryIndex: widget.index == null ? 1 : widget.index!,
                 )),
           ),
         );
@@ -85,7 +88,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
         gradient: LinearGradient(
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
-          colors: cardDetailList[widget.index].gradients,
+          colors: widget.index == null
+              ? [Colors.pink.shade300, Colors.pink]
+              : cardDetailList[widget.index!].gradients,
         ),
       ),
       child: Scaffold(

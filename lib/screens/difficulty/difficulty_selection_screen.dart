@@ -5,7 +5,9 @@ import '../../Widgets/close_button.dart';
 import '../../Widgets/home/difficulty_tile.dart';
 
 class DifficultyScreen extends StatelessWidget {
-  const DifficultyScreen({required this.selectedIndex});
+  const DifficultyScreen({
+    required this.selectedIndex,
+  });
   final int selectedIndex;
 
   @override
@@ -68,11 +70,20 @@ class DifficultyScreen extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                DifficultyTile(selectedIndex: selectedIndex, difficulty: 0),
+                DifficultyTile(
+                  selectedIndex: selectedIndex,
+                  difficulty: 0,
+                ),
                 const SizedBox(height: 20),
-                DifficultyTile(selectedIndex: selectedIndex, difficulty: 1),
+                DifficultyTile(
+                  selectedIndex: selectedIndex,
+                  difficulty: 1,
+                ),
                 const SizedBox(height: 20),
-                DifficultyTile(selectedIndex: selectedIndex, difficulty: 2),
+                DifficultyTile(
+                  selectedIndex: selectedIndex,
+                  difficulty: 2,
+                ),
               ],
             ),
           ],
