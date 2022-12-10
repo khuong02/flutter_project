@@ -45,39 +45,143 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
-            body: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.20,
-                  child: ProfileWidget(
-                    imageUrl: snapshot.data!.photo,
-                    onClicked: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => EditProfileUser(snapshot.data!),
+            extendBodyBehindAppBar: true,
+            body: Stack(children: [
+              Center(
+                child: Image.network(
+                  snapshot.data!.photo,
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.91,
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.45,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30, bottom: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 40,
+                                  backgroundImage:
+                                      NetworkImage(snapshot.data!.photo),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.05,
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      snapshot.data!.name,
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.01,
+                                    ),
+                                    Text(
+                                      snapshot.data!.email,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                color: Color.fromARGB(255, 40, 171, 227),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8,
+                                horizontal: 24,
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          EditProfileUser(snapshot.data!),
+                                    ),
+                                  );
+                                },
+                                child: const Text(
+                                  "Edit",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      );
-                    },
+                      ),
+                      Divider(
+                        color: Colors.grey.shade400,
+                      ),
+                      MaterialButton(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        onPressed: () {},
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "Date create",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey),
+                            ),
+                            Text(
+                              snapshot.data!.dateJoin.day.toString() +
+                                  "/" +
+                                  snapshot.data!.dateJoin.month.toString() +
+                                  "/" +
+                                  snapshot.data!.dateJoin.year.toString(),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w800, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Divider(
+                        color: Colors.grey.shade400,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.12,
+                        child: buildInfo(snapshot.data!),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.10,
-                  child: buildName(snapshot.data!),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.10,
-                  child: NumberWidget(
-                    rank: 1,
-                    totalPlayed: 20,
-                    datetime: DateTime(2020, 2, 3),
-                  ),
-                ),
-                SizedBox(
-                  child: buildInfo(snapshot.data!),
-                ),
-              ],
-            ),
+              ),
+            ]),
           );
         }
         return const Center(child: CircularProgressIndicator());
@@ -85,36 +189,15 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
     );
   }
 
-  Widget buildName(User user) {
-    return Column(
-      children: [
-        Text(
-          user.name,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
-        ),
-        const SizedBox(
-          height: 4,
-        ),
-        Text(
-          user.email,
-          style: TextStyle(color: Colors.grey, fontSize: 15),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-      ],
-    );
-  }
-
   Widget buildInfo(User user) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              "Credit",
+              "Cash",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
@@ -122,7 +205,23 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
             ),
             Text(
               user.cost.toString(),
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+            )
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              "Best score",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Text(
+              user.bestScore.toString(),
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
             )
           ],
         ),
