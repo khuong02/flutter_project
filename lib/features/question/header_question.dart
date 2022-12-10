@@ -34,8 +34,8 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   void initState() {
     super.initState();
 
-    numberQuestion = quizMaker.numberQuestion;
     quizMaker.getList(widget.questionData);
+    numberQuestion = quizMaker.numberQuestion;
     getQuestionAndAnswer();
   }
 

@@ -150,7 +150,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
   Widget buildDetail(
       BuildContext context, String title, String value, Color color) {
     return Container(
-      width: MediaQuery.of(context).size.height * 0.15,
+      width: MediaQuery.of(context).size.width / 3.8,
       height: MediaQuery.of(context).size.height * 0.08,
       decoration: BoxDecoration(
         color: color,
@@ -167,11 +167,11 @@ class _ScoreScreenState extends State<ScoreScreen> {
           children: [
             Text(
               title,
-              style: const TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 19),
             ),
             Text(
               value,
-              style: const TextStyle(fontSize: 25),
+              style: const TextStyle(fontSize: 20),
             )
           ],
         ),
@@ -230,7 +230,21 @@ Widget buildShared(BuildContext context) {
       ],
     ),
     child: MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("Currently this feature is not done!!"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Ok"))
+            ],
+          ),
+        );
+      },
       child: const ListTile(
         leading: Icon(
           Icons.share,
