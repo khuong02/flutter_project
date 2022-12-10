@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Consts/cosntants.dart';
+import '../../screens/auth/authentication_view.dart';
 
 class AuthenticationApi {
   //POST
@@ -39,5 +42,13 @@ class AuthenticationApi {
       body: jsonEncode(data),
     );
     return response;
+  }
+
+  static onSignOut(context) async {
+    final pref = await SharedPreferences.getInstance();
+    await pref.remove('token');
+    Navigator.pop(context);
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const AuthenticationView()));
   }
 }

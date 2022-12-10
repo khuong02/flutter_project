@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:do_an_di_dong/Providers/theme_provider.dart';
 import 'package:do_an_di_dong/Utilities/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'models/token_obj.dart';
 import 'screens/auth/authentication_view.dart';
 import 'Consts/firebase_options.dart';
+import 'package:provider/provider.dart' as Provider;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -83,11 +85,19 @@ class MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
-      home: getHome(),
-    );
-  }
+  Widget build(BuildContext context) => Provider.ChangeNotifierProvider(
+    create: (context) => ThemeProvider(),
+    builder: (context, _) {
+      final themeProvider = Provider.Provider.of<ThemeProvider>(context);
+
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.light(),
+        home: getHome(),
+      );
+    },
+  );
+
+
+  // );
 }
