@@ -19,7 +19,7 @@ class _AddCostWidgetState extends State<AddCostWidget> {
     showDialog(
         context: context,
         builder: (context) => CupertinoAlertDialog(
-          title: const Text('Do you want buy credit?'),
+          title: Text('Do you want buy ${widget.cost} credit?'),
           actions: [
             TextButton(
               onPressed: () {
