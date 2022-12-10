@@ -49,12 +49,12 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                     top: 2,
                     child: Icon(Icons.add_circle),
                   ),
-                  // TextButton(
-                  //   onPressed: () {
-                  //     authController.onSignOut(context);
-                  //   },
-                  //   child: Text("Sign out"),
-                  // ),
+                  TextButton(
+                    onPressed: () {
+                      authController.onSignOut(context);
+                    },
+                    child: Text("Sign out"),
+                  ),
                 ],
               ),
               Text("Let's choose a mode to play!"),

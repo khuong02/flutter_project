@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 
 class NumberWidget extends StatelessWidget {
-  const NumberWidget(
-      {Key? key,
-      required this.rank,
-      required this.datetime,
-      required this.totalPlayed})
-      : super(key: key);
-  final int rank;
-  final DateTime datetime;
-  final int totalPlayed;
+  const NumberWidget({
+    Key? key,
+    required this.datetime,
+  }) : super(key: key);
+
+  final String datetime;
 
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          buildNumber(context, "$rank", "Ranking"),
           const SizedBox(
             height: 24,
             child: VerticalDivider(
@@ -25,7 +21,7 @@ class NumberWidget extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          buildNumber(context, "$totalPlayed", "Total played"),
+          buildNumber(context, datetime, "Join since"),
           const SizedBox(
             height: 24,
             child: VerticalDivider(
@@ -33,7 +29,6 @@ class NumberWidget extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          buildNumber(context, "12", "Average"),
         ],
       ),
     );
