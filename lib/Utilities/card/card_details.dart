@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 class ListDetail {
   ListDetail(
       {required this.title,
+      required this.id,
       required this.iconAssetName,
       required this.gradients,
       required this.shadowColor,
       required this.iconTag,
       required this.category,
       required this.textColor});
+
+  final int id;
   final String title;
   final String iconAssetName;
   final List<Color> gradients;
@@ -22,6 +25,7 @@ const double opacity = 0.4;
 
 final List<ListDetail> cardDetailList = [
   ListDetail(
+    id: 1,
     title: 'Art and Literature',
     iconAssetName: 'assets/images/art and literature.png',
     gradients: [
@@ -34,6 +38,7 @@ final List<ListDetail> cardDetailList = [
     textColor: const Color(0xff089e44),
   ),
   ListDetail(
+    id: 2,
     title: 'Film and TV',
     iconAssetName: 'assets/images/film and tv.png',
     gradients: [
@@ -46,6 +51,7 @@ final List<ListDetail> cardDetailList = [
     textColor: const Color(0xff5718d6),
   ),
   ListDetail(
+    id: 3,
     title: 'Food and Drink',
     iconAssetName: 'assets/images/food and drink.png',
     gradients: [
@@ -58,6 +64,7 @@ final List<ListDetail> cardDetailList = [
     textColor: const Color(0xffd6182e),
   ),
   ListDetail(
+    id: 4,
     title: 'General Knowledge',
     iconAssetName: 'assets/images/general knowledge.png',
     gradients: [
@@ -70,6 +77,7 @@ final List<ListDetail> cardDetailList = [
     textColor: const Color(0xff0846a3),
   ),
   ListDetail(
+    id: 5,
     title: 'Geography',
     iconAssetName: 'assets/images/geography.png',
     gradients: [
@@ -82,6 +90,7 @@ final List<ListDetail> cardDetailList = [
     textColor: const Color(0xffd97014),
   ),
   ListDetail(
+    id: 6,
     title: 'History',
     iconAssetName: 'assets/images/history.png',
     gradients: [
@@ -94,6 +103,7 @@ final List<ListDetail> cardDetailList = [
     textColor: const Color(0xff3c2a70),
   ),
   ListDetail(
+    id: 7,
     title: 'Music',
     iconAssetName: 'assets/images/music.png',
     gradients: [
@@ -106,6 +116,7 @@ final List<ListDetail> cardDetailList = [
     textColor: const Color(0xff28272b),
   ),
   ListDetail(
+    id: 8,
     title: 'Science',
     iconAssetName: 'assets/images/science.png',
     gradients: [
@@ -118,6 +129,7 @@ final List<ListDetail> cardDetailList = [
     textColor: const Color(0xffeb2aeb),
   ),
   ListDetail(
+    id: 9,
     title: 'Society and Culture',
     iconAssetName: 'assets/images/society and culture.png',
     gradients: [
@@ -130,6 +142,7 @@ final List<ListDetail> cardDetailList = [
     textColor: const Color(0xfff2bd05),
   ),
   ListDetail(
+    id: 10,
     title: 'Sports and Leisure',
     iconAssetName: 'assets/images/sports and leisure.png',
     gradients: [

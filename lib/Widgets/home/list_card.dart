@@ -5,9 +5,9 @@ import '../../Utilities/card/card_details.dart';
 import '../../screens/difficulty/difficulty_selection_screen.dart';
 
 class ListCard extends StatelessWidget {
-  const ListCard(this.index);
+  const ListCard(this.detail);
 
-  final int index;
+  final ListDetail detail;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class ListCard extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => DifficultyScreen(
-                      selectedIndex: index,
+                      detail: detail,
                     )),
           );
         },
@@ -35,7 +35,7 @@ class ListCard extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
-                  colors: cardDetailList[index].gradients,
+                  colors: detail.gradients,
                 ),
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
@@ -43,7 +43,7 @@ class ListCard extends StatelessWidget {
                     offset: const Offset(1, 3),
                     blurRadius: 7,
                     spreadRadius: 5,
-                    color: cardDetailList[index].shadowColor,
+                    color: detail.shadowColor,
                   )
                 ],
               ),
@@ -52,7 +52,7 @@ class ListCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    cardDetailList[index].title,
+                    detail.title,
                     style: const TextStyle(
                       fontSize: 25,
                       color: Colors.white,
@@ -63,9 +63,9 @@ class ListCard extends StatelessWidget {
               ),
             ),
             Hero(
-              tag: cardDetailList[index].iconTag,
+              tag: detail.iconTag,
               child: Image.asset(
-                cardDetailList[index].iconAssetName,
+                detail.iconAssetName,
                 scale: 3,
               ),
             ),

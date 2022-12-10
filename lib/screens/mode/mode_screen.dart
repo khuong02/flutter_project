@@ -23,7 +23,7 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
-          child: Column(
+          child: ListView(
             children: [
               Container(
                 alignment: AlignmentDirectional.bottomEnd,
@@ -43,7 +43,7 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                         children: [
                           Icon(
                             Icons.add_circle,
-                            color: Colors.brown,
+                            color: Colors.purple,
                             size: 39,
                           ),
                           Container(
@@ -52,7 +52,11 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(Radius.circular(16)),
-                              color: Colors.brown,
+                              gradient: LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [Colors.purple, Colors.orange],
+                              ),
                             ),
                             child: Text(
                               '5000',
@@ -66,6 +70,30 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                       ),
                     ),
                   ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 30),
+                child: Column(
+                  children: const [
+                    Text(
+                      'Welcome To Quizz KLD',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xfff85e7d),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Choose Practice Or Rank!',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color(0xffa9a4a5),
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -97,12 +125,12 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                             colors: [Colors.teal.shade400, Colors.teal],
                           ),
                           borderRadius: BorderRadius.circular(30),
-                          boxShadow: const [
+                          boxShadow: [
                             BoxShadow(
                               offset: Offset(1, 3),
                               blurRadius: 7,
                               spreadRadius: 5,
-                              color: Colors.teal,
+                              color: Colors.teal.shade200,
                             )
                           ],
                         ),
@@ -161,12 +189,12 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                             colors: [Colors.pink.shade400, Colors.pink],
                           ),
                           borderRadius: BorderRadius.circular(30),
-                          boxShadow: const [
+                          boxShadow: [
                             BoxShadow(
                               offset: Offset(1, 3),
                               blurRadius: 7,
                               spreadRadius: 5,
-                              color: Colors.pink,
+                              color: Colors.pink.shade200,
                             )
                           ],
                         ),

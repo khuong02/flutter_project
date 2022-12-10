@@ -23,7 +23,7 @@ class DifficultyTile extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => LoadingScreen(
-                      index: selectedIndex + 1,
+                      index: selectedIndex,
                       selectedDif: difficulty + 1,
                     )));
       },
