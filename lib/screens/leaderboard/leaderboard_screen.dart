@@ -8,8 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LeaderboardScreen extends StatefulWidget{
-  late bool lightMode;
-  LeaderboardScreen({Key? key, required this.lightMode}) : super(key: key);
+  const LeaderboardScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _LeaderboardScreen();
@@ -24,7 +23,7 @@ class _LeaderboardScreen extends State<LeaderboardScreen>{
         if(snapshot.hasData){
           List<LeaderBoardObj> users = snapshot.data!;
 
-          return Leaderboard(users: users, isLightMode: widget.lightMode,);
+          return Leaderboard(users: users);
         }
 
         return const Center(child: CircularProgressIndicator());

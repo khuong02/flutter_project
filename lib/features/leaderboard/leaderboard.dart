@@ -1,18 +1,19 @@
 import 'package:do_an_di_dong/Consts/cosntants.dart';
 import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
+import 'package:do_an_di_dong/Providers/theme_provider.dart';
 import 'package:do_an_di_dong/Widgets/leaderboard/board.dart';
 import 'package:do_an_di_dong/Widgets/leaderboard/title.dart';
 import 'package:do_an_di_dong/Widgets/leaderboard/winner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/leaderboard_obj.dart';
 
 class Leaderboard extends StatefulWidget{
   final List<LeaderBoardObj> users;
-  late bool isLightMode;
 
-  Leaderboard({Key? key, required this.users, required this.isLightMode}) : super(key: key);
+  Leaderboard({Key? key, required this.users}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _Leaderboard();
@@ -24,7 +25,7 @@ class _Leaderboard extends State<Leaderboard>{
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        backgroundColor: widget.isLightMode ? Colors.white : MyColor.leaderboardBackGroundColor,
+        backgroundColor: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : MyColor.leaderboardBackGroundColor,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
@@ -35,7 +36,7 @@ class _Leaderboard extends State<Leaderboard>{
             child: Column(
               children: [
                 TitleWidget(
-                  color: widget.isLightMode
+                  color: Provider.of<ThemeProvider>(context).getThemeMode
                       ? Colors.white
                       : MyColor.leaderboardBackGroundColor,
                 ),
