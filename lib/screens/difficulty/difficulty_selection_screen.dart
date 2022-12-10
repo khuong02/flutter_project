@@ -1,3 +1,4 @@
+import 'package:do_an_di_dong/models/topic_obj.dart';
 import 'package:flutter/material.dart';
 
 import '../../Utilities/card/card_details.dart';
@@ -6,9 +7,9 @@ import '../../Widgets/home/difficulty_tile.dart';
 
 class DifficultyScreen extends StatelessWidget {
   const DifficultyScreen({
-    required this.selectedIndex,
+    required this.detail,
   });
-  final int selectedIndex;
+  final ListDetail detail;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class DifficultyScreen extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
-          colors: cardDetailList[selectedIndex].gradients,
+          colors: detail.gradients,
         ),
       ),
       child: Scaffold(
@@ -33,7 +34,7 @@ class DifficultyScreen extends StatelessWidget {
               ],
             ),
             Text(
-              cardDetailList[selectedIndex].title,
+              detail.title,
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w900,
@@ -41,9 +42,9 @@ class DifficultyScreen extends StatelessWidget {
               ),
             ),
             Hero(
-              tag: cardDetailList[selectedIndex].iconTag,
+              tag: detail.iconTag,
               child: Image.asset(
-                cardDetailList[selectedIndex].iconAssetName,
+                detail.iconAssetName,
                 height: 150,
                 width: 300,
               ),
@@ -71,17 +72,17 @@ class DifficultyScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 DifficultyTile(
-                  selectedIndex: selectedIndex,
+                  detail: detail,
                   difficulty: 0,
                 ),
                 const SizedBox(height: 20),
                 DifficultyTile(
-                  selectedIndex: selectedIndex,
+                  detail: detail,
                   difficulty: 1,
                 ),
                 const SizedBox(height: 20),
                 DifficultyTile(
-                  selectedIndex: selectedIndex,
+                  detail: detail,
                   difficulty: 2,
                 ),
               ],

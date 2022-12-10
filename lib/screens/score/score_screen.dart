@@ -128,7 +128,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
                   ),
                   child: Icon(
                     Icons.exit_to_app,
-                    color: cardDetailList[widget.index].textColor,
+                    color: const Color(0xff0846a3),
                     size: 30,
                   ),
                 ),

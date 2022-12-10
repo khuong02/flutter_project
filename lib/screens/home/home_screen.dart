@@ -1,3 +1,4 @@
+import 'package:do_an_di_dong/api/topic/topic_api.dart';
 import 'package:flutter/material.dart';
 
 import '../../Utilities/card/card_details.dart';
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
-                    CustomCloseButton(color: Colors.black45),
+                    CustomCloseButton(color: Colors.black),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -50,14 +51,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                ListView.builder(
-                  itemCount: cardDetailList.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return ListCard(index);
+                FutureBuilder<List<ListDetail>>(
+                  future: TopicApi.getTopic(),
+                  builder: (context, snapshot){
+                    if(snapshot.hasData){
+                      List<ListDetail> data = snapshot.data!;
+                      return ListView.builder(
+                        itemCount: data.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return ListCard(data[index]);
+                        },
+                      );
+                    }
+
+                    return const Center(child: CircularProgressIndicator());
                   },
-                ),
+                )
               ],
             ),
           ),
