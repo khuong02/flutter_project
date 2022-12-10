@@ -28,7 +28,7 @@ class RankMode extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
-                CustomCloseButton(),
+                CustomCloseButton(color: Colors.white),
               ],
             ),
             const Text(

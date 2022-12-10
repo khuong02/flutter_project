@@ -211,7 +211,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         appBar: AppBar(
           backgroundColor: Colors.white.withOpacity(0),
           shadowColor: Colors.white.withOpacity(0),
-          leading: const CustomCloseButton(),
+          leading: const CustomCloseButton(color: Colors.white),
           title: CircularCountDownTimer(
             width: 50,
             height: 50,
