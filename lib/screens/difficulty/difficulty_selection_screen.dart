@@ -72,17 +72,17 @@ class DifficultyScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 DifficultyTile(
-                  selectedIndex: detail.id,
+                  detail: detail,
                   difficulty: 0,
                 ),
                 const SizedBox(height: 20),
                 DifficultyTile(
-                  selectedIndex: detail.id,
+                  detail: detail,
                   difficulty: 1,
                 ),
                 const SizedBox(height: 20),
                 DifficultyTile(
-                  selectedIndex: detail.id,
+                  detail: detail,
                   difficulty: 2,
                 ),
               ],

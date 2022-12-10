@@ -6,11 +6,11 @@ import '../../Utilities/card/card_details.dart';
 class DifficultyTile extends StatelessWidget {
   DifficultyTile({
     Key? key,
-    required this.selectedIndex,
+    required this.detail,
     required this.difficulty,
   }) : super(key: key);
 
-  final int selectedIndex;
+  final ListDetail detail;
   final int difficulty;
 
   final List<String> level = ['Easy', 'Medium', 'Hard'];
@@ -23,7 +23,7 @@ class DifficultyTile extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => LoadingScreen(
-                      index: selectedIndex,
+                      index: detail.id,
                       selectedDif: difficulty + 1,
                     )));
       },
@@ -32,7 +32,7 @@ class DifficultyTile extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: cardDetailList[selectedIndex].shadowColor,
+          color: detail.shadowColor,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
