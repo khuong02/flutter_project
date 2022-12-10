@@ -58,6 +58,7 @@ dependencies:
   image_picker: ^0.8.6
   cloudinary: ^1.0.3
   auto_reload: ^1.1.0
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_native_splash: ^2.2.14

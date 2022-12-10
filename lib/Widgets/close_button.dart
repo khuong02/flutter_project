@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomCloseButton extends StatelessWidget {
+  final Color color;
   const CustomCloseButton({
     Key? key,
+    required this.color
   }) : super(key: key);
 
   @override
@@ -13,10 +15,10 @@ class CustomCloseButton extends StatelessWidget {
         onTap: () {
           Navigator.pop(context);
         },
-        child: const Icon(
+        child: Icon(
           CupertinoIcons.arrowshape_turn_up_left_fill,
-          color: Colors.white,
-          size: 30,
+          color: color,
+          size: 40,
         ),
       ),
     );

@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../models/pagination.dart';
 import '../question/question_screen.dart';
 import '../../Utilities/card/card_details.dart';
 
@@ -28,13 +29,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-
     SchedulerBinding.instance.addPostFrameCallback((_) {
       Timer(const Duration(milliseconds: 500), () {
         getQuestions();
       });
     });
   }
+
 
   Future<bool> checkConnectivity() async {
     bool result = await InternetConnectionChecker().hasConnection;

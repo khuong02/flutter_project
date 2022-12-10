@@ -70,4 +70,24 @@ class UserApi {
     );
     return response;
   }
+
+  //POST
+  addCredit(int cost) async{
+    SharedPreferences perfs = await SharedPreferences.getInstance();
+    String token = perfs.getString('token')!;
+    Map<String, int> data = {
+      "cost": cost,
+    };
+
+    final response = await http.post(
+      Uri.parse(Constants.urlApi + "users/buycredit"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: jsonEncode(data),
+    );
+
+    return response;
+  }
 }

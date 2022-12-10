@@ -29,7 +29,7 @@ class DifficultyScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
-                CustomCloseButton(),
+                CustomCloseButton(color: Colors.white),
               ],
             ),
             Text(

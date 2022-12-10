@@ -1,4 +1,5 @@
 import 'package:do_an_di_dong/Consts/cosntants.dart';
+import 'package:do_an_di_dong/screens/cost/add_cost_screen.dart';
 import 'package:do_an_di_dong/screens/home/home_screen.dart';
 import 'package:do_an_di_dong/screens/rankmode/rank_mode.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,50 +15,59 @@ class ModeScreen extends ConsumerStatefulWidget {
 }
 
 class _ModeScreenState extends ConsumerState<ModeScreen> {
+
   @override
   Widget build(BuildContext context) {
     final authController = ref.read(authProvider.notifier);
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
             children: [
-              Stack(
-                alignment: AlignmentDirectional.topEnd,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
+              Container(
+                alignment: AlignmentDirectional.bottomEnd,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddCost()),
+                    );
+                  }, // Handle your callback
+                  child: Ink(
+                    height: 40,
+                    width: 120,
                     child: Container(
-                      width: 70,
-                      height: 30,
-                      padding: EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          border: Border.all(width: 1),
-                          color: Colors.grey.shade400),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text("5000"),
+                          Icon(
+                            Icons.add_circle,
+                            color: Colors.brown,
+                            size: 39,
+                          ),
+                          Container(
+                            width: 80,
+                            height: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                              color: Colors.brown,
+                            ),
+                            child: Text(
+                              '5000',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
-                  Positioned(
-                    right: 60,
-                    top: 2,
-                    child: Icon(Icons.add_circle),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      authController.onSignOut(context);
-                    },
-                    child: Text("Sign out"),
-                  ),
-                ],
+                ),
               ),
-              Text("Let's choose a mode to play!"),
               SizedBox(
                 height: 200,
                 child: GestureDetector(
@@ -76,7 +86,10 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 20),
                         height: 150,
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
@@ -137,7 +150,10 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 20),
                         height: 150,
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
@@ -182,63 +198,6 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget cardMode(List<Color> colors, Color color, String title, String image) {
-    return SizedBox(
-      height: 200,
-      child: GestureDetector(
-        onTap: () {},
-        child: Stack(
-          alignment: AlignmentDirectional.topEnd,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 50),
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              height: 150,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: colors,
-                ),
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(1, 3),
-                    blurRadius: 7,
-                    spreadRadius: 5,
-                    color: color,
-                  )
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Hero(
-              tag: title,
-              child: Image.asset(
-                image,
-                scale: 3,
-              ),
-            ),
-          ],
         ),
       ),
     );

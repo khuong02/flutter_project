@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../features/question/header_question.dart';
+import '../../models/pagination.dart';
 
 class QuestionScreen extends StatefulWidget {
   QuestionScreen({
@@ -9,6 +10,7 @@ class QuestionScreen extends StatefulWidget {
   });
   final questionData;
   final int categoryIndex;
+
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
 }
