@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import '../../Consts/my_color/my_color.dart';
 
 class TitleWidget extends StatelessWidget{
-  const TitleWidget({Key? key}) : super(key: key);
+  Color color;
+  TitleWidget({Key? key, required this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +24,13 @@ class TitleWidget extends StatelessWidget{
           height: 60.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
-            color: Colors.white,
+            color: color,
           ),
-          child: const Center(
+          child: Center(
             child: Text(
               'LeaderBoard',
               style: TextStyle(
-                  color: Colors.black,
+                  color: color == MyColor.leaderboardBackGroundColor ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w600,
                   fontSize: 20.0,
                   letterSpacing: 1.0),
