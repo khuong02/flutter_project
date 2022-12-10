@@ -36,12 +36,14 @@ class Board extends StatelessWidget{
         padding: const EdgeInsets.all(3.0),
         child: Container(
           height: MediaQuery.of(context).size.height - 450.0,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             borderRadius:  BorderRadius.only(
               topLeft: Radius.circular(20.0),
               topRight: Radius.circular(20.0),
             ),
-            color: Colors.white,
+            gradient: LinearGradient(
+              colors: [Colors.brown.shade300, Colors.brown, Colors.brown.shade600],
+            ),
           ),
           child: GridView.count(
             crossAxisCount: 1,

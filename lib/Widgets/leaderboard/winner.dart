@@ -23,7 +23,7 @@ class WinnerContainer extends StatefulWidget{
     this.color,
     this.winnerPosition,
     required this.user,
-    required this.positionName
+    required this.positionName,
   }) : super(key: key);
 
   @override
@@ -51,11 +51,6 @@ class _WinnerContainerState extends State<WinnerContainer> {
                      height: widget.height,
                      width: 90.0,
                      decoration: BoxDecoration(
-                       gradient: LinearGradient(colors:[
-                         Colors.yellow.shade600,
-                         Colors.orange,
-                         Colors.red,
-                       ]),
                        borderRadius: const BorderRadius.only(
                          topLeft: Radius.circular(40.0),
                          topRight: Radius.circular(40.0),
@@ -67,8 +62,12 @@ class _WinnerContainerState extends State<WinnerContainer> {
                        child: Container(
                          height: widget.height,
                          width: 90.0,
-                         decoration: const BoxDecoration(
-                           color:Colors.white,
+                         decoration: BoxDecoration(
+                           gradient: LinearGradient(
+                             begin: Alignment.centerLeft,
+                             end: Alignment.centerRight,
+                             colors: [Colors.orangeAccent.shade200, Colors.orangeAccent ,Colors.orangeAccent.shade700],
+                           ),
                            borderRadius: BorderRadius.only(
                              topLeft: Radius.circular(40.0),
                              topRight: Radius.circular(40.0),
@@ -88,7 +87,7 @@ class _WinnerContainerState extends State<WinnerContainer> {
                                      child: Text(
                                        widget.user.username!,
                                        textAlign: TextAlign.center,
-                                       style: const TextStyle(color: Colors.black,fontSize: 11.0,
+                                       style: const TextStyle(color: Colors.white,fontSize: 11.0,
                                            fontWeight: FontWeight.w600),
                                      ),
                                    ),

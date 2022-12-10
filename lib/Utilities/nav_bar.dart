@@ -22,7 +22,7 @@ class _NavBar extends State<NavBar> {
 
   final List<Widget> _children = [
     const ModeScreen(),
-    const LeaderboardScreen(),
+    LeaderboardScreen(lightMode: true,),
     const Profile(),
     const SettingScreen(),
   ];
