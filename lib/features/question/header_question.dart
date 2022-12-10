@@ -15,8 +15,11 @@ import '../../screens/score/score_screen.dart';
 import '../../Consts/cosntants.dart';
 
 class HeaderQuestion extends StatefulWidget {
-  HeaderQuestion({required this.questionData, required this.categoryIndex});
-
+  const HeaderQuestion({
+    Key? key,
+    required this.questionData,
+    required this.categoryIndex,
+  }) : super(key: key);
   final questionData;
   final int categoryIndex;
 
@@ -30,10 +33,13 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   @override
   void initState() {
     super.initState();
+
     quizMaker.getList(widget.questionData);
     getQuestionAndAnswer();
+    numberQuestion = quizMaker.numberQuestion;
   }
 
+  int numberQuestion = 0;
   int numberAnswer = 0;
   int bestStreak = 0;
 
@@ -130,7 +136,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                 const Duration(microseconds: 500000, milliseconds: 30),
                 () {},
               );
-              if (questionNumber < 9) {
+              if (questionNumber < numberQuestion - 1) {
                 setState(
                   () {
                     optionColor[j] = Colors.white;

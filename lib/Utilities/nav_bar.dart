@@ -1,5 +1,5 @@
-import 'package:do_an_di_dong/screens/home/home_screen.dart';
 import 'package:do_an_di_dong/screens/leaderboard/leaderboard_screen.dart';
+import 'package:do_an_di_dong/screens/mode/mode_screen.dart';
 import 'package:do_an_di_dong/screens/user/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -21,7 +21,7 @@ class _NavBar extends State<NavBar> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
 
   final List<Widget> _children = [
-    const HomeScreen(),
+    const ModeScreen(),
     const LeaderboardScreen(),
     const Profile(),
     const SettingScreen(),

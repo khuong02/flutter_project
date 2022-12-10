@@ -1,8 +1,11 @@
+import 'package:do_an_di_dong/Consts/cosntants.dart';
+
 import 'questions.dart';
 
 class QuizMaker {
   List<Question> _questionList = [];
   int _score = 0;
+  int numberQuestion = 0;
 
   List<String> _createOptions(dynamic json, int i) {
     List<String> list = (json[i]['incorrectAnswers']).cast<String>();
@@ -23,13 +26,24 @@ class QuizMaker {
   }
 
   void getList(dynamic json) {
-    for (int i = 0; i < 10; i++) {
-      _questionList.add(Question(
-        question: json[i]['question'],
-        correctAnswer: json[i]['correctAnswer'],
-        options: _createOptions(json, i),
-      ));
+    if (Constants.isRank) {
+      for (int i = 0; i < 20; i++) {
+        _questionList.add(Question(
+          question: json[i]['question'],
+          correctAnswer: json[i]['correctAnswer'],
+          options: _createOptions(json, i),
+        ));
+      }
+    } else {
+      for (int i = 0; i < 10; i++) {
+        _questionList.add(Question(
+          question: json[i]['question'],
+          correctAnswer: json[i]['correctAnswer'],
+          options: _createOptions(json, i),
+        ));
+      }
     }
+    numberQuestion = _questionList.length;
   }
 
   String getQuestion(int i) {

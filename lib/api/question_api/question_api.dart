@@ -12,7 +12,25 @@ class QuestionApi {
         "questions?quizz_id=" +
         quizid.toString() +
         "&difficulty_id=" +
-        diffid.toString();
+        diffid.toString() +
+        "&page=1" +
+        "&limit=10";
+
+    var response = await http.get(
+      Uri.parse(uri),
+      headers: <String, String>{
+        "Authorization": 'Bearer ' + token,
+      },
+    );
+
+    return response;
+  }
+
+  callQuestionsRankMode() async {
+    SharedPreferences perfs = await SharedPreferences.getInstance();
+    String token = perfs.getString('token')!;
+
+    String uri = Constants.urlApi + "questionsrank?page=1";
 
     var response = await http.get(
       Uri.parse(uri),
