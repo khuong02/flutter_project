@@ -51,7 +51,7 @@ dependencies:
     path: packages/firebase_auth_repository
   form_validators:
     path: packages/form_validators
-  firebase_auth: ^3.11.1
+  firebase_auth: ^3.11.2
   google_nav_bar: ^5.0.6
   line_icons: ^2.0.1
   fl_chart: ^0.55.2
