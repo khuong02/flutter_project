@@ -20,31 +20,6 @@ class Leaderboard extends StatefulWidget {
 }
 
 class _Leaderboard extends State<Leaderboard> {
-  late List<LeaderBoardObj> leaderboard = [];
-
-  void validateUserLeaderBoard() {
-    leaderboard = widget.users;
-    if (widget.users.length < 0) {
-      leaderboard.add(LeaderBoardObj(null, null, null, null, 'winner1',
-          'winner1@gmail.com', Constants.imageUri));
-      leaderboard.add(LeaderBoardObj(null, null, null, null, 'winner2',
-          'winner2@gmail.com', Constants.imageUri));
-      leaderboard.add(LeaderBoardObj(null, null, null, null, 'winner3',
-          'winner3@gmail.com', Constants.imageUri));
-    }
-
-    if (widget.users.length < 1) {
-      leaderboard.add(LeaderBoardObj(null, null, null, null, 'winner2',
-          'winner2@gmail.com', Constants.imageUri));
-      leaderboard.add(LeaderBoardObj(null, null, null, null, 'winner3',
-          'winner3@gmail.com', Constants.imageUri));
-    }
-
-    if (widget.users.length < 2) {
-      leaderboard.add(LeaderBoardObj(null, null, null, null, 'winner3',
-          'winner3@gmail.com', Constants.imageUri));
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +72,7 @@ class _Leaderboard extends State<Leaderboard> {
                     ),
                   ],
                 ),
-                Board(list: leaderboard),
+                Board(list: widget.users),
               ],
             ),
           ),
