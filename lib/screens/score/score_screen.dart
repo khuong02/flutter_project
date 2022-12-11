@@ -41,7 +41,10 @@ class _ScoreScreenState extends State<ScoreScreen> {
   }
 
   updateCost() async {
-    int moneyBonus = widget.numberOfCorrectAnswer * 200;
+    int moneyBonus = 0;
+    if (Constants.isRank) {
+      moneyBonus = widget.numberOfCorrectAnswer * 200;
+    }
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('cost', widget.cash + moneyBonus);
