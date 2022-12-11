@@ -84,7 +84,7 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                                 ),
                                 SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.05,
+                                      MediaQuery.of(context).size.width * 0.02,
                                 ),
                                 Column(
                                   children: [
