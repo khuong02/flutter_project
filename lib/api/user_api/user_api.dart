@@ -23,8 +23,11 @@ class UserApi {
         'Authorization': 'Bearer ' + token,
       },
     );
+
     if (response.statusCode == 200) {
-      return User.fromJson(jsonDecode(response.body)["data"]);
+      User user = User.fromJson(jsonDecode(response.body)["data"]);
+      perfs.setInt('cost', user.cost);
+      return user;
     }
     throw Exception("Fail to get user profile");
   }
@@ -72,7 +75,7 @@ class UserApi {
   }
 
   //POST
-  addCredit(int cost) async{
+  addCredit(int cost) async {
     SharedPreferences perfs = await SharedPreferences.getInstance();
     String token = perfs.getString('token')!;
     Map<String, int> data = {

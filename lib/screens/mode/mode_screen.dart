@@ -1,4 +1,5 @@
 import 'package:do_an_di_dong/Consts/cosntants.dart';
+import 'package:do_an_di_dong/api/user_api/user_api.dart';
 import 'package:do_an_di_dong/screens/cost/add_cost_screen.dart';
 import 'package:do_an_di_dong/screens/home/home_screen.dart';
 import 'package:do_an_di_dong/screens/rankmode/rank_mode.dart';
@@ -6,6 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:do_an_di_dong/features/authentication/authentication_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../models/user.dart';
 
 class ModeScreen extends ConsumerStatefulWidget {
   const ModeScreen({Key? key}) : super(key: key);
@@ -15,6 +19,21 @@ class ModeScreen extends ConsumerStatefulWidget {
 }
 
 class _ModeScreenState extends ConsumerState<ModeScreen> {
+  int money = 5000;
+  late Future<User> myUser;
+  @override
+  void initState() {
+    loadUser();
+    super.initState();
+  }
+
+  Future loadUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      myUser = UserApi().getUser();
+      money = prefs.getInt('cost') ?? 5000;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +70,12 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                             height: 40,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(16)),
-                              gradient: LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                                colors: [Colors.purple, Colors.orange],
-                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                              color: Colors.brown,
                             ),
                             child: Text(
-                              '5000',
+                              money.toString(),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -114,10 +130,7 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 20),
                         height: 150,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
+                        width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
@@ -178,10 +191,7 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 20),
                         height: 150,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
+                        width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,

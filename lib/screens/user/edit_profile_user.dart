@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfileUser extends StatefulWidget {
   User myUser;
@@ -52,9 +53,10 @@ class _EditProfileState extends State<EditProfileUser> {
   }
 
   updateUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     Map<String, String> data = {
       "username": _txtName.text,
-      "cost": widget.myUser.cost.toString(),
+      "cost": prefs.getInt('cost').toString(),
       "avatar": widget.myUser.photo,
     };
 
