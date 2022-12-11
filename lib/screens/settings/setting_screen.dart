@@ -1,11 +1,15 @@
+import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
+import 'package:do_an_di_dong/Utilities/nav_bar.dart';
+import 'package:do_an_di_dong/Widgets/setting/setting_group.dart';
 import 'package:do_an_di_dong/api/api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Providers/theme_provider.dart';
+import '../../Widgets/setting/setting_item.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -15,18 +19,18 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreen extends State<SettingScreen> {
-  Map<String, bool> switchMap = {
-    "darkMode": false,
-  };
-
   @override
   Widget build(BuildContext context) {
+    Map<String, bool> switchMap = {
+      "darkMode": Provider.of<ThemeProvider>(context).getThemeMode,
+    };
+
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(.94),
+      backgroundColor: switchMap["darkMode"]! ? MyColor.leaderboardBackGroundColor : Colors.white.withOpacity(.94),
       appBar: AppBar(
         title: Text(
           "Settings",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: switchMap["darkMode"]! ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -36,27 +40,10 @@ class _SettingScreen extends State<SettingScreen> {
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: [
-            SettingsGroup(
+            SettingGroup(
+              backgroundColor: switchMap["darkMode"]! ? MyColor.leaderboardColor : Colors.white,
               items: [
-                // SettingsItem(
-                //   onTap: () {},
-                //   icons: LineIcons.history,
-                //   iconStyle: IconStyle(),
-                //   title: 'card recharge history',
-                //   // subtitle: "Make Ziar'App yours",
-                // ),
-                // SettingsItem(
-                //   onTap: () {},
-                //   icons: Icons.fingerprint,
-                //   iconStyle: IconStyle(
-                //     iconsColor: Colors.white,
-                //     withBackground: true,
-                //     backgroundColor: Colors.red,
-                //   ),
-                //   title: 'Privacy',
-                //   subtitle: "Lock Ziar'App to improve your privacy",
-                // ),
-                SettingsItem(
+                SettingItem(
                   onTap: () {},
                   icons: Icons.notifications,
                   iconStyle: IconStyle(
@@ -64,84 +51,65 @@ class _SettingScreen extends State<SettingScreen> {
                     withBackground: true,
                     backgroundColor: Colors.orange,
                   ),
+                  titleStyle: TextStyle(
+                    color: switchMap["darkMode"]!
+                        ? Colors.white
+                        : MyColor.leaderboardColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  subtitleStyle: TextStyle(
+                    color: switchMap["darkMode"]!
+                        ? Colors.white
+                        : Colors.grey,
+                  ),
                   title: 'Dark Mode',
                   subtitle: "Use Dark Mode will you feel funny",
                   trailing: Switch.adaptive(
                     value: switchMap["darkMode"]!,
-                    onChanged: (value) {
+                    onChanged: (value) async{
+                      SharedPreferences perfs = await SharedPreferences.getInstance();
                       setState(() {
                         switchMap["darkMode"] = !switchMap["darkMode"]!;
                         Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                        UserApi.setThemeMode(switchMap["darkMode"]! ? 1 : 0);
                       });
+
+                      await perfs.setBool('mode', switchMap["darkMode"]!);
                     },
                   ),
                 ),
-                // SettingsItem(
-                //   onTap: () {},
-                //   icons: CupertinoIcons.bell,
-                //   iconStyle: IconStyle(
-                //     iconsColor: Colors.white,
-                //     withBackground: true,
-                //     backgroundColor: Colors.red,
-                //   ),
-                //   title: 'Sound',
-                //   subtitle: "Invitation, ...vv",
-                //   trailing: Switch.adaptive(
-                //     value: false,
-                //     onChanged: (value) {},
-                //   ),
-                // ),
-                // SettingsItem(
-                //   onTap: () {},
-                //   icons: Icons.feedback_rounded,
-                //   iconStyle: IconStyle(
-                //     iconsColor: Colors.white,
-                //     withBackground: true,
-                //     backgroundColor: Colors.yellow,
-                //   ),
-                //   title: 'Send Feedback',
-                //   subtitle: "send feedback about your experience,...",
-                // ),
               ],
             ),
-            // SettingsGroup(
-            //   items: [
-            //     SettingsItem(
-            //       onTap: () {},
-            //       icons: Icons.info_rounded,
-            //       iconStyle: IconStyle(
-            //         backgroundColor: Colors.purple,
-            //       ),
-            //       title: 'About',
-            //       subtitle: "Learn more about Ziar'App",
-            //     ),
-            //   ],
-            // ),
-            // You can add a settings title
-            SettingsGroup(
+            SettingGroup(
+              backgroundColor: switchMap["darkMode"]! ? MyColor.leaderboardColor : Colors.white,
               settingsGroupTitle: "Account",
+              settingsGroupTitleStyle: TextStyle(fontSize: 19, color: switchMap["darkMode"]! ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
               items: [
-                SettingsItem(
-                  onTap: () {
+                SettingItem(
+                  iconStyle: IconStyle(
+                    backgroundColor: Colors.white,
+                    iconsColor: switchMap["darkMode"]! ? Colors.black : Colors.black,
+                  ),
+                  icons: Icons.exit_to_app_rounded,
+                  titleStyle: TextStyle(
+                    color: switchMap["darkMode"]!
+                        ? Colors.white
+                        : MyColor.leaderboardColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  subtitleStyle: TextStyle(
+                    color: switchMap["darkMode"]!
+                        ? Colors.white
+                        : Colors.grey,
+                  ),
+                  title: "Sign Out",
+                  subtitle: "Sign out this account",
+                  onTap: (){
                     AuthenticationApi.onSignOut(context);
                   },
-                  icons: Icons.exit_to_app_rounded,
-                  title: "Sign Out",
                 ),
-                // SettingsItem(
-                //   onTap: () {},
-                //   icons: CupertinoIcons.repeat,
-                //   title: "Change email",
-                // ),
-                // SettingsItem(
-                //   onTap: () {},
-                //   icons: CupertinoIcons.delete_solid,
-                //   title: "Delete account",
-                //   titleStyle: TextStyle(
-                //     color: Colors.red,
-                //     fontWeight: FontWeight.bold,
-                //   ),
-                // ),
               ],
             ),
           ],

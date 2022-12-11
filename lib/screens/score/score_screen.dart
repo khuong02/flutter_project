@@ -1,8 +1,11 @@
 import 'dart:convert';
 
 import 'package:do_an_di_dong/Consts/cosntants.dart';
+import 'package:do_an_di_dong/Utilities/nav_bar.dart';
 import 'package:do_an_di_dong/api/leaderboard_api/leaderboard_api.dart';
+import 'package:do_an_di_dong/api/user_api/user_api.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utilities/card/card_details.dart';
 
 class ScoreScreen extends StatefulWidget {
@@ -11,6 +14,7 @@ class ScoreScreen extends StatefulWidget {
   final DateTime timeStart;
   final int numberOfCorrectAnswer;
   final int bestStreak;
+  final int cash;
   const ScoreScreen({
     Key? key,
     required this.score,
@@ -18,6 +22,7 @@ class ScoreScreen extends StatefulWidget {
     required this.timeStart,
     required this.numberOfCorrectAnswer,
     required this.bestStreak,
+    required this.cash,
   }) : super(key: key);
 
   @override
@@ -35,11 +40,27 @@ class _ScoreScreenState extends State<ScoreScreen> {
     await LeaderBoardApi().playLeaderBoard(data);
   }
 
+  updateCost() async {
+    int moneyBonus = 0;
+    if (Constants.isRank) {
+      moneyBonus = widget.numberOfCorrectAnswer * 200;
+    }
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('cost', widget.cash + moneyBonus);
+    Map<String, String> data = {
+      "cost": (widget.cash + moneyBonus).toString(),
+    };
+
+    await UserApi().updateProfile(data, null);
+  }
+
   @override
   void initState() {
     if (Constants.isRank) {
       updateLeaderBoard();
     }
+    updateCost();
     super.initState();
   }
 
@@ -107,10 +128,9 @@ class _ScoreScreenState extends State<ScoreScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
-                  if (Constants.isRank == false) {
-                    Navigator.pop(context);
-                  }
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => NavBar()),
+                      (route) => false);
                 },
                 child: Container(
                   width: 0.3 * MediaQuery.of(context).size.width,

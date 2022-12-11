@@ -3,6 +3,7 @@ class User {
   final String email;
   final String photo;
   final int cost;
+  final int mode;
   final DateTime dateJoin;
   final int bestScore;
 
@@ -11,6 +12,7 @@ class User {
     required this.email,
     required this.photo,
     required this.cost,
+    required this.mode,
     required this.dateJoin,
     required this.bestScore,
   });
@@ -20,6 +22,7 @@ class User {
         email = json["user"]["email"],
         photo = json["user"]["avatar"],
         cost = int.parse(json["user"]["cost"]),
+        mode = json["mode"],
         dateJoin = DateTime.parse(json["user"]["created_at"]),
         bestScore = json["score"];
 }

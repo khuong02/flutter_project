@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/leaderboard_obj.dart';
 
-class Leaderboard extends StatefulWidget{
+class Leaderboard extends StatefulWidget {
   final List<LeaderBoardObj> users;
 
   Leaderboard({Key? key, required this.users}) : super(key: key);
@@ -19,13 +19,15 @@ class Leaderboard extends StatefulWidget{
   State<StatefulWidget> createState() => _Leaderboard();
 }
 
-class _Leaderboard extends State<Leaderboard>{
+class _Leaderboard extends State<Leaderboard> {
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        backgroundColor: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : MyColor.leaderboardBackGroundColor,
+        backgroundColor: Provider.of<ThemeProvider>(context).getThemeMode
+            ? MyColor.leaderboardBackGroundColor
+            : Colors.white,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
@@ -37,8 +39,8 @@ class _Leaderboard extends State<Leaderboard>{
               children: [
                 TitleWidget(
                   color: Provider.of<ThemeProvider>(context).getThemeMode
-                      ? Colors.white
-                      : MyColor.leaderboardBackGroundColor,
+                      ? MyColor.leaderboardBackGroundColor
+                      : Colors.white,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +72,7 @@ class _Leaderboard extends State<Leaderboard>{
                     ),
                   ],
                 ),
-                Board(list:widget.users),
+                Board(list: widget.users),
               ],
             ),
           ),

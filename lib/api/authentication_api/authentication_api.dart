@@ -47,6 +47,7 @@ class AuthenticationApi {
   static onSignOut(context) async {
     final pref = await SharedPreferences.getInstance();
     await pref.remove('token');
+    await pref.remove('cost');
     Navigator.pop(context);
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const AuthenticationView()));

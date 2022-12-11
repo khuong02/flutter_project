@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Widgets/close_button.dart';
 import '../../Utilities/card/card_details.dart';
@@ -33,18 +34,23 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
   @override
   void initState() {
     super.initState();
-
+    getCost();
     quizMaker.getList(widget.questionData);
     numberQuestion = quizMaker.numberQuestion;
     getQuestionAndAnswer();
   }
 
+  void getCost() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    cash = prefs.getInt('cost')!;
+  }
+
   int numberQuestion = 0;
   int numberAnswer = 0;
   int bestStreak = 0;
+  int cash = 0;
 
-  int money = 5000;
-  int moneyBuy = 1000;
+  int buyCash = 1000;
 
   final CountDownController _controller = CountDownController();
 
@@ -403,6 +409,7 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
           timeStart: timeStart,
           numberOfCorrectAnswer: numberAnswer,
           bestStreak: bestStreak,
+          cash: cash,
         ),
       ),
     );
@@ -426,7 +433,8 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
         showDialog(
             context: context,
             builder: (context) => CupertinoAlertDialog(
-                  title: const Text('Bạn có muốn mua câu trả lời không?'),
+                  title: const Text('Do you want to buy the answer?'),
+                  content: Text(buyCash.toString()),
                   actions: [
                     TextButton(
                       onPressed: () {
@@ -442,14 +450,15 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                     TextButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        if (money > moneyBuy) {
-                          money -= moneyBuy;
-                          moneyBuy += moneyBuy;
+                        if (cash > buyCash) {
+                          cash -= buyCash;
+                          buyCash += buyCash;
 
                           showBuyAnwser(
                               quizMaker.getCorrectIndex(questionNumber));
                         } else {
-                          ErrorDialog.show(context, "Bạn không đủ tiền");
+                          ErrorDialog.show(
+                              context, "You don't have enough money!");
                         }
                       },
                       child: const Text(

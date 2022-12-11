@@ -1,7 +1,10 @@
 import 'package:do_an_di_dong/api/topic/topic_api.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../Consts/my_color/my_color.dart';
 import '../../Utilities/card/card_details.dart';
+import '../../Providers/theme_provider.dart';
 import '../../Widgets/home/list_card.dart';
 
 import '../../Widgets/close_button.dart';
@@ -17,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Provider.of<ThemeProvider>(context).getThemeMode ? MyColor.leaderboardBackGroundColor : Colors.white,
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: Padding(
@@ -29,8 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    CustomCloseButton(color: Colors.black),
+                  children: [
+                    CustomCloseButton(color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,),
                   ],
                 ),
                 const SizedBox(height: 10),

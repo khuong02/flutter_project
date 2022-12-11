@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:do_an_di_dong/Providers/theme_provider.dart';
 import 'package:do_an_di_dong/Utilities/nav_bar.dart';
+import 'package:do_an_di_dong/screens/mode/mode_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -86,18 +87,15 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) => Provider.ChangeNotifierProvider(
-    create: (context) => ThemeProvider(),
-    builder: (context, _) {
-      final themeProvider = Provider.Provider.of<ThemeProvider>(context);
+        create: (context) => ThemeProvider(),
+        builder: (context, _) {
+          final themeProvider = Provider.Provider.of<ThemeProvider>(context);
 
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.light(),
-        home: getHome(),
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData.light(),
+            home: getHome(),
+          );
+        },
       );
-    },
-  );
-
-
-  // );
 }
