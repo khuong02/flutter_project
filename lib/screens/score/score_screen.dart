@@ -128,11 +128,6 @@ class _ScoreScreenState extends State<ScoreScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  // Navigator.pop(context);
-                  // if (Constants.isRank == false) {
-                  //   Navigator.pop(context);
-                  // }
-
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => NavBar()),
                       (route) => false);

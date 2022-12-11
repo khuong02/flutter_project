@@ -457,7 +457,8 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                           showBuyAnwser(
                               quizMaker.getCorrectIndex(questionNumber));
                         } else {
-                          ErrorDialog.show(context, "Bạn không đủ tiền");
+                          ErrorDialog.show(
+                              context, "You don't have enough money!");
                         }
                       },
                       child: const Text(

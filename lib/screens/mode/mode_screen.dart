@@ -31,7 +31,7 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       myUser = UserApi().getUser();
-      money = prefs.getInt('cost') ?? 5000;
+      money = prefs.getInt('cost') ?? money;
     });
   }
 
