@@ -1,4 +1,4 @@
-import 'package:do_an_di_dong/Consts/cosntants.dart';
+import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
 import 'package:do_an_di_dong/Providers/theme_provider.dart';
 import 'package:do_an_di_dong/screens/leaderboard/leaderboard_screen.dart';
 import 'package:do_an_di_dong/screens/mode/mode_screen.dart';
@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/errors/not_found_screen.dart';
 import '../screens/settings/setting_screen.dart';

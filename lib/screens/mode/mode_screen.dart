@@ -1,4 +1,6 @@
 import 'package:do_an_di_dong/Consts/cosntants.dart';
+import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
+import 'package:do_an_di_dong/Providers/theme_provider.dart';
 import 'package:do_an_di_dong/api/user_api/user_api.dart';
 import 'package:do_an_di_dong/screens/cost/add_cost_screen.dart';
 import 'package:do_an_di_dong/screens/home/home_screen.dart';
@@ -8,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:do_an_di_dong/features/authentication/authentication_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:provider/provider.dart' as Provider;
 
 import '../../models/user.dart';
 
@@ -23,15 +27,17 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
   late Future<User> myUser;
   @override
   void initState() {
-    loadUser();
+    loadUser(context);
     super.initState();
   }
 
-  Future loadUser() async {
+  Future loadUser(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       myUser = UserApi().getUser();
       money = prefs.getInt('cost') ?? money;
+      bool mode = prefs.getBool('mode') ?? true;
+      Provider.Provider.of<ThemeProvider>(context, listen: false).setTheme(mode);
     });
   }
 
@@ -39,6 +45,7 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
   Widget build(BuildContext context) {
     final authController = ref.read(authProvider.notifier);
     return Scaffold(
+      backgroundColor: Provider.Provider.of<ThemeProvider>(context).getThemeMode ? MyColor.leaderboardBackGroundColor : Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -70,9 +77,12 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                             height: 40,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16)),
-                              color: Colors.brown,
+                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                              gradient: LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [Colors.purple, Colors.orange],
+                              ),
                             ),
                             child: Text(
                               money.toString(),

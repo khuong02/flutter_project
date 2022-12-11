@@ -1,9 +1,12 @@
 import 'package:auto_reload/auto_reload.dart';
+import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
+import 'package:do_an_di_dong/Providers/theme_provider.dart';
 import 'package:do_an_di_dong/Widgets/user/number_widget.dart';
 import 'package:do_an_di_dong/api/api.dart';
 import 'package:do_an_di_dong/models/user.dart';
 import 'package:do_an_di_dong/screens/user/edit_profile_user.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../Widgets/user/profile.dart';
 
 class Profile extends StatefulWidget {
@@ -60,8 +63,8 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.45,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
+                  decoration: BoxDecoration(
+                    color: Provider.of<ThemeProvider>(context).getThemeMode ? MyColor.leaderboardBackGroundColor : Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
@@ -90,7 +93,8 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                                   children: [
                                     Text(
                                       snapshot.data!.name,
-                                      style: const TextStyle(
+                                      style: TextStyle(
+                                        color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -102,9 +106,9 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                                     ),
                                     Text(
                                       snapshot.data!.email,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 14,
-                                        color: Colors.grey,
+                                        color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.grey,
                                       ),
                                     ),
                                   ],
@@ -113,7 +117,11 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                             ),
                             Container(
                               decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 40, 171, 227),
+                                gradient: LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: [Colors.purple, Colors.orange],
+                                ),
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(20),
                                 ),
@@ -143,7 +151,7 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                         ),
                       ),
                       Divider(
-                        color: Colors.grey.shade400,
+                        color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.grey.shade400,
                       ),
                       MaterialButton(
                         padding: const EdgeInsets.symmetric(vertical: 4),
@@ -152,11 +160,12 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Text(
+                            Text(
                               "Date create",
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.grey),
+                                  color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.grey,
+                              ),
                             ),
                             Text(
                               snapshot.data!.dateJoin.day.toString() +
@@ -164,14 +173,17 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                                   snapshot.data!.dateJoin.month.toString() +
                                   "/" +
                                   snapshot.data!.dateJoin.year.toString(),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w800, fontSize: 20),
+                              style: TextStyle(
+                                color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.grey,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 20,
+                              ),
                             ),
                           ],
                         ),
                       ),
                       Divider(
-                        color: Colors.grey.shade400,
+                        color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.grey.shade400,
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.12,
@@ -196,32 +208,42 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               "Cash",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
+                color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,
               ),
             ),
             Text(
               user.cost.toString(),
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,
+              ),
             )
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               "Best score",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
+                color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,
               ),
             ),
             Text(
               user.bestScore.toString(),
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,
+              ),
             )
           ],
         ),

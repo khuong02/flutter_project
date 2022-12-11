@@ -27,6 +27,8 @@ class UserApi {
     if (response.statusCode == 200) {
       User user = User.fromJson(jsonDecode(response.body)["data"]);
       perfs.setInt('cost', user.cost);
+      perfs.setBool('mode', user.mode == 1 ? true : false);
+
       return user;
     }
     throw Exception("Fail to get user profile");
@@ -92,5 +94,23 @@ class UserApi {
     );
 
     return response;
+  }
+
+  //POST
+  static void setThemeMode(int mode)async{
+    SharedPreferences perfs = await SharedPreferences.getInstance();
+    String token = perfs.getString('token')!;
+    Map<String, int> data = {
+      "mode": mode,
+    };
+
+    final response = await http.post(
+      Uri.parse(Constants.urlApi + "users/settings"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: jsonEncode(data),
+    );
   }
 }

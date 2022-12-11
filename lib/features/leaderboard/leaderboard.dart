@@ -26,8 +26,8 @@ class _Leaderboard extends State<Leaderboard> {
     return Container(
       child: Scaffold(
         backgroundColor: Provider.of<ThemeProvider>(context).getThemeMode
-            ? Colors.white
-            : MyColor.leaderboardBackGroundColor,
+            ? MyColor.leaderboardBackGroundColor
+            : Colors.white,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
@@ -39,8 +39,8 @@ class _Leaderboard extends State<Leaderboard> {
               children: [
                 TitleWidget(
                   color: Provider.of<ThemeProvider>(context).getThemeMode
-                      ? Colors.white
-                      : MyColor.leaderboardBackGroundColor,
+                      ? MyColor.leaderboardBackGroundColor
+                      : Colors.white,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

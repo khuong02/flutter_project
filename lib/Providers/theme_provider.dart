@@ -8,6 +8,10 @@ class ThemeProvider extends ChangeNotifier {
     themeMode = !themeMode;
   }
 
+  void setTheme(bool theme){
+    themeMode = theme;
+  }
+
   bool get getThemeMode {
     return themeMode;
   }
