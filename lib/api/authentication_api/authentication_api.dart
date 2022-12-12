@@ -49,7 +49,8 @@ class AuthenticationApi {
     await pref.remove('token');
     await pref.remove('cost');
     Navigator.pop(context);
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const AuthenticationView()));
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const AuthenticationView()),
+        (route) => false);
   }
 }

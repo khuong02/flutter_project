@@ -357,18 +357,6 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: const SizedBox(
-                        height: 35,
-                        width: 35,
-                        child: Icon(
-                          Icons.phone,
-                          color: Colors.white,
-                          size: 35,
-                        ),
-                      ),
-                    ),
                     buyAnswers(),
                   ],
                 ),

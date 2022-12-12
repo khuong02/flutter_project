@@ -37,7 +37,8 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
       myUser = UserApi().getUser();
       money = prefs.getInt('cost') ?? money;
       bool mode = prefs.getBool('mode') ?? true;
-      Provider.Provider.of<ThemeProvider>(context, listen: false).setTheme(mode);
+      Provider.Provider.of<ThemeProvider>(context, listen: false)
+          .setTheme(mode);
     });
   }
 
@@ -45,7 +46,9 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
   Widget build(BuildContext context) {
     final authController = ref.read(authProvider.notifier);
     return Scaffold(
-      backgroundColor: Provider.Provider.of<ThemeProvider>(context).getThemeMode ? MyColor.leaderboardBackGroundColor : Colors.white,
+      backgroundColor: Provider.Provider.of<ThemeProvider>(context).getThemeMode
+          ? MyColor.leaderboardBackGroundColor
+          : Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -77,7 +80,8 @@ class _ModeScreenState extends ConsumerState<ModeScreen> {
                             height: 40,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
                               gradient: LinearGradient(
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,

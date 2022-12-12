@@ -7,7 +7,6 @@ import 'package:do_an_di_dong/Utilities/loading/loading_sheet.dart';
 import 'package:do_an_di_dong/Utilities/my_error/error_dialog.dart';
 import 'package:do_an_di_dong/Widgets/text_input_field.dart';
 import 'package:do_an_di_dong/Widgets/user/profile.dart';
-import 'package:do_an_di_dong/api/user_api/user_api.dart';
 import 'package:do_an_di_dong/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Widgets/close_button.dart';
+import '../../api/api.dart';
 
 class EditProfileUser extends StatefulWidget {
   User myUser;
@@ -30,10 +30,16 @@ class EditProfileUser extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfileUser> {
   final _txtName = TextEditingController();
+  final _txtCurrentPass = TextEditingController();
+  final _txtNewPass = TextEditingController();
+  final _txtConfirmPass = TextEditingController();
 
   @override
   void dispose() {
     _txtName.dispose();
+    _txtCurrentPass.dispose();
+    _txtNewPass.dispose();
+    _txtConfirmPass.dispose();
     super.dispose();
   }
 
@@ -74,7 +80,9 @@ class _EditProfileState extends State<EditProfileUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Provider.of<ThemeProvider>(context).getThemeMode ? MyColor.leaderboardBackGroundColor : Colors.white,
+      backgroundColor: Provider.of<ThemeProvider>(context).getThemeMode
+          ? MyColor.leaderboardBackGroundColor
+          : Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(top: 60.0),
         child: ListView(
@@ -82,9 +90,23 @@ class _EditProfileState extends State<EditProfileUser> {
           physics: const BouncingScrollPhysics(),
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomCloseButton(color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,),
+                CustomCloseButton(
+                  color: Provider.of<ThemeProvider>(context).getThemeMode
+                      ? Colors.white
+                      : Colors.black,
+                ),
+                IconButton(
+                  onPressed: () {
+                    showFormChangePass();
+                  },
+                  icon: const Icon(
+                    Icons.password,
+                    size: 35,
+                    color: Colors.blueGrey,
+                  ),
+                ),
               ],
             ),
             const SizedBox(
@@ -92,7 +114,7 @@ class _EditProfileState extends State<EditProfileUser> {
             ),
             ProfileWidget(
               isEdit: true,
-              imageUrl: widget.myUser.photo!,
+              imageUrl: widget.myUser.photo,
               onClicked: () {
                 pickImage();
               },
@@ -111,11 +133,13 @@ class _EditProfileState extends State<EditProfileUser> {
             ),
             Container(
               decoration: BoxDecoration(
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
-                      color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
+                      color: Colors.black26,
+                      offset: Offset(0, 4),
+                      blurRadius: 5.0)
                 ],
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [Colors.purple, Colors.orange],
@@ -132,10 +156,9 @@ class _EditProfileState extends State<EditProfileUser> {
                   ),
                   minimumSize: MaterialStateProperty.all(Size(10, 50)),
                   backgroundColor:
-                  MaterialStateProperty.all(Colors.transparent),
+                      MaterialStateProperty.all(Colors.transparent),
                   // elevation: MaterialStateProperty.all(3),
-                  shadowColor:
-                  MaterialStateProperty.all(Colors.transparent),
+                  shadowColor: MaterialStateProperty.all(Colors.transparent),
                 ),
                 onPressed: () async {
                   LoadingSheet.show(context);
@@ -167,5 +190,120 @@ class _EditProfileState extends State<EditProfileUser> {
         ),
       ),
     );
+  }
+
+  void showFormChangePass() {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text(
+          "Change your password",
+        ),
+        content: Container(
+          height: MediaQuery.of(context).size.height * 0.3,
+          child: Column(children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: TextInputField(
+                obscureText: true,
+                hintText: "Current password",
+                onChanged: (name) {},
+                controller: _txtCurrentPass,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: TextInputField(
+                obscureText: true,
+                hintText: "New password",
+                onChanged: (name) {},
+                controller: _txtNewPass,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: TextInputField(
+                obscureText: true,
+                hintText: "Confirm password",
+                onChanged: (name) {},
+                controller: _txtConfirmPass,
+              ),
+            ),
+          ]),
+        ),
+        actions: [
+          TextButton(
+              onPressed: () {
+                if (validatePassField()) {
+                  LoadingSheet.show(context);
+                  changepass();
+                } else {
+                  ErrorDialog.show(context, "You have to fill all the fields");
+                }
+              },
+              child: Text("Save")),
+          TextButton(
+            onPressed: () {
+              clean();
+              Navigator.pop(context);
+            },
+            child: Text("Close"),
+          )
+        ],
+      ),
+    );
+  }
+
+  changepass() async {
+    Map<String, String> data = {
+      "email": widget.myUser.email,
+      'oldpassword': _txtCurrentPass.text,
+      'newpassword': _txtNewPass.text,
+      'cf_password': _txtConfirmPass.text,
+    };
+
+    final response = await UserApi().changePassword(data);
+    final datares = json.decode(response);
+
+    if (datares["status"] == 200) {
+      Navigator.pop(context);
+      Navigator.pop(context);
+      showDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+          title: const Text("Change password successfully"),
+          content: const Text("Please sign in again!!"),
+          actions: [
+            CupertinoDialogAction(
+              child: const Text('OK'),
+              onPressed: () {
+                AuthenticationApi.onSignOut(context);
+              },
+            )
+          ],
+        ),
+      );
+    } else {
+      Navigator.pop(context);
+      Navigator.pop(context);
+      clean();
+      ErrorDialog.show(context, datares["message"].toString());
+    }
+  }
+
+  bool validatePassField() {
+    if (_txtCurrentPass.text.isEmpty ||
+        _txtNewPass.text.isEmpty ||
+        _txtConfirmPass.text.isEmpty) {
+      return false;
+    }
+    return true;
+  }
+
+  clean() {
+    _txtConfirmPass.text = "";
+    _txtCurrentPass.text = "";
+    _txtNewPass.text = "";
   }
 }
