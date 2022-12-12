@@ -97,7 +97,7 @@ class UserApi {
   }
 
   //POST
-  static void setThemeMode(int mode)async{
+  static void setThemeMode(int mode) async {
     SharedPreferences perfs = await SharedPreferences.getInstance();
     String token = perfs.getString('token')!;
     Map<String, int> data = {
@@ -112,5 +112,20 @@ class UserApi {
       },
       body: jsonEncode(data),
     );
+  }
+
+  changePassword(Map<String, String> data) async {
+    SharedPreferences perfs = await SharedPreferences.getInstance();
+    String token = perfs.getString('token')!;
+
+    final response = await http.post(
+      Uri.parse(Constants.urlApi + "users/changepass"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: jsonEncode(data),
+    );
+    return response.body;
   }
 }

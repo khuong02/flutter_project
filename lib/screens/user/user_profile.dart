@@ -64,7 +64,9 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                   height: MediaQuery.of(context).size.height * 0.45,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
-                    color: Provider.of<ThemeProvider>(context).getThemeMode ? MyColor.leaderboardBackGroundColor : Colors.white,
+                    color: Provider.of<ThemeProvider>(context).getThemeMode
+                        ? MyColor.leaderboardBackGroundColor
+                        : Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
@@ -94,7 +96,11 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                                     Text(
                                       snapshot.data!.name,
                                       style: TextStyle(
-                                        color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,
+                                        color:
+                                            Provider.of<ThemeProvider>(context)
+                                                    .getThemeMode
+                                                ? Colors.white
+                                                : Colors.black,
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -108,30 +114,82 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                                       snapshot.data!.email,
                                       style: TextStyle(
                                         fontSize: 14,
-                                        color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.grey,
+                                        color:
+                                            Provider.of<ThemeProvider>(context)
+                                                    .getThemeMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                       ),
                                     ),
                                   ],
                                 ),
                               ],
                             ),
+                            // Container(
+                            //   decoration: const BoxDecoration(
+                            //     gradient: LinearGradient(
+                            //       begin: Alignment.centerLeft,
+                            //       end: Alignment.centerRight,
+                            //       colors: [Colors.purple, Colors.orange],
+                            //     ),
+                            //     borderRadius: BorderRadius.all(
+                            //       Radius.circular(20),
+                            //     ),
+                            //   ),
+                            //   padding: const EdgeInsets.symmetric(
+                            //     vertical: 8,
+                            //     horizontal: 24,
+                            //   ),
+                            //   child: GestureDetector(
+                            //     onTap: () {
+                            //       Navigator.of(context).push(
+                            //         MaterialPageRoute(
+                            //           builder: (context) =>
+                            //               EditProfileUser(snapshot.data!),
+                            //         ),
+                            //       );
+                            //     },
+                            //     child: const Text(
+                            //       "Edit",
+                            //       style: TextStyle(
+                            //           color: Colors.white,
+                            //           fontWeight: FontWeight.w600),
+                            //     ),
+                            //   ),
+                            // ),
                             Container(
-                              decoration: const BoxDecoration(
-                                gradient: LinearGradient(
+                              decoration: BoxDecoration(
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0, 4),
+                                      blurRadius: 5.0)
+                                ],
+                                gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
                                   colors: [Colors.purple, Colors.orange],
                                 ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20),
+                                color: Colors.deepPurple.shade300,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                  minimumSize:
+                                      MaterialStateProperty.all(Size(10, 50)),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.transparent),
+                                  // elevation: MaterialStateProperty.all(3),
+                                  shadowColor: MaterialStateProperty.all(
+                                      Colors.transparent),
                                 ),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8,
-                                horizontal: 24,
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
+                                onPressed: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) =>
@@ -139,11 +197,19 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                                     ),
                                   );
                                 },
-                                child: const Text(
-                                  "Edit",
-                                  style: TextStyle(
+                                child: const Padding(
+                                  padding: EdgeInsets.only(
+                                    top: 10,
+                                    bottom: 10,
+                                  ),
+                                  child: Text(
+                                    "Edit",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      // fontWeight: FontWeight.w700,
                                       color: Colors.white,
-                                      fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -151,7 +217,9 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                         ),
                       ),
                       Divider(
-                        color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.grey.shade400,
+                        color: Provider.of<ThemeProvider>(context).getThemeMode
+                            ? Colors.white
+                            : Colors.grey.shade400,
                       ),
                       MaterialButton(
                         padding: const EdgeInsets.symmetric(vertical: 4),
@@ -163,8 +231,11 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                             Text(
                               "Date create",
                               style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.grey,
+                                fontWeight: FontWeight.w500,
+                                color: Provider.of<ThemeProvider>(context)
+                                        .getThemeMode
+                                    ? Colors.white
+                                    : Colors.grey,
                               ),
                             ),
                             Text(
@@ -174,7 +245,10 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                                   "/" +
                                   snapshot.data!.dateJoin.year.toString(),
                               style: TextStyle(
-                                color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.grey,
+                                color: Provider.of<ThemeProvider>(context)
+                                        .getThemeMode
+                                    ? Colors.white
+                                    : Colors.grey,
                                 fontWeight: FontWeight.w800,
                                 fontSize: 20,
                               ),
@@ -183,7 +257,9 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                         ),
                       ),
                       Divider(
-                        color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.grey.shade400,
+                        color: Provider.of<ThemeProvider>(context).getThemeMode
+                            ? Colors.white
+                            : Colors.grey.shade400,
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.12,
@@ -213,7 +289,9 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,
+                color: Provider.of<ThemeProvider>(context).getThemeMode
+                    ? Colors.white
+                    : Colors.black,
               ),
             ),
             Text(
@@ -221,7 +299,9 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
-                color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,
+                color: Provider.of<ThemeProvider>(context).getThemeMode
+                    ? Colors.white
+                    : Colors.black,
               ),
             )
           ],
@@ -234,7 +314,9 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,
+                color: Provider.of<ThemeProvider>(context).getThemeMode
+                    ? Colors.white
+                    : Colors.black,
               ),
             ),
             Text(
@@ -242,7 +324,9 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
-                color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,
+                color: Provider.of<ThemeProvider>(context).getThemeMode
+                    ? Colors.white
+                    : Colors.black,
               ),
             )
           ],
