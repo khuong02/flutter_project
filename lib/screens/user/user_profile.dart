@@ -1,13 +1,11 @@
 import 'package:auto_reload/auto_reload.dart';
 import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
 import 'package:do_an_di_dong/Providers/theme_provider.dart';
-import 'package:do_an_di_dong/Widgets/user/number_widget.dart';
 import 'package:do_an_di_dong/api/api.dart';
 import 'package:do_an_di_dong/models/user.dart';
 import 'package:do_an_di_dong/screens/user/edit_profile_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../Widgets/user/profile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -125,38 +123,6 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                                 ),
                               ],
                             ),
-                            // Container(
-                            //   decoration: const BoxDecoration(
-                            //     gradient: LinearGradient(
-                            //       begin: Alignment.centerLeft,
-                            //       end: Alignment.centerRight,
-                            //       colors: [Colors.purple, Colors.orange],
-                            //     ),
-                            //     borderRadius: BorderRadius.all(
-                            //       Radius.circular(20),
-                            //     ),
-                            //   ),
-                            //   padding: const EdgeInsets.symmetric(
-                            //     vertical: 8,
-                            //     horizontal: 24,
-                            //   ),
-                            //   child: GestureDetector(
-                            //     onTap: () {
-                            //       Navigator.of(context).push(
-                            //         MaterialPageRoute(
-                            //           builder: (context) =>
-                            //               EditProfileUser(snapshot.data!),
-                            //         ),
-                            //       );
-                            //     },
-                            //     child: const Text(
-                            //       "Edit",
-                            //       style: TextStyle(
-                            //           color: Colors.white,
-                            //           fontWeight: FontWeight.w600),
-                            //     ),
-                            //   ),
-                            // ),
                             Container(
                               decoration: BoxDecoration(
                                 boxShadow: const [
