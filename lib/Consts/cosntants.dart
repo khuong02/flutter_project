@@ -2,7 +2,8 @@
 
 class Constants {
   const Constants();
-  static String urlApi = 'https://83e6-116-110-42-127.ap.ngrok.io/api/';
+  static String urlApi =
+      'https://0db0-2402-9d80-3b1-fe3c-4499-74dd-47f3-e5f1.ap.ngrok.io/api/';
   static int duration = 20;
   static String apiKey = "494572664456165";
   static String apiSecret = "UUk5XXKYw-FsBCSV0YRQ1QWKGII";
