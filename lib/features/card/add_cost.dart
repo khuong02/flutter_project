@@ -130,21 +130,3 @@ class _AddCostWidgetState extends State<AddCostWidget> {
     );
   }
 }
-// Row(
-// mainAxisAlignment: MainAxisAlignment.center,
-// crossAxisAlignment: CrossAxisAlignment.center,
-// children: [
-// Text(
-// '100.000',
-// style: const TextStyle(
-// fontSize: 25,
-// color: Colors.white,
-// fontWeight: FontWeight.w700,
-// ),
-// ),
-// Image.asset(
-// "assets/images/general knowledge.png",
-// scale: 1,
-// ),
-// ],
-// ),
