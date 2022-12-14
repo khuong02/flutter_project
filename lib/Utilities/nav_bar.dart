@@ -1,5 +1,6 @@
 import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
 import 'package:do_an_di_dong/Providers/theme_provider.dart';
+import 'package:do_an_di_dong/screens/friend/friend_screen.dart';
 import 'package:do_an_di_dong/screens/leaderboard/leaderboard_screen.dart';
 import 'package:do_an_di_dong/screens/mode/mode_screen.dart';
 import 'package:do_an_di_dong/screens/user/user_profile.dart';
@@ -26,6 +27,7 @@ class _NavBar extends State<NavBar> {
 
   final List<Widget> _children = [
     const ModeScreen(),
+    const FriendScreen(),
     const LeaderboardScreen(),
     const Profile(),
     const SettingScreen(),
@@ -34,6 +36,10 @@ class _NavBar extends State<NavBar> {
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Friend',
       style: optionStyle,
     ),
     Text(
@@ -86,7 +92,7 @@ class _NavBar extends State<NavBar> {
               hoverColor: Colors.grey[100]!,
               gap: 8,
               activeColor: Colors.black,
-              iconSize: 30,
+              iconSize: 23,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration: const Duration(milliseconds: 400),
               tabBackgroundColor: Colors.grey[300]!,
@@ -94,6 +100,9 @@ class _NavBar extends State<NavBar> {
               tabs: const [
                 GButton(
                   icon: LineIcons.home,
+                ),
+                GButton(
+                  icon: LineIcons.userFriends,
                 ),
                 GButton(
                   icon: LineIcons.barChart,

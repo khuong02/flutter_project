@@ -2,6 +2,7 @@ import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
 import 'package:do_an_di_dong/Utilities/nav_bar.dart';
 import 'package:do_an_di_dong/Widgets/setting/setting_group.dart';
 import 'package:do_an_di_dong/api/api.dart';
+import 'package:do_an_di_dong/screens/friend/my_friend_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
@@ -78,6 +79,37 @@ class _SettingScreen extends State<SettingScreen> {
                       await perfs.setBool('mode', switchMap["darkMode"]!);
                     },
                   ),
+                ),
+              ],
+            ),
+            SettingGroup(
+              backgroundColor: switchMap["darkMode"]! ? MyColor.leaderboardColor : Colors.white,
+              settingsGroupTitle: "Individual",
+              settingsGroupTitleStyle: TextStyle(fontSize: 19, color: switchMap["darkMode"]! ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
+              items: [
+                SettingItem(
+                  iconStyle: IconStyle(
+                    backgroundColor: Colors.white,
+                    iconsColor: switchMap["darkMode"]! ? Colors.black : Colors.black,
+                  ),
+                  icons: Icons.supervised_user_circle,
+                  titleStyle: TextStyle(
+                    color: switchMap["darkMode"]!
+                        ? Colors.white
+                        : MyColor.leaderboardColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  subtitleStyle: TextStyle(
+                    color: switchMap["darkMode"]!
+                        ? Colors.white
+                        : Colors.grey,
+                  ),
+                  title: "Friends",
+                  subtitle: "Your friends",
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyFriendScreen()));
+                  },
                 ),
               ],
             ),
