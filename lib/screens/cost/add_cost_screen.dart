@@ -12,7 +12,6 @@ class AddCost extends StatefulWidget {
 }
 
 class _AddCostState extends State<AddCost> {
-  int index = -1;
 
   List<Widget> getListCardMoney(){
     List<Widget> listCard = [];
