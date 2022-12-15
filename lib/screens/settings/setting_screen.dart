@@ -55,7 +55,7 @@ class _SettingScreen extends State<SettingScreen> {
               items: [
                 SettingItem(
                   onTap: () {},
-                  icons: Icons.notifications,
+                  icons: Icons.light_mode,
                   iconStyle: IconStyle(
                     iconsColor: Colors.white,
                     withBackground: true,
@@ -158,44 +158,6 @@ class _SettingScreen extends State<SettingScreen> {
                   ? MyColor.leaderboardColor
                   : Colors.white,
               settingsGroupTitle: "History",
-              settingsGroupTitleStyle: TextStyle(
-                  fontSize: 19,
-                  color: switchMap["darkMode"]! ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.bold),
-              items: [
-                SettingItem(
-                  iconStyle: IconStyle(
-                    backgroundColor: Colors.white,
-                    iconsColor:
-                        switchMap["darkMode"]! ? Colors.black : Colors.black,
-                  ),
-                  icons: Icons.history,
-                  titleStyle: TextStyle(
-                    color: switchMap["darkMode"]!
-                        ? Colors.white
-                        : MyColor.leaderboardColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                  subtitleStyle: TextStyle(
-                    color: switchMap["darkMode"]! ? Colors.white : Colors.grey,
-                  ),
-                  title: "History",
-                  subtitle: "Your history play game!",
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HistoryScreen()));
-                  },
-                ),
-              ],
-            ),
-            SettingGroup(
-              backgroundColor: switchMap["darkMode"]!
-                  ? MyColor.leaderboardColor
-                  : Colors.white,
-              settingsGroupTitle: "Account",
               settingsGroupTitleStyle: TextStyle(
                   fontSize: 19,
                   color: switchMap["darkMode"]! ? Colors.white : Colors.black,
