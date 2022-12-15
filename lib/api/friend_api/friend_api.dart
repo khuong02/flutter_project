@@ -26,8 +26,9 @@ class FriendApi {
         myFriends.add(FriendObj(
           friend["id"],
           friend["avatar"],
-          friend["username"],
+          friend["name"],
           friend["email"],
+          friend["status"],
         ));
       }
     }
@@ -53,8 +54,9 @@ class FriendApi {
         listPending.add(FriendObj(
           friend["id"],
           friend["avatar"],
-          friend["username"],
+          friend["name"],
           friend["email"],
+          friend["status"],
         ));
       }
     }
@@ -82,6 +84,7 @@ class FriendApi {
           friend["avatar"],
           friend["name"],
           friend["email"],
+          friend["status"],
         ));
       }
     }
@@ -109,6 +112,21 @@ class FriendApi {
 
     final response = await http.post(
       Uri.parse(Constants.urlApi + "addFriend"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: jsonEncode(data),
+    );
+    return response;
+  }
+
+  responseFriend(Map<String, dynamic> data) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+
+    final response = await http.post(
+      Uri.parse(Constants.urlApi + "respond2invitation"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer ' + token,

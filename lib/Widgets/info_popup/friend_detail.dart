@@ -36,31 +36,13 @@ class FriendDetail extends StatelessWidget {
                           color: Colors.grey),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          Map<String, int> data = {
-                            'user_id_second': myFriend.id,
-                          };
-                          Response res = await FriendApi().unfriend(data);
-                          if (res.statusCode == 200) {
-                            Navigator.pop(context);
-                            showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                      title: Text("Unfriend successfully!"),
-                                    ));
-                          }
-                        },
-                        child: Text("Unfriend"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text("Challenge"),
-                      ),
-                    ],
+                  SizedBox(
+                    child: myFriend.status == 2
+                        ? ElevatedButton(
+                            onPressed: () {},
+                            child: Text("Challenge"),
+                          )
+                        : null,
                   ),
                 ],
               ),

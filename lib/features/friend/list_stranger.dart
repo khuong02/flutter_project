@@ -1,3 +1,5 @@
+import 'package:do_an_di_dong/Utilities/loading/loading_sheet.dart';
+import 'package:do_an_di_dong/Utilities/my_error/error_dialog.dart';
 import 'package:do_an_di_dong/api/api.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -13,10 +15,22 @@ class StrangerList extends StatefulWidget {
 }
 
 class _StrangerListState extends State<StrangerList> {
+  late Future<List<FriendObj>> myList;
+
+  Future<List<FriendObj>> getList() async {
+    return FriendApi().getStrangerList();
+  }
+
+  @override
+  void initState() {
+    myList = getList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<FriendObj>>(
-      future: FriendApi().getStrangerList(),
+      future: myList,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var list = snapshot.data;
@@ -38,23 +52,20 @@ class _StrangerListState extends State<StrangerList> {
                   },
                   trailing: ElevatedButton(
                     onPressed: () async {
+                      LoadingSheet.show(context);
                       Map<String, int> data = {
                         'user_id_second': list[index].id,
                       };
                       var res = await FriendApi().addFriend(data);
                       if (res.statusCode == 200) {
-                        showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  title: Text("Add friend successfully!"),
-                                  actions: [
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("OK"))
-                                  ],
-                                ));
+                        Navigator.pop(context);
+                        setState(() {
+                          myList = getList();
+                        });
+                      } else {
+                        Navigator.pop(context);
+                        ErrorDialog.show(
+                            context, "Fail to send friend request!");
                       }
                     },
                     child: Text("Add friend"),

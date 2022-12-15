@@ -1,3 +1,4 @@
+import 'package:do_an_di_dong/Utilities/loading/loading_sheet.dart';
 import 'package:do_an_di_dong/Widgets/info_popup/friend_detail.dart';
 import 'package:do_an_di_dong/api/api.dart';
 import 'package:do_an_di_dong/models/friend_obj.dart';
@@ -25,7 +26,7 @@ class _ListFriendPendingState extends State<ListFriendPending> {
               itemBuilder: (BuildContext context, int index) {
                 return Card(
                   child: ListTile(
-                    leading: Image.network(list![index].avatar),
+                    leading: Image.network(list[index].avatar),
                     title: Text(list[index].name),
                     subtitle: Text(list[index].email),
                     onTap: () {
@@ -36,6 +37,43 @@ class _ListFriendPendingState extends State<ListFriendPending> {
                         ),
                       );
                     },
+                    trailing: SizedBox(
+                      width: 96,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.close),
+                            color: Colors.red,
+                            onPressed: () async {
+                              LoadingSheet.show(context);
+                              Map<String, dynamic> data = {
+                                'user_id_second': list[index].id,
+                                'accept': false,
+                              };
+                              var res = await FriendApi().responseFriend(data);
+                              if (res.statusCode == 200) {
+                                refreshPage();
+                              }
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.done),
+                            color: Colors.green,
+                            onPressed: () async {
+                              LoadingSheet.show(context);
+                              Map<String, dynamic> data = {
+                                'user_id_second': list[index].id,
+                                'accept': true,
+                              };
+                              var res = await FriendApi().responseFriend(data);
+                              if (res.statusCode == 200) {
+                                refreshPage();
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 );
               },
@@ -45,5 +83,12 @@ class _ListFriendPendingState extends State<ListFriendPending> {
         },
       ),
     );
+  }
+
+  refreshPage() {
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ListFriendPending()));
   }
 }
