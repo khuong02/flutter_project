@@ -272,8 +272,6 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                   crossAxisCount: 1,
                   children: [
                     SizedBox(
-                      // width: MediaQuery.of(context).size.width,
-                      // height: size.height * 0.35,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -288,14 +286,14 @@ class _HeaderQuestionState extends State<HeaderQuestion> {
                             height: 5,
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.15,
+                            // height: MediaQuery.of(context).size.height * 0.15,
                             width: size.width,
                             child: AutoSizeText(
                               quizMaker.getQuestion(questionNumber),
                               minFontSize: 18,
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 30,
+                                fontSize: 25,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
