@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MyFriendScreen extends StatefulWidget{
+import '../../features/friend/list_friend.dart';
+
+class MyFriendScreen extends StatefulWidget {
   const MyFriendScreen({Key? key}) : super(key: key);
 
   @override
@@ -15,9 +17,7 @@ class _MyFriendScreenState extends State<MyFriendScreen> {
       appBar: AppBar(
         title: Text('List Friend'),
       ),
-      body: Center(
-        child: Text("MyFriendScreen"),
-      ),
+      body: ListFriend(),
     );
   }
 }
