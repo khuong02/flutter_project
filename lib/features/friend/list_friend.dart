@@ -1,3 +1,4 @@
+import 'package:do_an_di_dong/Utilities/loading/loading_sheet.dart';
 import 'package:do_an_di_dong/Widgets/info_popup/friend_detail.dart';
 import 'package:do_an_di_dong/api/api.dart';
 import 'package:do_an_di_dong/models/friend_obj.dart';
@@ -36,6 +37,19 @@ class _ListFriendState extends State<ListFriend> {
                           ),
                         );
                       },
+                      trailing: ElevatedButton(
+                        onPressed: () async {
+                          LoadingSheet.show(context);
+                          Map<String, int> data = {
+                            'user_id_second': list[index].id,
+                          };
+                          var res = await FriendApi().unfriend(data);
+                          if (res.statusCode == 200) {
+                            refreshPage();
+                          }
+                        },
+                        child: Text("Unfriend"),
+                      ),
                     ),
                   );
                 },
@@ -44,5 +58,12 @@ class _ListFriendState extends State<ListFriend> {
             return const Center(child: CircularProgressIndicator());
           },
         ));
+  }
+
+  refreshPage() {
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ListFriend()));
   }
 }
