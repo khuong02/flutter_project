@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../features/question/header_question.dart';
-import '../../models/pagination.dart';
 
 class QuestionScreen extends StatefulWidget {
   QuestionScreen({

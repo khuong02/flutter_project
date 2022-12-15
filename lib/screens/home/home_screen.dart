@@ -1,4 +1,4 @@
-import 'package:do_an_di_dong/api/topic/topic_api.dart';
+import 'package:do_an_di_dong/api/api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Provider.of<ThemeProvider>(context).getThemeMode ? MyColor.leaderboardBackGroundColor : Colors.white,
+      backgroundColor: Provider.of<ThemeProvider>(context).getThemeMode
+          ? MyColor.leaderboardBackGroundColor
+          : Colors.white,
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: Padding(
@@ -34,7 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    CustomCloseButton(color: Provider.of<ThemeProvider>(context).getThemeMode ? Colors.white : Colors.black,),
+                    CustomCloseButton(
+                      color: Provider.of<ThemeProvider>(context).getThemeMode
+                          ? Colors.white
+                          : Colors.black,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -57,8 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 FutureBuilder<List<ListDetail>>(
                   future: TopicApi.getTopic(),
-                  builder: (context, snapshot){
-                    if(snapshot.hasData){
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
                       List<ListDetail> data = snapshot.data!;
                       return ListView.builder(
                         itemCount: data.length,

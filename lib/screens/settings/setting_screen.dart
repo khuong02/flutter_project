@@ -2,6 +2,7 @@ import 'package:do_an_di_dong/Consts/my_color/my_color.dart';
 import 'package:do_an_di_dong/Utilities/nav_bar.dart';
 import 'package:do_an_di_dong/Widgets/setting/setting_group.dart';
 import 'package:do_an_di_dong/api/api.dart';
+import 'package:do_an_di_dong/features/friend/list_friend_pending.dart';
 import 'package:do_an_di_dong/screens/friend/my_friend_screen.dart';
 import 'package:do_an_di_dong/screens/history/history_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Providers/theme_provider.dart';
 import '../../Widgets/setting/setting_item.dart';
+import '../../features/friend/list_friend.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -28,11 +30,15 @@ class _SettingScreen extends State<SettingScreen> {
     };
 
     return Scaffold(
-      backgroundColor: switchMap["darkMode"]! ? MyColor.leaderboardBackGroundColor : Colors.white.withOpacity(.94),
+      backgroundColor: switchMap["darkMode"]!
+          ? MyColor.leaderboardBackGroundColor
+          : Colors.white.withOpacity(.94),
       appBar: AppBar(
         title: Text(
           "Settings",
-          style: TextStyle(color: switchMap["darkMode"]! ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: switchMap["darkMode"]! ? Colors.white : Colors.black,
+              fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -43,7 +49,9 @@ class _SettingScreen extends State<SettingScreen> {
         child: ListView(
           children: [
             SettingGroup(
-              backgroundColor: switchMap["darkMode"]! ? MyColor.leaderboardColor : Colors.white,
+              backgroundColor: switchMap["darkMode"]!
+                  ? MyColor.leaderboardColor
+                  : Colors.white,
               items: [
                 SettingItem(
                   onTap: () {},
@@ -61,19 +69,19 @@ class _SettingScreen extends State<SettingScreen> {
                     fontSize: 18,
                   ),
                   subtitleStyle: TextStyle(
-                    color: switchMap["darkMode"]!
-                        ? Colors.white
-                        : Colors.grey,
+                    color: switchMap["darkMode"]! ? Colors.white : Colors.grey,
                   ),
                   title: 'Dark Mode',
                   subtitle: "Use Dark Mode will you feel funny",
                   trailing: Switch.adaptive(
                     value: switchMap["darkMode"]!,
-                    onChanged: (value) async{
-                      SharedPreferences perfs = await SharedPreferences.getInstance();
+                    onChanged: (value) async {
+                      SharedPreferences perfs =
+                          await SharedPreferences.getInstance();
                       setState(() {
                         switchMap["darkMode"] = !switchMap["darkMode"]!;
-                        Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                        Provider.of<ThemeProvider>(context, listen: false)
+                            .toggleTheme();
                         UserApi.setThemeMode(switchMap["darkMode"]! ? 1 : 0);
                       });
 
@@ -84,14 +92,20 @@ class _SettingScreen extends State<SettingScreen> {
               ],
             ),
             SettingGroup(
-              backgroundColor: switchMap["darkMode"]! ? MyColor.leaderboardColor : Colors.white,
+              backgroundColor: switchMap["darkMode"]!
+                  ? MyColor.leaderboardColor
+                  : Colors.white,
               settingsGroupTitle: "Individual",
-              settingsGroupTitleStyle: TextStyle(fontSize: 19, color: switchMap["darkMode"]! ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
+              settingsGroupTitleStyle: TextStyle(
+                  fontSize: 19,
+                  color: switchMap["darkMode"]! ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.bold),
               items: [
                 SettingItem(
                   iconStyle: IconStyle(
                     backgroundColor: Colors.white,
-                    iconsColor: switchMap["darkMode"]! ? Colors.black : Colors.black,
+                    iconsColor:
+                        switchMap["darkMode"]! ? Colors.black : Colors.black,
                   ),
                   icons: Icons.supervised_user_circle,
                   titleStyle: TextStyle(
@@ -102,27 +116,58 @@ class _SettingScreen extends State<SettingScreen> {
                     fontSize: 18,
                   ),
                   subtitleStyle: TextStyle(
+                    color: switchMap["darkMode"]! ? Colors.white : Colors.grey,
+                  ),
+                  title: "Your Friends",
+                  subtitle: "Friends",
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ListFriend()));
+                  },
+                ),
+                SettingItem(
+                  iconStyle: IconStyle(
+                    backgroundColor: Colors.white,
+                    iconsColor:
+                        switchMap["darkMode"]! ? Colors.black : Colors.black,
+                  ),
+                  icons: Icons.supervised_user_circle,
+                  titleStyle: TextStyle(
                     color: switchMap["darkMode"]!
                         ? Colors.white
-                        : Colors.grey,
+                        : MyColor.leaderboardColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
                   ),
-                  title: "Friends",
-                  subtitle: "Your friends",
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyFriendScreen()));
+                  subtitleStyle: TextStyle(
+                    color: switchMap["darkMode"]! ? Colors.white : Colors.grey,
+                  ),
+                  title: "Friends Request",
+                  subtitle: "Accept or deny",
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ListFriendPending()));
                   },
                 ),
               ],
             ),
             SettingGroup(
-              backgroundColor: switchMap["darkMode"]! ? MyColor.leaderboardColor : Colors.white,
+              backgroundColor: switchMap["darkMode"]!
+                  ? MyColor.leaderboardColor
+                  : Colors.white,
               settingsGroupTitle: "History",
-              settingsGroupTitleStyle: TextStyle(fontSize: 19, color: switchMap["darkMode"]! ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
+              settingsGroupTitleStyle: TextStyle(
+                  fontSize: 19,
+                  color: switchMap["darkMode"]! ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.bold),
               items: [
                 SettingItem(
                   iconStyle: IconStyle(
                     backgroundColor: Colors.white,
-                    iconsColor: switchMap["darkMode"]! ? Colors.black : Colors.black,
+                    iconsColor:
+                        switchMap["darkMode"]! ? Colors.black : Colors.black,
                   ),
                   icons: Icons.history,
                   titleStyle: TextStyle(
@@ -133,27 +178,72 @@ class _SettingScreen extends State<SettingScreen> {
                     fontSize: 18,
                   ),
                   subtitleStyle: TextStyle(
-                    color: switchMap["darkMode"]!
-                        ? Colors.white
-                        : Colors.grey,
+                    color: switchMap["darkMode"]! ? Colors.white : Colors.grey,
                   ),
                   title: "History",
                   subtitle: "Your history play game!",
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HistoryScreen()));
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HistoryScreen()));
                   },
                 ),
               ],
             ),
             SettingGroup(
-              backgroundColor: switchMap["darkMode"]! ? MyColor.leaderboardColor : Colors.white,
+              backgroundColor: switchMap["darkMode"]!
+                  ? MyColor.leaderboardColor
+                  : Colors.white,
               settingsGroupTitle: "Account",
-              settingsGroupTitleStyle: TextStyle(fontSize: 19, color: switchMap["darkMode"]! ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
+              settingsGroupTitleStyle: TextStyle(
+                  fontSize: 19,
+                  color: switchMap["darkMode"]! ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.bold),
               items: [
                 SettingItem(
                   iconStyle: IconStyle(
                     backgroundColor: Colors.white,
-                    iconsColor: switchMap["darkMode"]! ? Colors.black : Colors.black,
+                    iconsColor:
+                        switchMap["darkMode"]! ? Colors.black : Colors.black,
+                  ),
+                  icons: Icons.history,
+                  titleStyle: TextStyle(
+                    color: switchMap["darkMode"]!
+                        ? Colors.white
+                        : MyColor.leaderboardColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  subtitleStyle: TextStyle(
+                    color: switchMap["darkMode"]! ? Colors.white : Colors.grey,
+                  ),
+                  title: "History",
+                  subtitle: "Your history play game!",
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HistoryScreen()));
+                  },
+                ),
+              ],
+            ),
+            SettingGroup(
+              backgroundColor: switchMap["darkMode"]!
+                  ? MyColor.leaderboardColor
+                  : Colors.white,
+              settingsGroupTitle: "Account",
+              settingsGroupTitleStyle: TextStyle(
+                  fontSize: 19,
+                  color: switchMap["darkMode"]! ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.bold),
+              items: [
+                SettingItem(
+                  iconStyle: IconStyle(
+                    backgroundColor: Colors.white,
+                    iconsColor:
+                        switchMap["darkMode"]! ? Colors.black : Colors.black,
                   ),
                   icons: Icons.exit_to_app_rounded,
                   titleStyle: TextStyle(
@@ -164,13 +254,11 @@ class _SettingScreen extends State<SettingScreen> {
                     fontSize: 18,
                   ),
                   subtitleStyle: TextStyle(
-                    color: switchMap["darkMode"]!
-                        ? Colors.white
-                        : Colors.grey,
+                    color: switchMap["darkMode"]! ? Colors.white : Colors.grey,
                   ),
                   title: "Sign Out",
                   subtitle: "Sign out this account",
-                  onTap: (){
+                  onTap: () {
                     AuthenticationApi.onSignOut(context);
                   },
                 ),
