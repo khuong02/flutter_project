@@ -41,7 +41,7 @@ dependencies:
   http: ^0.13.4
   loading_animation_widget: ^1.2.0+3
   circular_countdown_timer: ^0.2.1
-  internet_connection_checker: 0.0.1
+  internet_connection_checker: ^1.0.0+1
   fl_score_bar: ^0.2.4
   auto_size_text: ^3.0.0
   babstrap_settings_screen: ^0.1.3
