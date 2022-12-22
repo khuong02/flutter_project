@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../Providers/auth_repo_provider.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 final googleSignInProvider =
     StateNotifierProvider<GoogleSignInController, GoogleSignInState>(
@@ -26,6 +27,7 @@ enum GoogleSignInState {
 
 class GoogleSignInController extends StateNotifier<GoogleSignInState> {
   final AuthenticationRepository _authenticationRepository;
+  final _googleSignIn = GoogleSignIn.standard();
 
   GoogleSignInController(this._authenticationRepository)
       : super(GoogleSignInState.initial);
@@ -51,6 +53,7 @@ class GoogleSignInController extends StateNotifier<GoogleSignInState> {
         await pref.setString('token', body["token"]);
 
         state = GoogleSignInState.success;
+        await _googleSignIn.signOut();
         Navigator.pop(context);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => NavBar()));

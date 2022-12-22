@@ -81,7 +81,7 @@ class UserProfileState extends AutoReload with AutoReloadMixin {
                             Row(
                               children: [
                                 CircleAvatar(
-                                  radius: 40,
+                                  radius: 20,
                                   backgroundImage:
                                       NetworkImage(snapshot.data!.photo),
                                 ),
